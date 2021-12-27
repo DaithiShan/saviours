@@ -2,7 +2,7 @@
 <img src="markdown-files/readme-files/readme-logo.png" alt="St Saviours OBA" />
 </div>
 
-<div align='center'>
+<div align='left'>
 <p>The<strong>St Saviours Olympic Boxing Academy</strong> e-shop was designed, built and deployed by club member David Burns. The purpose of this web application is to modernise this innercity boxing club. Prospective members will be able to subscribe online, and existing members can renew easily. Also providing a store for all who want to purchase boxing gear from the club.</p>
 
 **This project contains real images from this real life Dublin boxing club, of which the developer is a member.**
