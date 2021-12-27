@@ -1,0 +1,8 @@
+// Set text color based on bg
+@function set-text-color($color) {
+    @if(lightness($color) > 70) {
+        @return #212529;
+    } @else {
+        @return #e9ecef;
+    }
+};
