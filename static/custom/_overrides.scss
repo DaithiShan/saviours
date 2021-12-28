@@ -10,22 +10,21 @@ $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
 
-// MY THEME COLORS
+// COLOR OVERRIDES
 $yellow:  #ffee32;
 $orange:  #fdc500;
 $cyan:  #c86bfa;
 $purple:  #5c0099;
 $black:    #03071e;
-$dark: $gray-900;
+$dark: #03071e;
 
-// OVERRIDE THEME COLORS
+// THEME OVERRIDES
 $primary:       $yellow;
 $secondary:     $orange;
 
-$body-bg: $black;
+// BODY OVERRIDES
+$body-bg: $gray-900;
 $body-color: $gray-200 ;
-
-// THEME OVERRIDES
 
 // NAVBAR OVERRIDES
 $navbar-dark-color:                 $yellow;

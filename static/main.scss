@@ -1,3 +1,65 @@
-@import 'custom/variables';
+@import 'custom/overrides';
 @import 'custom/mixins';
 @import 'custom/functions';
+
+// GOOGLE FONT IMPORT
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Playball&display=swap');
+
+// BODY EXTRA STYLING
+body {
+    font-family: 'Oswald', sans-serif;
+
+    /* for footer placement
+    ref: https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14 */
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+// NAVBAR EXTRA STYLING
+.nav-link {
+    font-family: 'Playball', cursive;
+    font-size: 2rem;
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+
+#nav-logo {
+    img {
+        width: auto;
+        height: 50px;
+    }
+}
+
+// FOOTER EXTRA STYLING
+
+footer {
+    background-color: $dark;
+    margin-top: auto;
+
+    .footer-title {
+        font-family: 'Playball', cursive;
+        color: $yellow;
+        font-size: 2rem;
+        padding-top: 10px;
+    }
+
+    .footer-text {
+        font-size: 1.1rem;
+
+        a {
+            transition: all 0.5s ease 0s;
+            text-decoration: none;
+            color: $gray-200;
+        }
+
+        a:hover {
+            color: rgba($orange, .80);
+        }
+
+        a:focus {
+            color: $orange;
+        }
+    }
+}
