@@ -2,18 +2,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'store/css/main.css' %}">
-    <title>St Saviours Olympic Boxing Academy</title>
-    <meta name="title" content="The RhythmBox">
-    <meta name="description" content="St Saviours Olympic Boxing Academy is home to the Irish boxing champions of tomorrow. Join today, and get your hands on our latest boxing gear.">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% block meta %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="St Saviours Olympic Boxing Academy">
+        <meta name="description" content="St Saviours Olympic Boxing Academy is home to the Irish boxing champions of tomorrow. Join today, and get your hands on our latest boxing gear.">
+    {% endblock %}
+
+    <!-- STYLESHEETS -->
+    {% block corecss %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% endblock corecss %}
+    
+    {% block extracss %}
+    {% endblock extracss %}
+
+    <!-- SCRIPTS -->
+    {% block corejs %}
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+        
+        <!-- Stripe -->
+        <script src="https://js.stripe.com/v3/"></script>
+    {% endblock %}
+    
+    {% block extra_js %}
+    {% endblock %}
+
+    <!-- PAGE TITLE -->
+        <title>St Saviours OBA - {% block extra_title %}{% endblock %}</title>
+
 </head>
 <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <!-- NAVBAR LOGO -->
+            <a id="nav-logo" class="navbar-brand px-1 mr-md-1" href="#">
+                <img src="{% static 'img/logo.png' %}" alt="St Saviours OBA Logo ">
+            </a>
+
+                <!-- centered bag icon in mobile view -->
+                <!-- Adapted from CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
+            <div class="d-lg-none">
+                <a class="bag-icon-sm nav-link position-relative" href="#" title="Shopping Bag">
+                    <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center">
+                        <span>
+                            {% if bag_items %}
+                                {{ bag_items|length }}
+                            {% else %}
+                            {% endif %}
+                        </span>
+                    </i>
+                </a>
+            </div>
+            
+            <!-- NAVBAR HAMBURGER -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Shop
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-uppercase" href="#">Shop Membership</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">Shop Gear</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">Shop Apparel</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-uppercase" href="#">Club Mission</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">Club Location</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">Club Timetable</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">FAQs</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="#">Contact</a>
+                        </div>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="#">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="#">Log out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="#">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="#">Login</a>
+                    </li>
+                    {% endif  %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% block nav_search %}active{% endblock %}">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search" title="Search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        <div class="d-none d-lg-inline-block">
+            <a href="#" class="nav-link" title="Shopping Bag" aria-label="View Shopping Bag">
+                <i class="fas fa-shopping-bag"></i>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- PAGE CONTENT -->
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container d-flex justify-content-around">
+            <div class="row w-100 p-4">
+
+                <!-- ABOUT LINKS -->
+                <div class="col-12 col-md-3">
+                    <div class="row">
+                        <div class="col-12 footer-title">
+                            About Us
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Club Mission</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Club Location</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Club Timetable</a> 
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">FAQs</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Contact</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBERSHIP LINKS -->
+                <div class="col-12 col-md-3">
+                    <div class="row">
+                        <div class="col-12 footer-title">
+                            Membership
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="#">Yearly Bundle</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="#">Quarterly Bundle</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="#">Monthly Bundle</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- APPAREL LINKS -->
+                <div class="col-12 col-md-3">
+                    <div class="row">
+                        <div class="col-12 footer-title">
+                            Shop Apparel
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Jackets & Hoodies</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Tshirts</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Sweatpants</a> 
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Boxing Tops</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Boxing Shorts</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GEAR LINKS -->
+                <div class="col-12 col-md-3">
+                    <div class="row">
+                        <div class="col-12 footer-title">
+                            Shop Gear
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Boxing Gloves</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Handwraps</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Mouthguard</a> 
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Headguard</a>
+                        </div>
+                        <div class="col-12 footer-text">
+                            <a href="">Groin Shield</a>
+                        </div>
+                    </div>
+                </div>
+    
+                
+                <!-- Footer Quick Links -->
+                <!-- <div class="col-12 footer-icons ">
+                    <div class="row w-50">
+                        <div class="col-4">
+                            <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
+                                <i class="fas fa-at"></i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div id="footer-end" class="col-12 text-center">
+                    <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    
+    {% block postloadjs %}
+    {% endblock %}
+
 </body>
 </html> 
