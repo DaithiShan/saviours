@@ -116,17 +116,25 @@ footer {
     }
 
     label {
-        letter-spacing: 1.1px;
-        font-size: 1.4rem;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
     }
 
     input {
-        margin-bottom: 1.4rem;
         color: $black;
+        font-size: 1rem;
 
         &:active, &:focus {
             border-color: $orange;
             color: $black;
+        }
+
+        &:focus:invalid {
+            border-color: $cyan;
+        }
+
+        &:focus:valid {
+            border-color: $orange;
         }
     }
 
@@ -142,4 +150,5 @@ footer {
             margin-bottom: 0.5rem;
         }
     }
+
 }

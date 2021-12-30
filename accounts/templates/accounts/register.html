@@ -13,7 +13,7 @@
         {% for field in registration_form %}
             <fieldset>
                 {% if field.name == 'newsletter' %}
-                    <label for="{{ field.id_for_label }}" class="form-label">Would you like to hear about the latest updates and events via our newsletter?</label>
+                    <label for="{{ field.id_for_label }}" class="form-label mt-4">Would you like to hear about the latest updates and events via our newsletter?</label>
                     <div class="form-check mb-1 d-flex flex-column">
                         {% for radio in field %}
                             <label class="form-check-label" for="{{ radio.id_for_label }}">
@@ -28,18 +28,18 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
+                    <label for="{{ field.id_for_label }}" class="form-label mt-4">{{ field.label }}:</label>
                     {{ field|add_class:'form-control' }}
                 {% endif %}
                 {% for error in field.errors %}
-                    <span class="danger">{{ error }}</span>
+                    <span class="text-danger">{{ error }}</span>
                 {% endfor %}
             </fieldset>
         {% endfor %}
 
         <input type="hidden" name="next" value="{{ request.GET.next }}" />
         
-        <fieldset class="form__group">
+        <fieldset class="form__group mt-3">
             <button type="submit" class="btn-lg btn-primary mt-3 mb-4">Register</button>
         </fieldset>
     </div>
