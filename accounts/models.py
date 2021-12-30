@@ -60,7 +60,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(
         verbose_name="last name", max_length=30, unique=False
     )
-    newsletter = models.BooleanField(default=False)
+    newsletter = models.BooleanField(default=True)
     date_joined = models.DateTimeField(
         verbose_name="date joined", auto_now_add=True
     )

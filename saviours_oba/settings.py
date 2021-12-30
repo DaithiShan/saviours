@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3rd party
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -73,8 +76,13 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = "accounts.Account"
+
 WSGI_APPLICATION = 'saviours_oba.wsgi.application'
 
+
+# CSRF TRUSTED ORIGINS SET TO LOCAL URL
+CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.io',]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
