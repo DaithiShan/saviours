@@ -1,0 +1,52 @@
+{% extends 'store/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+<div class="container reg-form-wrapper">
+    <h2 class="mt-3 mb-4">Register An Account</h2>
+    <form method="POST" class="form" novalidate id="registration-form">
+        {% csrf_token %}
+        <div class="mb-4">
+        {% for field in registration_form %}
+            <fieldset>
+                {% if field.name == 'newsletter' %}
+                    <label for="{{ field.id_for_label }}" class="form-label">Would you like to hear about the latest updates and events via our newsletter?</label>
+                    <div class="form-check mb-1 d-flex flex-column">
+                        {% for radio in field %}
+                            <label class="form-check-label" for="{{ radio.id_for_label }}">
+                                <span class="">{{radio.choice_label}}</span>
+                                    <!-- Set False selected by default and set correct values -->
+                                    {% if radio.id_for_label == 'id_newsletter_0' %}
+                                        <input type="radio" class="form-check-input" name="newsletter" id="{{ radio.id_for_label }}"  value='True' checked>
+                                    {% else %}
+                                        <input type="radio" class="form-check-input" name="newsletter" id="{{ radio.id_for_label }}"  value='False'>
+                                    {% endif %}
+                            </label>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
+                    {{ field|add_class:'form-control' }}
+                {% endif %}
+                {% for error in field.errors %}
+                    <span class="danger">{{ error }}</span>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        
+        <fieldset class="form__group">
+            <button type="submit" class="btn-lg btn-primary mt-3 mb-4">Register</button>
+        </fieldset>
+    </div>
+    </form>
+        <div class="auth-redirect mb-3">
+        <p class="auth-redirect__text regular">Already have an account?</p>
+        <a href="#" class="auth-redirect__btn btn btn--white dropdown-button regular">Log In Here</a>
+    </div>
+</div>
+{% endblock content %}

@@ -10972,3 +10972,35 @@ footer .footer-text a:focus {
   height: -moz-fit-content;
   height: fit-content;
 }
+
+.reg-form-wrapper {
+  max-width: 60rem;
+  margin: auto;
+}
+.reg-form-wrapper h2, .reg-form-wrapper .h2 {
+  font-family: "Playball", cursive;
+  color: #ffee32;
+  font-size: 2rem;
+}
+.reg-form-wrapper label {
+  letter-spacing: 1.1px;
+  font-size: 1.4rem;
+}
+.reg-form-wrapper input {
+  margin-bottom: 1.4rem;
+  color: #03071e;
+}
+.reg-form-wrapper input:active, .reg-form-wrapper input:focus {
+  border-color: #fdc500;
+  color: #03071e;
+}
+.reg-form-wrapper select {
+  color: #03071e;
+  width: 100%;
+}
+.reg-form-wrapper .form-check {
+  padding-left: 3em;
+}
+.reg-form-wrapper .form-check .form-check-input {
+  margin-bottom: 0.5rem;
+}
