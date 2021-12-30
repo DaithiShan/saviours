@@ -26,5 +26,5 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ()
     fieldsets = ()
 
-admin.site.register(Account, AccountAdmin)
 
+admin.site.register(Account, AccountAdmin)

@@ -12,7 +12,7 @@ def register_user(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
-        redirect_url = request.POST.get("next") or "home"
+        redirect_url = request.POST.get("next") or "store-home"
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get("email")
