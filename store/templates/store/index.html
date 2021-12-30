@@ -1,5 +1,86 @@
 {% extends 'store/base.html' %}
+{% load static %}
+
+{% block extra_title %}Home{% endblock %}
 
 {% block content %}
-    <h1 id="test">Hello World</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Home Hero -->
+        <div id="home-hero" class="col-12 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>St Saviours Olympic Boxing Academy</h1>
+                        <p class="lead">Home of future Irish champions</p>
+                    </div>
+                </div>
+            <div class="row d-flex justify-content flex-column">
+                <div id="get-membership" class="col-12 flex-start mb-3">
+                    <a class="lead btn-primary btn-lg" href="">Get Membership</a>
+                </div>
+                <div id="get-gear" class="col-12 flex-start">
+                    <a class="lead btn-primary btn-lg" href="">Get Boxing Gear</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr id="home-divider">
+        <!-- Home Content -->
+        <div class="home-content col-12">
+            <div class="container-fluid">
+                <div class="row text-center d-flex justify-content-center">
+                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="#">
+                                    <img src="{% static 'img/about-us.png' %}" alt="Image of St Saviours boxing coach, John 'Young' McCormack">
+                                </a>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">About Us</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="" href="#">
+                                    <img src="{% static 'img/hoodie.png' %}" alt="Image of St Saviours OBA Hoodie">
+                                </a>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Shop Club Apparel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="#">
+                                    <img src="{% static 'img/gloves.png' %}" alt="Image of boxing gloves">
+                                </a>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Shop Boxing Gear</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="#">
+                                    <img src="{% static 'img/member.png' %}" alt="Image of boxer training in St Saviours OBA">
+                                </a>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Membership</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
