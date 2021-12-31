@@ -39,14 +39,14 @@
 
         <input type="hidden" name="next" value="{{ request.GET.next }}" />
         
-        <fieldset class="form__group mt-3">
+        <fieldset class="form__group mt-3 text-center">
             <button type="submit" class="btn-lg btn-primary mt-3 mb-4">Register</button>
         </fieldset>
     </div>
     </form>
-        <div class="auth-redirect mb-3">
-        <p class="auth-redirect__text regular">Already have an account?</p>
-        <a href="#" class="auth-redirect__btn btn btn--white dropdown-button regular">Log In Here</a>
+        <div class="auth-redirect text-center mb-5">
+        <p class="lead">Already have an account?</p>
+        <a href="#" class="btn-outline-primary btn-lg">Log In Here</a>
     </div>
 </div>
 {% endblock content %}
