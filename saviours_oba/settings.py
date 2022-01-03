@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(@yg7=)c-i0#7j$nzbjqevv1py4jzc(jf%yn!_*=+*5!^rikf3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["saviours.herokuapp.com", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'saviours_oba.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,13 +76,18 @@ TEMPLATES = [
     },
 ]
 
+# Store session messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# Custom User Model
 AUTH_USER_MODEL = "accounts.Account"
+
 
 WSGI_APPLICATION = 'saviours_oba.wsgi.application'
 
 
 # CSRF TRUSTED ORIGINS SET TO LOCAL URL
-CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.io',]
+CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.io', ]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

@@ -113,7 +113,7 @@
                         <a class="nav-link text-uppercase" href="{% url 'register' %}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="#">Login</a>
+                        <a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a>
                     </li>
                     {% endif  %}
                 </ul>
@@ -126,15 +126,33 @@
                 </ul>
             </div>
         <div class="d-none d-lg-inline-block">
-            <a href="#" class="nav-link" title="Shopping Bag" aria-label="View Shopping Bag">
+            <a href="" class="nav-link" title="Shopping Bag" aria-label="View Shopping Bag">
                 <i class="fas fa-shopping-bag"></i>
             </a>
         </div>
     </nav>
+
+    {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}
+                            {% include 'includes/toasts/toast_error.html' %}
+                        {% elif level == 30 %}
+                            {% include 'includes/toasts/toast_warning.html' %}
+                        {% elif level == 25 %}
+                            {% include 'includes/toasts/toast_success.html' %}
+                        {% else %}
+                            {% include 'includes/toasts/toast_info.html' %}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        {% endif %}
     
     <!-- PAGE CONTENT -->
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
     </main>
 
     <!-- FOOTER -->
@@ -261,6 +279,9 @@
     </footer> -->
     
     {% block postloadjs %}
+        <script>
+            $('.toast').toast('show');
+        </script>
     {% endblock %}
 
 </body>
