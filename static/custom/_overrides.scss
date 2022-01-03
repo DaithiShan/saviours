@@ -39,4 +39,17 @@ $navbar-dark-toggler-border-color:  rgba($white, .1);
 $link-color: $black;
 $link-decoration:                         none;
 
+// TOAST OVERRIDES
+$toast-max-width:                   350px;
+$toast-padding-x:                   .75rem;
+$toast-padding-y:                   .5rem;
+$toast-font-size:                   .9rem;
+$toast-color:                       $orange;
+$toast-background-color:            $black;
+$toast-border-width:                1px;
+$toast-border-color:                $yellow;
+
+$toast-header-color:                $yellow;
+$toast-header-background-color:     $black;
+
 @import "../bootstrap-src/scss/bootstrap";

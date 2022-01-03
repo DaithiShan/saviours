@@ -151,3 +151,62 @@ footer {
         }
     }
 }
+
+// TOAST EXTRA STYLING
+
+// TOASTS EXTRA STYLING
+.message-container {
+    position: fixed;
+    width: 300px;
+    top: 75px;
+    right: 0;
+    z-index: 2000;
+
+    .close {
+        font-family: sans-serif;
+        background-color: $orange;
+        color: $black;
+    }
+}
+.custom-toast {
+    overflow: visible;
+}
+.toast-capper {
+    background-color: $yellow;
+    height: 2px;
+}
+.bag-snippet {
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.toast-msg {
+    padding-bottom: 5px;
+}
+.toast-msg p {
+    margin-bottom: 0;
+}
+.toast-count {
+    margin-bottom: .2rem;
+    padding: 10px 5px;
+    font-size: .8rem;
+}
+.toast-count span{
+    font-size: 1.2rem;
+    font-family: $orange;
+}
+.toast-highlighted {
+    background-color: $yellow;
+    color: $black;
+    text-align: center;
+    padding: 10px;
+}
+.toast-btn {
+    background-color: $orange;
+    color: $black;
+}
+.toast-btn:hover,
+.toast-btn:focus {
+    color: $orange;
+    background-color: $black;
+}
