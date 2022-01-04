@@ -1,0 +1,1 @@
+web: gunicorn saviours_oba.wsgi:application
