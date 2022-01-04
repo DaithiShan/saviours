@@ -1,0 +1,29 @@
+[
+    {
+        "model": "products.category",
+        "pk": 1,
+        "fields": {
+            "title": "Membership",
+            "slug": "membership",
+            "ordering": 1
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 2,
+        "fields": {
+            "title": "Boxing Gear",
+            "slug": "boxing-gear",
+            "ordering": 2
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 3,
+        "fields": {
+            "title": "Apparel",
+            "slug": "apparel",
+            "ordering": 3
+        }
+    }
+]

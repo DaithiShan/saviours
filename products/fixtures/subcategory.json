@@ -1,0 +1,112 @@
+[
+    {
+        "model": "products.subcategory",
+        "pk": 1,
+        "fields": {
+            "parent": 1,
+            "title": "Yearly Bundle",
+            "slug": "yearly-bundle",
+            "ordering": 1
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 2,
+        "fields": {
+            "parent": 1,
+            "title": "Quarterly Bundle",
+            "slug": "quarterly-bundle",
+            "ordering": 2
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 3,
+        "fields": {
+            "parent": 1,
+            "title": "Monthly Bundle",
+            "slug": "monthly-bundle",
+            "ordering": 3
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 4,
+        "fields": {
+            "parent": 2,
+            "title": "Boxing Gloves",
+            "slug": "boxing-gloves",
+            "ordering": 1
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 5,
+        "fields": {
+            "parent": 2,
+            "title": "Handwraps",
+            "slug": "handwraps",
+            "ordering": 2
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 6,
+        "fields": {
+            "parent": 2,
+            "title": "Mouthguard",
+            "slug": "mouthguard",
+            "ordering": 3
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 7,
+        "fields": {
+            "parent": 2,
+            "title": "Headguard",
+            "slug": "headguard",
+            "ordering": 4
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 8,
+        "fields": {
+            "parent": 2,
+            "title": "Groin Shield",
+            "slug": "groin-shield",
+            "ordering": 5
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 9,
+        "fields": {
+            "parent": 3,
+            "title": "Hoodies",
+            "slug": "hoodies",
+            "ordering": 1
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 10,
+        "fields": {
+            "parent": 3,
+            "title": "Tshirts",
+            "slug": "tshirts",
+            "ordering": 2
+        }
+    },
+    {
+        "model": "products.subcategory",
+        "pk": 11,
+        "fields": {
+            "parent": 3,
+            "title": "Sweatpants",
+            "slug": "sweatpants",
+            "ordering": 3
+        }
+    }
+]
