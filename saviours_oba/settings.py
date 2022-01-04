@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # My apps
     'store.apps.StoreConfig',
     'accounts.apps.AccountsConfig',
+    'products.apps.ProductsConfig',
 
     # Django apps
     'django.contrib.admin',
