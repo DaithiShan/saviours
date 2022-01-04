@@ -5224,11 +5224,12 @@ textarea.form-control-lg {
 .toast {
   width: 350px;
   max-width: 100%;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  color: #fdc500;
   pointer-events: auto;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: #03071e;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #ffee32;
   box-shadow: 0 0.5rem 1rem rgba(3, 7, 30, 0.15);
   border-radius: 0.25rem;
 }
@@ -5254,8 +5255,8 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  color: #6c757d;
-  background-color: rgba(255, 255, 255, 0.85);
+  color: #ffee32;
+  background-color: #03071e;
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top-left-radius: calc(0.25rem - 1px);
@@ -11009,4 +11010,69 @@ footer .footer-text a:focus {
 }
 .form-wrapper .form-check .form-check-input {
   margin-bottom: 0.5rem;
+}
+
+.message-container {
+  position: fixed;
+  width: 300px;
+  top: 75px;
+  right: 0;
+  z-index: 2000;
+}
+.message-container .close {
+  font-family: sans-serif;
+  background-color: #fdc500;
+  color: #03071e;
+}
+
+.custom-toast {
+  overflow: visible;
+}
+
+.toast-capper {
+  background-color: #ffee32;
+  height: 2px;
+}
+
+.bag-snippet {
+  height: 100px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.toast-msg {
+  padding-bottom: 5px;
+}
+
+.toast-msg p {
+  margin-bottom: 0;
+}
+
+.toast-count {
+  margin-bottom: 0.2rem;
+  padding: 10px 5px;
+  font-size: 0.8rem;
+}
+
+.toast-count span {
+  font-size: 1.2rem;
+  font-family: #fdc500;
+}
+
+.toast-highlighted {
+  background-color: #ffee32;
+  color: #03071e;
+  text-align: center;
+  padding: 10px;
+}
+
+.toast-btn {
+  background-color: #fdc500;
+  color: #03071e;
+}
+
+.toast-btn:hover,
+.toast-btn:focus {
+  color: #fdc500;
+  background-color: #03071e;
 }
