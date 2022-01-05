@@ -39,10 +39,11 @@ class Subcategory(models.Model):
     """
     parent = models.ForeignKey(Category,
                                related_name='subcategories',
+                               blank=True,
                                null=True,
                                on_delete=models.SET_NULL)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, blank=True)
+    slug = models.SlugField(max_length=255, blank=True, null=True)
     ordering = models.IntegerField(default=0)
 
     class Meta:
@@ -63,10 +64,12 @@ class Subcategory(models.Model):
 class Product(models.Model):
     """ Defines all products """
     category = models.ForeignKey(Category,
+                                 blank=True,
                                  null=True,
                                  related_name='products',
                                  on_delete=models.SET_NULL)
     subcategory = models.ForeignKey(Subcategory,
+                                    blank=True,
                                     null=True,
                                     related_name='subcategory',
                                     on_delete=models.SET_NULL)
