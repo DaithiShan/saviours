@@ -118,10 +118,10 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def make_thumbnail(self, image, size=(300, 200)):
+    def make_thumbnail(self, image, size=(300, 300)):
         """
         Method which automatically makes thumbnail images
-        of the main uploaded image, reducing size to 300x200
+        of the main uploaded image, reducing size to 300x300
         """
         img = Image.open(image)
         img.convert("RGB")
