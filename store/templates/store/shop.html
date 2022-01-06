@@ -4,11 +4,96 @@
 
 {% block content %}
 
-{% for product in products %}
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.description }}</p>
-    <h3>€{{ product.price }}</h3>
-{% endfor %}
+<div class="container">
 
+    <!-- Page Breadcrumbs -->
+    {% block breadcrumb_content %}
+        <ol class="breadcrumb bg-white">
+            <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="">Home</a></li>
+            <li class="breadcrumb-item active text-secondary" aria-current="page">All Products</li>
+        </ol>
+    {% endblock %}
+    
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-12">
+            <h3>All Products</h3>
+            <hr class="">
+        </div>
+        <div class="col-12 text-center">
+            <a class="btn-outline-primary" href="#" >Membership</a>
+            <a class="btn-outline-primary" href="#" >Boxing Gear</a>
+            <a class="btn-outline-primary" href="#">Apparel</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="row">
+
+        <!-- Product Card -->
+        {% for product in products %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-3 px-md-1">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        {% if product.thumbnail.url %}
+                            <a class="product-img" href="">
+                                <img src="{{ product.thumbnail.url }}" alt="{{ product.title }}">
+                            </a>
+                        {% else %}
+                            <a class="product-img" href="#">
+                                <img src="#" alt="{{ product.title }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <a href="#">
+                            <h3 class="text-primary">{{ product.title }}</h3>
+                        </a>
+                    </div>
+                    <div class="col-6 text-left font-weight-bolder">
+                        Test
+                    </div>
+                    <div class="col-6">
+                        <p>€{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        <div class="col-12">
+            <div class="container p-4">
+                <div class="pagination justify-content-center">
+                    <span class="text-center">
+                        {% if products.has_previous %}
+                            <a href="?page=1" title="First">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                            <a href="?page={{ products.previous_page_number }}" title="Previous">
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                        {% endif %}
+
+                        {% if products %}
+                            <span class="">
+                                <strong>{{ products.number }}</strong> of {{ products.paginator.num_pages }}
+                            </span>
+                        {% endif %}
+
+                        {% if products.has_next %}
+                            <a href="?page={{ products.next_page_number }}" title="Next">
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                            <a href="?page={{ products.paginator.num_pages }}" title="Last">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock content %}
