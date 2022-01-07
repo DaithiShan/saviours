@@ -72,17 +72,19 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle text-uppercase" href="{% url 'shop' %}" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Shop
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-uppercase" href="#">Shop Membership</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Shop Gear</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Shop Apparel</a>
-                        </div>
+                            {% for category in categories %}
+                                {% if category.title != 'Apparel' %}
+                                    <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                                    <div class="dropdown-divider"></div>
+                                {% else %}
+                                <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                                {% endif %}
+                            {% endfor %}
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -185,59 +187,21 @@
                     </div>
                 </div>
 
-                <!-- MEMBERSHIP LINKS -->
-                <div class="col-12 col-md-3">
-                    <div class="row">
-                        <div class="col-12 footer-title">
-                            Membership
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="#">Yearly Bundle</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="#">Quarterly Bundle</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="#">Monthly Bundle</a>
+                <!-- SHOP LINKS -->
+                {% for category in categories %}
+                    <div class="col-12 col-md-3">
+                        <div class="row">
+                            <div class="col-12 footer-title">
+                                {{ category.title }}
+                            </div>
+                            {% for subcategory in category.subcategories.all %}
+                                <div class="col-12 footer-text">
+                                    <a href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-    
-                <!-- APPAREL LINKS -->
-                <div class="col-12 col-md-3">
-                    <div class="row">
-                        <div class="col-12 footer-title">
-                            Apparel
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Hoodies</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Tshirts</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Sweatpants</a> 
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GEAR LINKS -->
-                <div class="col-12 col-md-3">
-                    <div class="row">
-                        <div class="col-12 footer-title">
-                            Gear
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Boxing Gloves</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Handwraps</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="">Mouthguard</a> 
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
     
                 
                 <!-- Footer Quick Links -->

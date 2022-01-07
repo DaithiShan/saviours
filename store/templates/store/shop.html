@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Shop{% endblock title %}
+{% block extra_title %}Shop{% endblock extra_title %}
 
 {% block content %}
 
@@ -8,24 +8,31 @@
 
     <!-- Page Breadcrumbs -->
     {% block breadcrumb_content %}
-        <ol class="breadcrumb bg-white">
-            <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="">Home</a></li>
-            <li class="breadcrumb-item active text-secondary" aria-current="page">All Products</li>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-primary">Home</a></li>
+            {% if category %}
+                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ category.title }}</li>
+            {% endif %}
         </ol>
     {% endblock %}
     
     <!-- Page Header -->
     <div class="row">
         <div class="col-12">
-            <h3>All Products</h3>
+            {% if category %}
+                <h3 class="text-primary">{{ category.title }}</h3>
+            {% endif %}
             <hr class="">
         </div>
         <div class="col-12 text-center">
-            <a class="btn-outline-primary" href="#" >Membership</a>
-            <a class="btn-outline-primary" href="#" >Boxing Gear</a>
-            <a class="btn-outline-primary" href="#">Apparel</a>
+                <button id="product-sort-button" class="">Sort Products<i class="fas fa-chevron-down"></i></button>
+                <div id="product-sort-list" class="filters__sort--list dropdown__list">
+                    <a href="" class="">Highest Rated</a>
+                    <a href="" class="">Price (Low to High)</a>
+                    <a href="" class="">Price (High to Low)</a>
+                    <a href="" class="">Newest Items</a>
+                </div>
         </div>
-    </div>
 
     <!-- Page Content -->
     <div class="row">
@@ -36,17 +43,17 @@
                 <div class="row">
                     <div class="col-12 p-0">
                         {% if product.thumbnail.url %}
-                            <a class="product-img" href="{% url 'product_detail' product.id %}">
+                            <a class="product-img" href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
                                 <img src="{{ product.thumbnail.url }}" alt="{{ product.title }}">
                             </a>
                         {% else %}
-                            <a class="product-img" href="{% url 'product_detail' product.id %}">
+                            <a class="product-img" href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
                                 <img src="#" alt="{{ product.title }}">
                             </a>
                         {% endif %}
                     </div>
                     <div class="col-12">
-                        <a href="{% url 'product_detail' product.id %}">
+                        <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
                             <h3 class="text-primary">{{ product.title }}</h3>
                         </a>
                     </div>

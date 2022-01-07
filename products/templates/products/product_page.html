@@ -10,9 +10,9 @@
         {% block breadcrumb_content %}
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-white">Home</a></li>
-                {% if product.category.pk == 1 %}
+                {% if product.category.title == 'Membership' %}
                     <li class="breadcrumb-item"><a href="#" class="text-primary">All Membership Options</a></li>
-                {% elif product.category.pk == 2 %}
+                {% elif product.category.title == 'Boxing Gear' %}
                     <li class="breadcrumb-item"><a href="#" class="text-primary">All Boxing Gear</a></li>
                 {% else %}
                 <li class="breadcrumb-item"><a href="#" class="text-primary">All Apparel</a></li>
