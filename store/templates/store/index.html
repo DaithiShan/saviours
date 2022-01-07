@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block extra_title %}Home{% endblock %}
+{% block extra_title %}Home{% endblock extra_title %}
 
 {% block content %}
 <div class="container-fluid">
@@ -17,10 +17,10 @@
                 </div>
             <div class="row d-flex justify-content flex-column">
                 <div id="get-membership" class="col-12 flex-start mb-3">
-                    <a class="lead btn-primary btn-lg" href="">Get Membership</a>
+                    <a class="lead btn-primary btn-lg" href="{% url 'shop' 'membership' %}">Get Membership</a>
                 </div>
                 <div id="get-gear" class="col-12 flex-start">
-                    <a class="lead btn-primary btn-lg" href="">Get Boxing Gear</a>
+                    <a class="lead btn-primary btn-lg" href="{% url 'shop' 'boxing-gear' %}">Get Boxing Gear</a>
                 </div>
             </div>
         </div>
@@ -45,36 +45,36 @@
                     <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
                         <div class="row">
                             <div class="col-12">
-                                <a class="" href="#">
+                                <a class="" href="{% url 'shop' 'apparel' %}">
                                     <img src="{% static 'img/hoodie.png' %}" alt="Image of St Saviours OBA Hoodie">
                                 </a>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Shop Club Apparel</a>
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'apparel' %}">Shop Club Apparel</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
                         <div class="row">
                             <div class="col-12">
-                                <a href="#">
+                                <a href="{% url 'shop' 'boxing-gear' %}">
                                     <img src="{% static 'img/gloves.png' %}" alt="Image of boxing gloves">
                                 </a>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Shop Boxing Gear</a>
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'boxing-gear' %}">Shop Boxing Gear</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
                         <div class="row">
                             <div class="col-12">
-                                <a href="#">
+                                <a href="{% url 'shop' 'membership' %}">
                                     <img src="{% static 'img/member.png' %}" alt="Image of boxer training in St Saviours OBA">
                                 </a>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">Membership</a>
+                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'membership' %}">Membership</a>
                             </div>
                         </div>
                     </div>

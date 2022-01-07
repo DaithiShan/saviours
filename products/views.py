@@ -7,11 +7,11 @@ from .models import Product, ProductSelect
 # ------ Product Page ------
 
 
-def product_page(request, product_id):
+def product_page(request, category, subcategory, product):
     """
     Returns specified product
     """
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, slug=product)
     product_options = product.product_select.all()
 
     # gets the product variations to select
