@@ -38,12 +38,17 @@ body {
 
 .dropdown-menu {
     .dropdown-item {
-        a:hover {
-            color: rgba($orange, .80);
+
+        color: $primary;
+
+        &:hover {
+            background-color: $orange;
+            color: $black;
         }
 
-        a:focus {
-            color: $orange;
+        &:focus {
+            background-color: $cyan;
+            color: $black;
         }
     }
 }
