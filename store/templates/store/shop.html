@@ -30,9 +30,9 @@
                 <button type="button" id="sortDropdown" class="dropdown-toggle btn btn-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Products
                 </button>
                 <ul class="dropdown-menu bg-dark" aria-labelledby="sortDropdown">
-                    <li><a href="#" class="text-primary dropdown-item">Highest Rated</a></li>
-                    <li><a href="?{% url_replace request 'order_by' 'price' %}" class="text-primary dropdown-item">Lowest Price</a></li>
-                    <li><a href="?{% url_replace request 'order_by' '-date_added' %}" class="text-primary dropdown-item">Newest Items</a></li>
+                    <li><a href="#" class="dropdown-item">Highest Rated</a></li>
+                    <li><a href="?{% url_replace request 'order_by' 'price' %}" class="dropdown-item">Lowest Price</a></li>
+                    <li><a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown-item">Newest Items</a></li>
                 </ul>
         </div>
     </div>

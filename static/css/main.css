@@ -10915,6 +10915,18 @@ body {
   height: 50px;
 }
 
+.dropdown-menu .dropdown-item {
+  color: #ffee32;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: #fdc500;
+  color: #03071e;
+}
+.dropdown-menu .dropdown-item:focus {
+  background-color: #c86bfa;
+  color: #03071e;
+}
+
 footer {
   background-color: #03071e;
   margin-top: auto;
