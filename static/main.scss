@@ -36,6 +36,18 @@ body {
     }
 }
 
+.dropdown-menu {
+    .dropdown-item {
+        a:hover {
+            color: rgba($orange, .80);
+        }
+
+        a:focus {
+            color: $orange;
+        }
+    }
+}
+
 // FOOTER EXTRA STYLING
 
 footer {

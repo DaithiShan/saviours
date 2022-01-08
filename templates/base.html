@@ -79,13 +79,13 @@
                             aria-haspopup="true" aria-expanded="false">
                             Shop
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                             {% for category in categories %}
                                 {% if category.title != 'Apparel' %}
-                                    <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                                    <a class="dropdown-item text-uppercase text-primary" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
                                     <div class="dropdown-divider"></div>
                                 {% else %}
-                                <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                                    <a class="dropdown-item text-uppercase text-primary" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
                                 {% endif %}
                             {% endfor %}
                     </li>
@@ -94,12 +94,12 @@
                             aria-haspopup="true" aria-expanded="false">
                             About
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-uppercase" href="#">Club Location</a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-primary text-uppercase" href="#">Club Location</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Club Timetable</a>
+                            <a class="dropdown-item text-primary text-uppercase" href="#">Club Timetable</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Contact</a>
+                            <a class="dropdown-item text-primary text-uppercase" href="#">Contact</a>
                         </div>
                     </li>
                     {% if user.is_authenticated %}

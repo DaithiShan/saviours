@@ -13,7 +13,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-primary">Home</a></li>
             {% if category %}
-                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ category.title }}</li>
+                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ category.title }}</a></li>
             {% endif %}
         </ol>
     {% endblock %}
@@ -29,7 +29,7 @@
         <div class="col-12 text-center dropdown show">
                 <button type="button" id="sortDropdown" class="dropdown-toggle btn btn-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Products
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                <ul class="dropdown-menu bg-dark" aria-labelledby="sortDropdown">
                     <li><a href="#" class="text-primary dropdown-item">Highest Rated</a></li>
                     <li><a href="?{% url_replace request 'order_by' 'price' %}" class="text-primary dropdown-item">Lowest Price</a></li>
                     <li><a href="?{% url_replace request 'order_by' '-date_added' %}" class="text-primary dropdown-item">Newest Items</a></li>
