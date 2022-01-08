@@ -11,11 +11,11 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-white">Home</a></li>
                 {% if product.category.title == 'Membership' %}
-                    <li class="breadcrumb-item"><a href="#" class="text-primary">All Membership Options</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop' 'membership' %}" class="text-primary">All Membership Options</a></li>
                 {% elif product.category.title == 'Boxing Gear' %}
-                    <li class="breadcrumb-item"><a href="#" class="text-primary">All Boxing Gear</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop' 'boxing-gear' %}" class="text-primary">All Boxing Gear</a></li>
                 {% else %}
-                <li class="breadcrumb-item"><a href="#" class="text-primary">All Apparel</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'shop' 'apparel' %}" class="text-primary">All Apparel</a></li>
                 {% endif %}
                 <li class="breadcrumb-item active text-secondary" aria-current="page">{{ product.title }}</li>
             </ol>

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Q
+from urllib.parse import urlparse, urlunparse
+from django.http import QueryDict
 from products.models import Product
 
 
@@ -35,16 +37,20 @@ def shop(request, category=None, subcategory=None):
     elif category:
         q &= Q(category__slug=category)
 
-    # products
-    products = Product.objects.filter(q)
+    # product
+    order = request.GET.get("order_by") or "ordering"
+    products = Product.objects.filter(q).order_by(order)
 
-    # from django docs
-    paginator = Paginator(products, 8)  # Show 12 products per page.
+    # Pagination object from django docs
+    paginator = Paginator(products, 4)  # Show 8 products per page.
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    context["page_obj"] = paginator.get_page(page_number)
 
-    context = {
-        'products': page_obj,
-        'category': category,
-        }
+    # Product List
+    context["products"] = products
+
+    # Category & Subcategory
+    context["category"] = category
+    context["subcategory"] = subcategory
+
     return render(request, 'store/shop.html', context)
