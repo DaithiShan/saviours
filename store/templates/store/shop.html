@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load store_tags %}
+
 {% block extra_title %}Shop{% endblock extra_title %}
 
 {% block content %}
@@ -24,15 +26,16 @@
             {% endif %}
             <hr class="">
         </div>
-        <div class="col-12 text-center">
-                <button id="product-sort-button" class="">Sort Products<i class="fas fa-chevron-down"></i></button>
-                <div id="product-sort-list" class="filters__sort--list dropdown__list">
-                    <a href="" class="">Highest Rated</a>
-                    <a href="" class="">Price (Low to High)</a>
-                    <a href="" class="">Price (High to Low)</a>
-                    <a href="" class="">Newest Items</a>
-                </div>
+        <div class="col-12 text-center dropdown show">
+                <button type="button" id="sortDropdown" class="dropdown-toggle btn btn-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Products
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                    <li><a href="#" class="text-primary dropdown-item">Highest Rated</a></li>
+                    <li><a href="?{% url_replace request 'order_by' 'price' %}" class="text-primary dropdown-item">Lowest Price</a></li>
+                    <li><a href="?{% url_replace request 'order_by' '-date_added' %}" class="text-primary dropdown-item">Newest Items</a></li>
+                </ul>
         </div>
+    </div>
 
     <!-- Page Content -->
     <div class="row">
@@ -72,26 +75,26 @@
             <div class="container p-4">
                 <div class="pagination justify-content-center">
                     <span class="text-center">
-                        {% if products.has_previous %}
-                            <a href="?page=1" title="First">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1" title="First" class="text-white">
                                 <i class="fas fa-angle-double-left"></i>
                             </a>
-                            <a href="?page={{ products.previous_page_number }}" title="Previous">
+                            <a href="?page={{ page_obj.previous_page_number }}" title="Previous" class="text-white">
                                 <i class="fas fa-angle-left"></i>
                             </a>
                         {% endif %}
 
-                        {% if products %}
+                        {% if page_obj %}
                             <span class="">
-                                <strong>{{ products.number }}</strong> of {{ products.paginator.num_pages }}
+                                <strong>{{ page_obj.number }}</strong> of {{ page_obj.paginator.num_pages }}
                             </span>
                         {% endif %}
 
-                        {% if products.has_next %}
-                            <a href="?page={{ products.next_page_number }}" title="Next">
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" title="Next" class="text-white">
                                 <i class="fas fa-angle-right"></i>
                             </a>
-                            <a href="?page={{ products.paginator.num_pages }}" title="Last">
+                            <a href="?page={{ page_obj.paginator.num_pages }}" title="Last" class="text-white">
                                 <i class="fas fa-angle-double-right"></i>
                             </a>
                         {% endif %}
