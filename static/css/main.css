@@ -11088,3 +11088,10 @@ footer .footer-text a:focus {
   color: #fdc500;
   background-color: #03071e;
 }
+
+.product-card {
+  max-width: 91%;
+  margin: auto;
+  background-color: #fff;
+  padding-bottom: 2rem;
+}
