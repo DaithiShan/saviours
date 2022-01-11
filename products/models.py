@@ -118,7 +118,7 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def make_thumbnail(self, image, size=(300, 300)):
+    def make_thumbnail(self, image, size=(250, 250)):
         """
         Method which automatically makes thumbnail images
         of the main uploaded image, reducing size to 300x300

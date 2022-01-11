@@ -26,7 +26,7 @@
             {% endif %}
             <hr class="">
         </div>
-        <div class="col-12 text-center dropdown show">
+        <div class="col-12 text-center dropdown show mb-4">
                 <button type="button" id="sortDropdown" class="dropdown-toggle btn btn-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Products
                 </button>
                 <ul class="dropdown-menu bg-dark" aria-labelledby="sortDropdown">
@@ -42,29 +42,23 @@
 
         <!-- Product Card -->
         {% for product in products %}
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-3 px-md-1">
-                <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-3 px-md-1 product">
+                <div class="row product-card">
                     <div class="col-12 p-0">
-                        {% if product.thumbnail.url %}
                             <a class="product-img" href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
-                                <img src="{{ product.thumbnail.url }}" alt="{{ product.title }}">
+                                <img class="mx-auto d-block" src="{{ product.thumbnail.url }}" alt="{{ product.title }}">
                             </a>
-                        {% else %}
-                            <a class="product-img" href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
-                                <img src="#" alt="{{ product.title }}">
-                            </a>
-                        {% endif %}
                     </div>
                     <div class="col-12">
                         <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
-                            <h3 class="text-primary">{{ product.title }}</h3>
+                            <h3 class="text-black ms-3">{{ product.title }}</h3>
                         </a>
                     </div>
-                    <div class="col-6 text-left font-weight-bolder">
-                        Test
+                    <div class="col-12 font-weight-bolder ms-3 text-dark lead">
+                        €{{ product.price }}
                     </div>
-                    <div class="col-6">
-                        <p>€{{ product.price }}</p>
+                    <div class="col-12 font-weight-bolder ms-3 text-dark lead">
+                        RATING
                     </div>
                 </div>
             </div>

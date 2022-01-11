@@ -225,3 +225,12 @@ footer {
     color: $orange;
     background-color: $black;
 }
+
+// Product Cards Extra Styling
+
+.product-card {
+    max-width: 91%;
+    margin: auto;
+    background-color: $white;
+    padding-bottom: 2rem;
+}
