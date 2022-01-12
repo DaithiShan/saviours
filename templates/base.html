@@ -119,8 +119,8 @@
                     {% endif  %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item {% block nav_search %}active{% endblock %}">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'search' %}active{% endif %}" href="{% url 'search' %}">
                             <i class="fas fa-search" title="Search"></i>
                         </a>
                     </li>

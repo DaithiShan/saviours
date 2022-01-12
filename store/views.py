@@ -5,6 +5,8 @@ from urllib.parse import urlparse, urlunparse
 from django.http import QueryDict
 from products.models import Product
 
+# Custom shop view adapted from https://github.com/cjcon90/the_rhythm_box/
+
 
 def home(request):
     """
@@ -21,15 +23,13 @@ def shop(request, category=None, subcategory=None):
     q = Q()
 
     # text search
-    if "q" in request.GET:
-        query = request.GET.get("q")
-        q &= (
-            Q(title__icontains=query) |
-            Q(category__title__icontains=query) |
-            Q(subcategory__title__icontains=query) |
-            Q(type__title__icontains=query) |
-            Q(brand__name__icontains=query)
-        )
+    # if "q" in request.GET:
+    #     query = request.GET.get("q")
+    #     q &= (
+    #         Q(title__icontains=query) |
+    #         Q(category__title__icontains=query) |
+    #         Q(subcategory__title__icontains=query)
+    #     )
 
     # URL parameter filters
     if subcategory:
@@ -54,3 +54,32 @@ def shop(request, category=None, subcategory=None):
     context["subcategory"] = subcategory
 
     return render(request, 'store/shop.html', context)
+
+# Custom search view adapted from Boutique Ado Mini Project
+
+def search(request):
+    """
+    Search functionality separated to own page.
+    Returns search results
+    """
+    query = None
+    context = {}
+    q = Q()
+
+    # text search
+    if "q" in request.GET:
+        query = request.GET.get("q")
+
+        q &= (
+            Q(title__icontains=query) |
+            Q(category__title__icontains=query) |
+            Q(subcategory__title__icontains=query)
+        )
+
+    # product
+    products = Product.objects.filter(q)
+
+    context["products"] = products
+    context["search_term"] = query
+
+    return render(request, 'store/search_shop.html', context)
