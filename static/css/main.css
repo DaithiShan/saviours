@@ -2162,7 +2162,7 @@ progress {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #e9ecef;
+  color: #03071e;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
@@ -2184,7 +2184,7 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
-  color: #e9ecef;
+  color: #03071e;
   background-color: #fff;
   border-color: #fff799;
   outline: 0;
@@ -2214,7 +2214,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
           margin-inline-end: 0.75rem;
-  color: #e9ecef;
+  color: #03071e;
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2230,7 +2230,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
           margin-inline-end: 0.75rem;
-  color: #e9ecef;
+  color: #03071e;
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2260,7 +2260,7 @@ progress {
   margin: -0.375rem -0.75rem;
   -webkit-margin-end: 0.75rem;
           margin-inline-end: 0.75rem;
-  color: #e9ecef;
+  color: #03071e;
   background-color: #e9ecef;
   pointer-events: none;
   border-color: inherit;
@@ -2382,7 +2382,7 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #e9ecef;
+  color: #03071e;
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -2414,7 +2414,7 @@ textarea.form-control-lg {
 }
 .form-select:-moz-focusring {
   color: transparent;
-  text-shadow: 0 0 0 #e9ecef;
+  text-shadow: 0 0 0 #03071e;
 }
 
 .form-select-sm {
@@ -2734,7 +2734,7 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #e9ecef;
+  color: #03071e;
   text-align: center;
   white-space: nowrap;
   background-color: #e9ecef;
@@ -11090,9 +11090,7 @@ footer .footer-text a:focus {
   background-color: #fdc500;
   color: #03071e;
 }
-
-.toast-btn:hover,
-.toast-btn:focus {
+.toast-btn:hover, .toast-btn:focus {
   color: #fdc500;
   background-color: #03071e;
 }
@@ -11134,4 +11132,9 @@ footer .footer-text a:focus {
 .increment-qty {
   color: #03071e;
   background-color: #ced4da;
+}
+
+.input-group .btn:hover, .input-group .btn:focus {
+  color: #03071e;
+  background-color: #fff;
 }

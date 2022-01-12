@@ -227,11 +227,12 @@ footer {
 .toast-btn {
     background-color: $orange;
     color: $black;
-}
-.toast-btn:hover,
-.toast-btn:focus {
-    color: $orange;
-    background-color: $black;
+
+    &:hover,
+    &:focus {
+        color: $orange;
+        background-color: $black;
+    }
 }
 
 // Product Cards Extra Styling
@@ -269,4 +270,15 @@ footer {
 .increment-qty {
     color: $black;
     background-color: $gray-400;
+}
+
+// Search bar styling
+.input-group {
+    .btn {
+        &:hover,
+        &:focus {
+            color: $black;
+            background-color: $white;
+        }
+    }
 }
