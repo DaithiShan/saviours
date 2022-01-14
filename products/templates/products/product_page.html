@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Product Variation and Quantity -->
-                <form action="#" class="form" method="POST">
+                <form action="{% url 'add_to_bag' product.id %}" class="form" method="POST">
                     {% csrf_token %}
                     <div class="form-row d-flex flex-wrap justify-content-center">
                         <div class="col-12 py-sm-1">
@@ -142,7 +142,7 @@
                             <div class="align-self-center">
                                 <input class="btn-secondary" type="submit" value="Add to bag">
                             </div>
-                            <input type="hidden" name="redirect_url" value="#">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </div>
                     </div>
                 </form>

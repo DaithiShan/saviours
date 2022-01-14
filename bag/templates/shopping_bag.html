@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}Shopping Bag{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- Page Breadcrumbs -->
+        {% block breadcrumb_content %}
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-primary">Home</a></li>
+                <li class="breadcrumb-item active text-secondary" aria-current="page">View Shopping Bag</li>
+            </ol>
+        {% endblock %}
+
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-secondary">Shopping Bag</h2>
+                <hr class="section-divider">
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="row">
+            <!-- Bag Items -->
+            {% if bag_items %}
+                {% for bag_item in bag_items %}
+                    <div class="col-12">
+                        <div class="row justify-content-center align-items-stretch">
+                            <div class="col-5">
+                                    <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}">
+                                        <img src="{{ bag_item.product.image.url }}" alt="{{ bag_item.product.title }}" class="w-100">
+                                    </a>
+                            </div>
+                            <div class="col-7">
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <!-- Product Name -->
+                                        <div class="col-8">
+                                            <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" class="text-secondary">
+                                                {{ bag_item.product.title }}
+                                            </a>
+                                        </div>
+                                        <!-- Remove Product -->
+                                        <div class="col-4">
+                                            <a class="remove-item float-right text-danger" id="remove_{{ bag_item.item_id }}" title="Remove Item" data-product_select="{{ bag_item.product_select }}">
+                                                Remove item <i class="text-danger far fa-times-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row bag-row">
+                                        <!-- Size/Class Info -->
+                                        <div class="col-12 bag-info">
+                                            <p>Type: {{ bag_item.product_select }}</p>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row">
+                                        <!-- Update Box-->
+                                        <div class="col-12">
+                                            <form action="{% url 'update_bag' bag_item.item_id %}" class="form update-form" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group col-5">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <!-- Inactive when quantity is less than two -->
+                                                            <button class="decrement-qty btn btn-sm btn-primary rounded-0" 
+                                                                data-item_id="{{ bag_item.product_select.id }}" id="decrement-qty_{{ bag_item.product_select.id }}" aria-label="Decrease Quantity">
+                                                                <span>
+                                                                    <i class="fas fa-minus fa-sm"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                        <label for="id_qty_{{ bag_item.product_select.id }}" class="sr-only">Quantity Input Field</label>
+                                                        <input id="id_qty_{{ bag_item.product_select.id }}" class="form-control form-control-sm qty_input" type="number"
+                                                            name="quantity" value="{{ bag_item.quantity }}" min="1" max="{{ bag_item.product_select.stock_count }}"
+                                                            data-item_id="{{ bag_item.product_select.id }}" aria-label="Current Quantity">
+                                                        <div class="input-group-append">
+
+                                                            <!-- Inactive when max stock is reached -->
+                                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                                data-item_id="{{ bag_item.product_select.id }}" id="increment-qty_{{ bag_item.product_select.id }}" aria-label="Increase Quantity">
+                                                                <span>
+                                                                    <i class="fas fa-plus fa-sm"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                        <input type="hidden" name="product_select_id" value="{{ bag_item.product_select }}">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <a class="text-primary update-btn">Update</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="row bag-row">
+                                        <!-- Price -->
+                                        <div class="col-12 text-right font-weight-bolder">
+                                            €{{ bag_item.product.price }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="sm-divider">
+                {% endfor %}
+
+                <!-- Totals -->
+                <div class="col-12 bag-total py-2 px-1">
+                    <h6>Subtotal: €{{ total|floatformat:2 }}</h6>
+                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                    <hr>
+                    <h6>Grand Total: €{{ grand_total|floatformat:2 }}</h6>
+                    {% if free_delivery_delta > 0 %}
+                        <p>
+                            Spend just €{{ free_delivery_delta }} more to get <strong class="text-uppercase">free delivery</strong>
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Checkout Btns -->
+                <div class="col-12 bag-btns">
+
+                    <a class="bag-back-btn" href="{% url 'shop' %}">
+                        <i class="fas fa-angle-left"></i> Keep Shopping
+                    </a>
+                    <a class="bag-checkout-btn" href="#">
+                        Secure Checkout <i class="fas fa-lock"></i>
+                    </a>
+                </div>
+
+            {% else %}
+                <!-- When Bag is empty -->
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Your bag is empty</p>
+                            <a href="{% url 'shop' %}">
+                                <span>
+                                    <i class="fas fa-chevron-left"></i>
+                                    Keep Shopping
+                                </span>
+                            </a>
+                        </div>
+                        <!-- Copied from Home page for consistency -->
+                        <div class="home-content col-12">
+                            <div class="container-fluid">
+                                <div class="row text-center d-flex justify-content-center">
+                                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a href="#">
+                                                    <img src="{% static 'img/about-us.png' %}" alt="Image of St Saviours boxing coach, John 'Young' McCormack">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <a class="btn-primary btn-lg mt-2 mb-2" href="#">About Us</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a class="" href="{% url 'shop' 'apparel' %}">
+                                                    <img src="{% static 'img/hoodie.png' %}" alt="Image of St Saviours OBA Hoodie">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'apparel' %}">Shop Club Apparel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a href="{% url 'shop' 'boxing-gear' %}">
+                                                    <img src="{% static 'img/gloves.png' %}" alt="Image of boxing gloves">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'boxing-gear' %}">Shop Boxing Gear</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 home-link d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <a href="{% url 'shop' 'membership' %}">
+                                                    <img src="{% static 'img/member.png' %}" alt="Image of boxer training in St Saviours OBA">
+                                                </a>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <a class="btn-primary btn-lg mt-2 mb-2" href="{% url 'shop' 'membership' %}">Membership</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% include 'products/includes/quantity_input_script.html' %}
+
+<script>
+    // Update quantity on click
+    $('.update-btn').click(function(e) {
+        var form = $(this).prev('.update-form');
+        form.submit();
+    });
+    
+    // Remove item from bag and reload on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}"
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var select = $(this).data('product_select');
+        var url = `/shopping_bag/remove/${itemId}/`;
+        var data = {
+            'csrfmiddlewaretoken': csrfToken,
+            'product_select': select
+        };
+        
+        $.post(url, data)
+            .done(function() {
+                location.reload();
+            });
+    });
+    
+</script>
+
+{% endblock %}
