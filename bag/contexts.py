@@ -9,7 +9,7 @@ from products.models import Product, ProductOption, ProductSelect
 def bag_content(request):
     """
     Bag object to be stored in user session
-    Copied and edited from Boutique Ado mini project
+    Copied and edited from Boutique Ado Mini Project
     https://tinyurl.com/5f7ypxcc
     """
     bag_items = []

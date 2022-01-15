@@ -107,7 +107,7 @@
                                         </button>
                                     </div>
                                     <label for="id_qty_{{ product.id }}" class="sr-only">Quantity Input Field</label>
-                                    <input id="id_qty_{{ product.id }}" class="form-control form-control-sm text-dark"
+                                    <input id="id_qty_{{ product.id }}" class="form-control form-control-sm text-dark qty_input"
                                         type="number" name="quantity" value="1" min="1" max="{% if product.category.pk == 1 %}5{% else %}10{% endif %}"
                                         data-item_id="{{ product.id }}" aria-label="Current Quantity">
                                     <div class="input-group-append">
