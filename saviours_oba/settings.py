@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'products.apps.ProductsConfig',
     'bag.apps.BagConfig',
+    'checkout.apps.CheckoutConfig',
 
     # Django apps
     'django.contrib.admin',
