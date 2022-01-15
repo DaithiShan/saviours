@@ -39,14 +39,14 @@
                                 <div class="container-fluid p-0">
                                     <div class="row">
                                         <!-- Product Name -->
-                                        <div class="col-8">
+                                        <div class="col-8 bag-details">
                                             <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" class="text-secondary">
                                                 {{ bag_item.product.title }}
                                             </a>
                                         </div>
                                         <!-- Remove Product -->
-                                        <div class="col-4">
-                                            <a class="remove-item float-right text-danger" id="remove_{{ bag_item.item_id }}" title="Remove Item" data-product_select="{{ bag_item.product_select }}">
+                                        <div class="col-4 bag-details">
+                                            <a href="" class="remove-item float-right text-danger" id="remove_{{ bag_item.item_id }}" title="Remove Item" data-product_select="{{ bag_item.product_select }}">
                                                 Remove item <i class="text-danger far fa-times-circle"></i>
                                             </a>
                                         </div>
@@ -93,13 +93,13 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <a class="text-primary update-btn">Update</a>
+                                            <a class="text-primary bag-details btn p-0 m-0 pe-auto update-btn">Update</a>
                                         </div>
                                     </div>
 
                                     <div class="row bag-row">
                                         <!-- Price -->
-                                        <div class="col-12 text-right font-weight-bolder">
+                                        <div class="col-12 text-right font-weight-bolder bag-details">
                                             €{{ bag_item.product.price }}
                                         </div>
                                     </div>
@@ -111,11 +111,11 @@
                 {% endfor %}
 
                 <!-- Totals -->
-                <div class="col-12 bag-total py-2 px-1">
-                    <h6>Subtotal: €{{ total|floatformat:2 }}</h6>
-                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                <div class="col-12 bag-total py-2 px-1 d-flex flex-column align-items-end mb-3">
+                    <h5>Subtotal: €{{ total|floatformat:2 }}</h5>
+                    <h5>Delivery: €{{ delivery|floatformat:2 }}</h5>
                     <hr>
-                    <h6>Grand Total: €{{ grand_total|floatformat:2 }}</h6>
+                    <h5>Grand Total: €{{ grand_total|floatformat:2 }}</h5>
                     {% if free_delivery_delta > 0 %}
                         <p>
                             Spend just €{{ free_delivery_delta }} more to get <strong class="text-uppercase">free delivery</strong>
@@ -124,12 +124,12 @@
                 </div>
 
                 <!-- Checkout Btns -->
-                <div class="col-12 bag-btns">
+                <div class="col-12 d-flex justify-content-between mb-5">
 
-                    <a class="bag-back-btn" href="{% url 'shop' %}">
+                    <a class="btn-outline-primary btn-lg m-0" href="{% url 'shop' %}">
                         <i class="fas fa-angle-left"></i> Keep Shopping
                     </a>
-                    <a class="bag-checkout-btn" href="#">
+                    <a class="btn-secondary btn-lg m-0" href="#">
                         Secure Checkout <i class="fas fa-lock"></i>
                     </a>
                 </div>
@@ -140,7 +140,7 @@
                     <div class="row">
                         <div class="col-12">
                             <p>Your bag is empty</p>
-                            <a href="{% url 'shop' %}">
+                            <a href="{% url 'shop' %}" class="btn-outline-primary btn-lg">
                                 <span>
                                     <i class="fas fa-chevron-left"></i>
                                     Keep Shopping

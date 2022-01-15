@@ -11138,3 +11138,7 @@ footer .footer-text a:focus {
   color: #03071e;
   background-color: #fff;
 }
+
+.bag-details {
+  font-size: 1.3rem;
+}
