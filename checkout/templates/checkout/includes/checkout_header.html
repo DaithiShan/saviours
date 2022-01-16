@@ -1,0 +1,63 @@
+{% load static %}
+
+<!-- Checkout Logo -->
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'shopping_bag' %}" title="Return to Shopping Bag">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" class="">
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout Progress Bar -->
+<div class="container progress-container">
+
+    <!-- Inspired by https://github.com/AJGreaves/thehouseofmouse -->
+    <div class="row justify-content-center">
+        <div class="col-10 col-md-8 col-lg-6">
+            <hr class="progress-line">
+
+            <!-- Displays checkout steps and user progress -->
+            <div  id="progress-steps" class="d-flex justify-content-between">
+                <div class="progress-step">
+                    <div class="progress-circle {% if active_page == 'order_review' %}active-circle{% endif %}">
+                        {% if active_page == 'order_review' %}
+                            <a href="{% url 'order_review' %}">
+                                1
+                            </a>
+                        {% elif active_page == 'order_details' %}
+                            <a href="{% url 'order_review' %}">
+                                <i class="fas fa-check"></i>
+                            </a>
+                        {% else %}
+                            <i class="fas fa-check"></i>
+                        {% endif %}
+                    </div>
+                    <p class="step-label">Review</p>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle {% if active_page == 'order_details' %}active-circle{% endif %}">
+                        {% if active_page == 'order_review' or active_page == 'order_details' %}
+                            2
+                        {% else %}
+                            <i class="fas fa-check"></i>
+                        {% endif %}
+                    </div>
+                    <p class="step-label">Details</p>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle {% if active_page == 'order_complete' %}active-circle{% endif %}">
+                        {% if active_page != 'order_complete' %}
+                            3
+                        {% else %}
+                            <i class="fas fa-check"></i>
+                        {% endif %}
+                    </div>
+                    <p class="step-label">Complete</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

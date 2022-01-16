@@ -1,0 +1,53 @@
+{% load static %}
+{% load bag_tools %}
+
+<!-- Bag Contents -->
+{% for bag_item in bag_items %}
+    <div class="row order-content">
+        <div class="col-3 d-flex align-items-center p-0">
+            <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" title="{{ bag_item.product.title }}">
+                    <img src="{{ bag_item.product.image.url }}" alt="{{ bag_item.product.title }}" class="w-100">
+            </a>
+        </div>
+        <div class="col-6">
+            <p class="my-0"><strong>{{ bag_item.product.title }}</strong></p>
+            <p class="my-0 small">SKU: {{ bag_item.product_select }}</p>
+            <p class="my-0 small text-muted">Qty: {{ bag_item.quantity }}</p>
+        </div>
+        <div class="col-3 order-items text-muted text-right d-flex align-items-end justify-content-end">
+            <p class="my-0">€{{ bag_item.product.price | calc_subtotal:bag_item.quantity }}</p>
+        </div>
+    </div>
+    <hr class="m-0">
+{% endfor %}
+
+<!-- Totals -->
+<div class="col-12 bag-total py-2 px-1">
+    <h6>Subtotal: €{{ total|floatformat:2 }}</h6>
+    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+    <hr>
+    <h6>Grand Total: €{{ grand_total|floatformat:2 }}</h6>
+    {% if free_delivery_delta > 0 %}
+        <p>
+            Spend just €{{ free_delivery_delta }} more to get <strong class="text-uppercase">free delivery</strong>
+        </p>
+    {% endif %}
+</div>
+
+<!-- Checkout Btns -->
+{% if active_page == 'order_review' %}
+    <div class="col-12">
+        <a class="btn-outline-primary" href="{% url 'shopping_bag' %}">
+            <i class="fas fa-angle-left"></i> Return to Bag
+        </a>
+        <a class="btn-secondary" href="{% url 'order_details' %}">
+            Secure Checkout <i class="fas fa-lock"></i>
+        </a>
+    </div>
+{% else %}
+    <div class="col-12 edit-btn d-flex align-items-end justify-content-end">
+        <a href="{% url 'shopping_bag' %}">
+            <i class="fas fa-angle-left"></i> Edit Bag
+        </a>
+    </div>
+{% endif %}
