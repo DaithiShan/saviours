@@ -42,7 +42,7 @@ def order_review(request):
     current_bag = request.session.get('current_bag', {})
     if not current_bag:
         messages.error(request, "There is nothing in your bag")
-        return redirect(reverse('all_products'))
+        return redirect(reverse('shop'))
 
     context = {
         'active_page': 'order_review',
@@ -58,6 +58,7 @@ def order_details(request):
     Crispy form allowing user to enter their information.
     Removes navbar and footer from page to follow eCommerce conventions.
     Hide Elements ref: https://tinyurl.com/yp2buee3
+    Code for this function all adapted from Boutique Ado Mini Project
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -129,8 +130,8 @@ def order_details(request):
                 except Product.DoesNotExist:
                     # if product is not found
                     messages.error(request, (
-                        "One of the products wasn't found in our database."
-                        "Contact us for assistance!")
+                        "One of the items wasn't found in our database."
+                        "Call the boxing club for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('shopping_bag'))
@@ -165,24 +166,24 @@ def order_details(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        if request.user.is_authenticated:
-            try:
-                profile = UserProfile.objects.get(user=request.user)
-                order_form = OrderForm(initial={
-                    'full_name': profile.default_full_name,
-                    'email': profile.user.email,
-                    'phone_number': profile.default_phone_number,
-                    'street_address1': profile.default_street_address1,
-                    'street_address2': profile.default_street_address2,
-                    'town_or_city': profile.default_town_or_city,
-                    'county': profile.default_county,
-                    'postcode': profile.default_postcode,
-                    'country': profile.default_country,
-                })
-            except UserProfile.DoesNotExist:
-                order_form = OrderForm()
-        else:
-            order_form = OrderForm()
+        # if request.user.is_authenticated:
+        #     try:
+        #         profile = UserProfile.objects.get(user=request.user)
+        #         order_form = OrderForm(initial={
+        #             'full_name': profile.default_full_name,
+        #             'email': profile.user.email,
+        #             'phone_number': profile.default_phone_number,
+        #             'street_address1': profile.default_street_address1,
+        #             'street_address2': profile.default_street_address2,
+        #             'town_or_city': profile.default_town_or_city,
+        #             'county': profile.default_county,
+        #             'postcode': profile.default_postcode,
+        #             'country': profile.default_country,
+        #         })
+        #     except UserProfile.DoesNotExist:
+        #         order_form = OrderForm()
+        # else:
+        order_form = OrderForm()
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe Public Key is missing, \
