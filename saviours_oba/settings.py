@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ["saviours-testing-app.herokuapp.com","saviours-oba.herokuapp.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["saviours-testing-app.herokuapp.com","saviours-oba.herokuapp.com", "127.0.0.1", "localhost", "saviours-daithishan-dev-cvappv.herokuapp.com"]
 
 
 # Application definition
@@ -112,17 +112,17 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.i
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if "DATABASE_URL" in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# if "DATABASE_URL" in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation
