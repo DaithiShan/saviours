@@ -1,11 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils.safestring import mark_safe
+from django.forms.models import model_to_dict
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import Account
-from .forms import RegistrationForm, AccountAuthenticationForm
+from checkout.models import Order
+from .models import Account, Address
+from .forms import (
+    RegistrationForm,
+    AccountAuthenticationForm,
+    EditAccountForm,
+    DeleteAccountForm,
+    AddressForm,
+    ContactForm,
+)
 
-# Custom views adapted from CodingWithMitch:
+# All custom account views adapted from CodingWithMitch:
 # https://www.youtube.com/playlist?list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW
 
 
@@ -83,3 +96,188 @@ def login_user(request):
             )
         context["login_form"] = form
     return render(request, "accounts/login.html", context)
+
+
+@login_required
+def account_details(request):
+    """
+    View listing user email, name, newsletter subscription status
+    and default address
+    """
+    context = {}
+    user = request.user
+    return render(request, "accounts/account_details.html", context)
+
+
+@login_required
+def edit_account_details(request):
+    """
+    View to edit user email, name, newsletter subscription status
+    """
+    context = {}
+    user = request.user
+    if request.POST:
+        form = EditAccountForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Account details updated")
+            return redirect("account_details")
+        else:
+            context["edit_account_form"] = form
+
+    else:
+        form = EditAccountForm(initial=model_to_dict(user))
+        context["edit_account_form"] = form
+    return render(request, "accounts/edit_account_details.html", context)
+
+
+@login_required
+def delete_account(request):
+    """
+    View to delete account from database
+    """
+    context = {}
+    if request.POST:
+        form = DeleteAccountForm(request.POST)
+        if form.is_valid():
+            email = request.user.email
+            password = request.POST["password"]
+            user = authenticate(email=email, password=password)
+            if user:
+                user.delete()
+                messages.success(
+                    request,
+                    f"Your account has been deleted. Sorry to see you go! 👋",
+                )
+                return redirect("home")
+            else:
+                form.add_error("password", "Incorrect Password")
+                context["delete_account_form"] = form
+        else:
+            context["delete_account_form"] = form
+    else:
+        form = DeleteAccountForm()
+        context["delete_account_form"] = form
+    return render(request, "accounts/delete_account.html", context)
+
+
+@login_required
+def add_address(request):
+    """
+    View to add a default address
+    """
+    context = {}
+    user = request.user
+    if request.POST:
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            messages.success(request, f"Address saved")
+            return redirect("account_details")
+        else:
+            context["address_form"] = form
+    else:
+        form = AddressForm()
+        context["address_form"] = form
+        context["type"] = "Add"
+    return render(request, "accounts/address.html", context)
+
+
+@login_required
+def edit_address(request):
+    """
+    View to edit a saved address
+    """
+    context = {}
+    address = request.user.address
+    if request.POST:
+        form = AddressForm(request.POST, instance=address)
+        if form.is_valid():
+            form.save()
+            context["address_form"] = form
+    else:
+        form = AddressForm(initial=model_to_dict(address))
+        context["address_form"] = form
+        context["type"] = "Edit"
+    return render(request, "accounts/address.html", context)
+
+
+@login_required
+def my_orders(request):
+    """
+    View to show all orders completed by user
+    """
+    context = {}
+    context["orders"] = Order.objects.filter(user=request.user).order_by(
+        "-date"
+    )
+    return render(request, "accounts/my_orders.html", context)
+
+def newsletter_subscribe(request):
+    """
+    View to subscribe users to the website newsletter
+    """
+    email = request.POST["email"]
+    already_registered = Account.objects.filter(email=email).exists()
+    already_subbed = NewsletterSub.objects.filter(email=email).exists()
+    if already_subbed:
+        pass
+    elif already_registered:
+        user = Account.objects.get(email=email)
+        user.newsletter = True
+        user.save()
+    else:
+        sub = NewsletterSub(email=email)
+        sub.save()
+    messages.success(request, "Thank you for subscribing to our newsletter!")
+    return redirect(request.GET.get("next"))
+
+
+def contact(request):
+    """
+    View to send messages to the site's admins
+    """
+    context = {}
+    if request.POST:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data["subject"]
+            from_email = form.cleaned_data["from_email"]
+            message = form.cleaned_data["message"]
+            from_name = form.cleaned_data["from_name"]
+            mail_msg = f"Message from:\
+                 {from_name}\n\n{message}\n\n\
+                     Return email address: {from_email}"
+            try:
+                send_mail(subject, mail_msg, from_email, ["cjcon90@pm.me"])
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
+            messages.success(
+                request,
+                "Message successfully sent!\nThanks for getting in touch 🙂",
+            )
+            return redirect("contact_success")
+        else:
+            context["contact_form"] = form
+    else:
+        if request.user.is_authenticated:
+            form = ContactForm(
+                initial={
+                    "from_email": request.user.email,
+                    "from_name": f"{request.user.first_name}\
+                         {request.user.last_name}",
+                }
+            )
+        else:
+            form = ContactForm()
+    context["contact_form"] = form
+    return render(request, "accounts/contact.html", context)
+
+
+def contact_success(request):
+    """
+    Confirmation of successful message sent to site admins
+    """
+    return render(request, "accounts/contact_success.html")
