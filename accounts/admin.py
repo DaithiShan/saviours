@@ -9,7 +9,6 @@ class AccountAdmin(admin.ModelAdmin):
         "email",
         "first_name",
         "last_name",
-        "newsletter",
         "date_joined",
         "last_login",
         "is_admin",
