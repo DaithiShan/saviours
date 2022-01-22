@@ -35,6 +35,16 @@ body {
     i {
         color: $yellow;
     }
+
+    &.active{
+        i {
+            color: $orange;
+        }
+
+        span {
+            color: $black;
+        }
+    }
 }
 
 #nav-logo {
@@ -318,3 +328,5 @@ footer {
     }
 
 }
+
+// MEDIA QUERIES
