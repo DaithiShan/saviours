@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block extra_title %}Delete Account{% endblock extra_title %}
+
+{% block content %} 
+    <h2 class="">Delete Account</h2>
+
+    <form method="POST" action="{% url 'delete_account' %}" class="form" novalidate>
+        {% csrf_token %}
+        {% for field in delete_account_form %}
+        <fieldset class="form__group">
+            <label for="{{ field.id_for_label }}" class="">{{ field.label }}</label>
+            {{ field|add_class:'form__input regular' }}
+            {% for error in field.errors %}
+                <span class="">{{ error }}</span>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+
+        {% for error in field.errors %}
+            <span class="">{{ error }}</span>
+        {% endfor %}
+
+        <fieldset class="">
+            <button type="submit" class="form__submit btn btn--warning upper bold">Delete Account</button>
+        </fieldset>
+    </form>
+
+    <div class="">
+        <p class="">Changed Your mind?</p>
+        <a href="{% url 'account_details' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="">Back to My Account</a>
+    </div>
+{% endblock content %}

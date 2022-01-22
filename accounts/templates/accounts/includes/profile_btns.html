@@ -1,0 +1,29 @@
+{% load static %}
+
+<!-- Displays user profile buttons -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 profile-btns profile-blk btn-primary">
+            <!-- Conditional to current page -->
+            {% with request.resolver_match.url_name as url_name %}
+                {% if url_name == 'account_details' %}
+                    <a href="{% url 'my_orders' %}">View Past Orders</a>
+                {% else %}
+                    <a href="{% url 'edit_address' %}">Update Delivery Information</a>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="col-12 profile-btns profile-blk btn-primary">
+            <a href="{% url 'password_reset' %}">Change Password</a>
+        </div>
+        <div class="col-12 profile-btns profile-blk btn-primary">
+            <a href="{% url 'edit_account_details' %}">Contact Us</a>
+        </div>
+        <div class="col-12 profile-btns profile-blk btn-primary">
+            <a href="{% url 'shop' %}">Keep Shopping</a>
+        </div>
+        <div class="col-12 profile-btns btn-primary">
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+</div>
