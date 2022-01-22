@@ -53,7 +53,7 @@
                 <!-- centered bag icon in mobile view -->
                 <!-- Adapted from CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
             <div class="d-lg-none">
-                <a class="bag-icon-sm nav-link position-relative" href="{% url 'shopping_bag' %}" title="Shopping Bag">
+                <a class="nav-link position-relative {% if bag_items %}active{% endif %}" href="{% url 'shopping_bag' %}" title="Shopping Bag">
                     <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center"></i>
                 </a>
             </div>
@@ -122,7 +122,7 @@
                 </ul>
             </div>
         <div class="d-none d-lg-inline-block">
-            <a href="{% url 'shopping_bag' %}" class="nav-link" title="Shopping Bag" aria-label="View Shopping Bag">
+            <a href="{% url 'shopping_bag' %}" class="nav-link {% if bag_items %}active{% endif %}" title="Shopping Bag" aria-label="View Shopping Bag">
                 <i class="fas fa-shopping-bag"></i>
             </a>
         </div>

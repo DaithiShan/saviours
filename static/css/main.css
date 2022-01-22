@@ -10917,6 +10917,12 @@ body {
 .nav-link i {
   color: #ffee32;
 }
+.nav-link.active i {
+  color: #fdc500;
+}
+.nav-link.active span {
+  color: #03071e;
+}
 
 #nav-logo img {
   width: auto;

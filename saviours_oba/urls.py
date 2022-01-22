@@ -23,8 +23,14 @@ urlpatterns = [
     path('', include('store.urls')),
     path('', include("products.urls")),
     path('', include('accounts.urls')),
+    path('pages/', include('pages.urls')),
     path('shopping_bag/', include("bag.urls")),
     path('checkout/', include('checkout.urls')),
-] + static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
+]
+
+# Check debug status
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
