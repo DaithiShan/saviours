@@ -285,7 +285,36 @@ footer {
 
 
 // BAG EXTRA STYLING
-
 .bag-details {
     font-size: 1.3rem;
+}
+
+
+// ACCOUNT PAGE STYLING
+.account{
+
+    .profile-btns {
+        display: flex;
+        justify-content: center;
+        margin: 1.5% auto;
+        padding: 10px;
+        text-align: center;
+        border-radius: 2px;
+        max-width: 100%;
+    }
+
+    th {
+        padding-left: 0;
+    }
+
+    td {
+        padding-left: 0;
+    }
+
+    .details-link {
+        width: fit-content;
+        height: fit-content;
+        margin-top: 1%;
+    }
+
 }

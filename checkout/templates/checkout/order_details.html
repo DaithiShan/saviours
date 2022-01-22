@@ -38,7 +38,8 @@
                     {% csrf_token %}
                     <fieldset class="my-2">
                         <legend class="form-label">Customer Details</legend>
-                        {{ order_form.full_name | as_crispy_field }}
+                        {{ order_form.first_name | as_crispy_field }}
+                        {{ order_form.last_name | as_crispy_field }}
                         {{ order_form.email | as_crispy_field }}
                     </fieldset>
                     <fieldset class="my-2">

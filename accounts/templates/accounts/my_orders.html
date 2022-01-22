@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
+{% endblock %}
+
+{% block extra_title %}Past Orders{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-12">
+                <h3>My Past Orders</h3>
+                <hr class="section-divider">
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="row page-content">
+            <div class="col-12 col-md-8 px-md-5 order-md-2">
+                <p class="text-muted pl-1">Order History ({{ orders.count }} {% if orders.count == 1 %}order{% else %}orders{% endif %})</p>
+                <div class="order-history table-responsive">
+                    {% if orders.count < 1 %}
+                        <h4>You have no orders yet!</h4>
+                    {% else %}
+                        <!-- Table iterating past orders -->
+                        <table class="table table-sm text-md-center">
+                            <thead>
+                                <tr>
+                                    <th>Order Date</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                    <tr>
+                                        <td>
+                                            {{ order.date }}
+                                        </td>
+                                        <td>
+                                            {{ order.lineitems.count }} {% if order.lineitems.count == 1 %}item{% else %}items{% endif %}
+                                        </td>
+                                        <td>
+                                            €{{ order.grand_total }}
+                                        </td>
+                                        <td class="table-btn">
+                                            <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                                View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+            <hr class="account-hr d-md-none">
+
+            <!-- Display profile buttons -->
+            <div class="col-12 col-md-4 lg-border order-md-1">
+                {% include 'accounts/includes/profile_btns.html' %}
+            </div>
+        </div>
+        
+    </div>
+        
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/account.js' %}"></script>
+{% endblock %}

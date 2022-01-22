@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block extra_title %}Edit Account{% endblock extra_title %}
+
+{% block content %} 
+    <h2 class="">Edit Account</h2>
+
+    <form method="POST" action="{% url 'edit_account_details' %}" class="form" novalidate>
+        {% csrf_token %}
+        {% for field in edit_account_form %}
+        <fieldset class="">
+            {% if field.name == 'newsletter' %}
+                <label for="{{ field.id_for_label }}" class="">Subscribe to our newsletter?
+                <div class="">
+                    {% for radio in field %}
+                        <label class="radio-btn" for="{{ radio.id_for_label }}">
+                            <span class="">{{radio.choice_label}}</span>
+                                <!-- Set False selected by default and set correct values -->
+                                {% if radio.id_for_label == 'id_newsletter_0' %}
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='True' {% if request.user.newsletter %}checked{% endif %}>
+                                {% else %}
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='False' {% if not request.user.newsletter %}checked{% endif %}>
+                                {% endif %}
+                            <span class=""></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <label for="{{ field.id_for_label }}" class="">{{ field.label }}</label>
+                {{ field|add_class:'' }}
+            {% endif %}
+            {% for error in field.errors %}
+                <span class="">{{ error }}</span>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+
+        {% for error in field.errors %}
+            <span class="">{{ error }}</span>
+        {% endfor %}
+
+        <fieldset class="">
+            <button type="submit" class="">Confirm</button>
+        </fieldset>
+    </form>
+{% endblock content %}

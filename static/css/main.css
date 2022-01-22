@@ -11142,3 +11142,28 @@ footer .footer-text a:focus {
 .bag-details {
   font-size: 1.3rem;
 }
+
+.account .profile-btns {
+  display: flex;
+  justify-content: center;
+  margin: 1.5% auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 2px;
+  max-width: 100%;
+}
+.account th {
+  padding-left: 0;
+}
+.account td {
+  padding-left: 0;
+}
+.account .details-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 1%;
+}

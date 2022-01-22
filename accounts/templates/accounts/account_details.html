@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block extra_title %}My Account{% endblock extra_title %}
+
+{% block content %}
+
+<div class="container account">
+
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-uppercase text-secondary">My Account</h3>
+            <hr class="section-divider mb-3">
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-12 col-md-8 px-md-5 order-md-2">
+            <h3 class="text-primary">My Details</h3>
+            <table class="table table-borderless mt-2">
+                <tr>
+                    <th>First Name:</th>
+                    <td>{{ request.user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name:</th>
+                    <td>{{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+            </table>
+            <div class="d-flex flex-column justify-content-between mb-3">
+                <a href="" class="btn-outline-primary details-link">Edit Account Details</a>
+                <a href="" class="btn-outline-secondary details-link">Update Address</a>
+                <a href="" class="btn-outline-danger details-link">Delete Account</a>
+           </div>
+    </div>
+    <div class="col-12 col-md-4 lg-border order-md-1 px-0">
+        {% include 'accounts/includes/profile_btns.html' %}
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/account.js' %}"></script>
+{% endblock %}

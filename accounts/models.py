@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django_countries.fields import CountryField
+
 
 # Custom user model is adapted from CodingWithMitch tutorial:
 # https://www.youtube.com/watch?v=eCeRC7E8Z7Y&list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW&index=12
@@ -10,7 +12,7 @@ class MyAccountManager(BaseUserManager):
     Account manager for custom user model
     """
     def create_user(
-        self, email, first_name, last_name, newsletter, password=None
+        self, email, first_name, last_name, password=None
     ):
         if not email:
             raise ValueError("Users must have an email address")
@@ -23,7 +25,6 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
-            newsletter=newsletter,
         )
 
         user.set_password(password)
@@ -31,14 +32,13 @@ class MyAccountManager(BaseUserManager):
         return user
 
     def create_superuser(
-        self, email, first_name, newsletter, last_name, password
+        self, email, first_name, last_name, password
     ):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
             first_name=first_name,
             last_name=last_name,
-            newsletter=newsletter,
         )
         user.is_admin = True
         user.is_staff = True
@@ -60,7 +60,6 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(
         verbose_name="last name", max_length=30, unique=False
     )
-    newsletter = models.BooleanField(default=True)
     date_joined = models.DateTimeField(
         verbose_name="date joined", auto_now_add=True
     )
@@ -71,7 +70,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name", "newsletter"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     objects = MyAccountManager()
 
@@ -87,3 +86,19 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Address(models.Model):
+    user = models.OneToOneField(
+        Account, on_delete=models.CASCADE, related_name="address"
+    )
+    street_address_1 = models.CharField(max_length=80)
+    street_address_2 = models.CharField(max_length=80, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40)
+    county = models.CharField(max_length=40)
+    postcode = models.CharField(max_length=20)
+    country = CountryField(blank=False, default="IE")
+    phone_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"Address:{self.street_address_1} ({self.user.email}) "

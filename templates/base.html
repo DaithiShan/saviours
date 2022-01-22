@@ -54,14 +54,7 @@
                 <!-- Adapted from CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
             <div class="d-lg-none">
                 <a class="bag-icon-sm nav-link position-relative" href="{% url 'shopping_bag' %}" title="Shopping Bag">
-                    <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center">
-                        <span>
-                            {% if bag_items %}
-                                {{ bag_items|length }}
-                            {% else %}
-                            {% endif %}
-                        </span>
-                    </i>
+                    <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center"></i>
                 </a>
             </div>
             
@@ -75,11 +68,10 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-uppercase" href="{% url 'shop' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Shop
-                        </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Shop
+                    </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="shopDropdown">
                             {% for category in categories %}
                                 {% if category.title != 'Apparel' %}
                                     <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
@@ -90,11 +82,10 @@
                             {% endfor %}
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             About
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu bg-dark" aria-labelledby="aboutDropdown">
                             <a class="dropdown-item text-uppercase" href="#">Club Location</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-uppercase" href="#">Club Timetable</a>
@@ -103,19 +94,23 @@
                         </div>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="#">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="{% url 'logout' %}">Log out</a>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-uppercase" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Account</a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="accountDropdown">
+                                <a class="dropdown-item text-uppercase" href="{% url 'account_details' %}">My Details</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-uppercase" href="{% url 'my_orders' %}">Order History</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="{% url 'register' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase" href="{% url 'register' %}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a>
+                        </li>
                     {% endif  %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -169,11 +164,11 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="container d-flex justify-content-around">
+        <div class="container-fluid d-flex justify-content-around">
             <div class="row w-100 p-4">
 
                 <!-- ABOUT LINKS -->
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-sm-6 col-md-3">
                     <div class="row">
                         <div class="col-12 footer-title">
                             About Us
@@ -192,7 +187,7 @@
 
                 <!-- SHOP LINKS -->
                 {% for category in categories %}
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-3">
                         <div class="row">
                             <div class="col-12 footer-title">
                                 {{ category.title }}
