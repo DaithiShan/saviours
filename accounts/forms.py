@@ -10,15 +10,6 @@ from .models import Account, Address
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
-    newsletter = forms.TypedChoiceField(
-        coerce=lambda x: x == "True",
-        choices=(
-            (True, "Yes"),
-            (False, "No"),
-        ),
-        widget=forms.RadioSelect,
-        initial=True,
-    )
 
     class Meta:
         model = Account
@@ -26,7 +17,6 @@ class RegistrationForm(UserCreationForm):
             "email",
             "first_name",
             "last_name",
-            "newsletter",
             "password1",
             "password2",
         )
@@ -49,19 +39,10 @@ class AccountAuthenticationForm(forms.ModelForm):
 
 class EditAccountForm(forms.ModelForm):
     email = forms.EmailField(max_length=60)
-    newsletter = forms.TypedChoiceField(
-        coerce=lambda x: x == "True",
-        choices=(
-            (True, "Yes, subscribe me to the newsletter"),
-            (False, "No thank you"),
-        ),
-        widget=forms.RadioSelect,
-        initial=True,
-    )
 
     class Meta:
         model = Account
-        fields = ("first_name", "last_name", "email", "newsletter")
+        fields = ("first_name", "last_name", "email")
 
 
 class DeleteAccountForm(forms.Form):

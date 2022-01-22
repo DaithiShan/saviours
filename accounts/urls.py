@@ -11,9 +11,6 @@ from .views import (
                     add_address,
                     edit_address,
                     my_orders,
-                    newsletter_subscribe,
-                    contact,
-                    contact_success,
 )
 
 urlpatterns = [
@@ -63,6 +60,4 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
-    path("contact/", contact, name="contact"),
-    path("contact_success/", contact_success, name="contact_success"),
 ]

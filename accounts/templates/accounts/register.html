@@ -12,25 +12,8 @@
         <div class="mb-4">
         {% for field in registration_form %}
             <fieldset>
-                {% if field.name == 'newsletter' %}
-                    <label for="{{ field.id_for_label }}" class="form-label mt-4">Would you like to hear about the latest updates and events via our newsletter?</label>
-                    <div class="form-check mb-1 d-flex flex-column">
-                        {% for radio in field %}
-                            <label class="form-check-label" for="{{ radio.id_for_label }}">
-                                <span class="">{{radio.choice_label}}</span>
-                                    <!-- Set False selected by default and set correct values -->
-                                    {% if radio.id_for_label == 'id_newsletter_0' %}
-                                        <input type="radio" class="form-check-input" name="newsletter" id="{{ radio.id_for_label }}"  value='True' checked>
-                                    {% else %}
-                                        <input type="radio" class="form-check-input" name="newsletter" id="{{ radio.id_for_label }}"  value='False'>
-                                    {% endif %}
-                            </label>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <label for="{{ field.id_for_label }}" class="form-label mt-4">{{ field.label }}:</label>
-                    {{ field|add_class:'form-control' }}
-                {% endif %}
+                <label for="{{ field.id_for_label }}" class="form-label mt-4">{{ field.label }}:</label>
+                {{ field|add_class:'form-control' }}    
                 {% for error in field.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
