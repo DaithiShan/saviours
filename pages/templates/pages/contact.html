@@ -4,8 +4,9 @@
 
 {% block extra_title %}Contact Us{% endblock extra_title %}
 
-{% block content %} 
-    <h2 class="">Contact Us</h2>
+{% block content %}
+<div class="container form-wrapper col-md-6 col-lg-4 px-4 py-1">
+    <h2 class="text-secondary">Contact Us</h2>
     <form method="POST" action="{% url 'contact' %}" class="form" novalidate>
         {% csrf_token %}
 
@@ -24,7 +25,8 @@
         {% endfor %}
 
         <fieldset class="form__group">
-            <button type="submit" class="form__submit btn btn--black upper bold">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-4">Submit</button>
         </fieldset>
     </form>
+</div>
 {% endblock content %}

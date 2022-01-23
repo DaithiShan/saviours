@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}About Us{% endblock %}
+
+{% block content %}
+
+<div class="container about-container page-margins">
+
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-12">
+                <h2 class="text-secondary">St Saviour's Olympic Boxing Academy</h2>
+            <hr class="section-divider">
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="row about-box">
+        <div class="col-12 col-md-4 about-content">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Address -->
+                    <div class="col-6 col-md-12 about-text">
+                        <h4>Address</h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        St Saviours Olympic Boxing Club
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        R132 Inns Quay
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Dublin
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Phone and Email -->
+                    <div class="col-6 col-md-12 about-text phone-email">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Phone</h4>
+                                <p class="m-0 small"><a class="pages-link" href="tel:+353-895-866-7065">+353 (85) 8667065</a></p>
+                                <p class="text-muted small">Membership Officer</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 about-text">
+                                <h4>Email:</h4>
+                                <p class="m-0 small">
+                                    <a class="pages-link" href="mailto:david.shanahan.burns@gmail.com?subject=Delphin%20Enquiry:%20General">Club Secretary</a>
+                                </p>
+                                <p class="m-0 small">
+                                    <a class="pages-link" href="mailto:david.shanahan.burns@gmail.com?subject=Delphin%20Enquiry:%20Membership">Membership Officer</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+          <div class="col-12 col-md-8 about-content">
+                <div class="map-wrapper">
+                    <div class="gmap_canvas">
+                        <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=%20St%20Saviours%20Olympic%20Boxing%20Academy,%20R132%20Inns%20Quay,%20Co.%20Dublin&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                        <br>
+                        <a href="https://www.embedgooglemap.net">google map html widget</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <hr class="sm-divider">
+</div>
+
+
+{% endblock %}
