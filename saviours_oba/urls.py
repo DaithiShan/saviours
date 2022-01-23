@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('store.urls')),
     path('', include("products.urls")),
     path('', include('accounts.urls')),
-    path('pages/', include('pages.urls')),
+    path('', include('pages.urls')),
     path('shopping_bag/', include("bag.urls")),
     path('checkout/', include('checkout.urls')),
 ]
