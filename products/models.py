@@ -3,6 +3,9 @@ from django.template.defaultfilters import slugify
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
+from django.db.models import Avg
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 from accounts.models import Account
 
@@ -145,6 +148,42 @@ class Product(models.Model):
                 self.thumbnail = self.make_thumbnail(self.image)
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_average_rating(self):
+        """
+        Returns the average of all ratings existing for
+        this product in their original value (/100)
+        """
+        ratings = Rating.objects.filter(product=self).aggregate(
+            rating_avg=Avg("rating")
+        )
+        return (ratings["rating_avg"]) or 0
+
+    def get_average_rating_decimal(self):
+        """
+        Returns the average of all ratings existing for
+        this product out of /5 (for use in star ratings)
+        """
+        ratings = Rating.objects.filter(product=self).aggregate(
+            rating_avg=Avg("rating")
+        )
+        return self.get_average_rating() / 20
+
+    def get_rating_count(self):
+        """
+        counts how many ratings completes on this product
+        """
+        return Rating.objects.filter(product=self).count()
+
+    def get_product_url(self):
+        """
+        Creates a redirect url for product
+        based on whether products has a set type or not
+        """
+        url = f"/shop/{self.category.slug}/{self.subcategory.slug}/"
+        return (
+            url + f"{self.slug}"
+        )
 
 
 # ------ ManyToMany Through Table ------

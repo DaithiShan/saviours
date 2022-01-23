@@ -11140,6 +11140,76 @@ footer .footer-text a:focus {
   background-color: #ced4da;
 }
 
+.star-rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  color: #fdc500;
+  font-size: 2.5rem;
+  width: auto;
+  margin: 0;
+  position: relative;
+  padding: 0;
+}
+.star-rating--small {
+  font-size: 2.5rem;
+}
+.star-rating__upper {
+  color: #ffee32;
+  padding: 0;
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-rating__lower {
+  padding: 0;
+  display: flex;
+  z-index: 0;
+}
+
+.star-rate {
+  /* make hover effect work properly in IE */
+  /* hide radio inputs */
+  /* hide 'none' input from screenreaders */
+  /* set icon padding and size */
+  /* set default star color */
+  /* if any input is checked, make its following siblings grey */
+  /* make all stars yellow on rating group hover */
+  /* make hovered input's following siblings grey on hover */
+}
+.star-rate .rating-group {
+  display: inline-flex;
+  display: flex;
+}
+.star-rate .rating-icon {
+  pointer-events: none;
+}
+.star-rate .rating-input {
+  display: none;
+}
+.star-rate .rating-input-none {
+  display: none;
+}
+.star-rate .rating-label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 2.5rem;
+}
+.star-rate .rating-icon-star {
+  color: #ffee32;
+}
+.star-rate .rating-input:checked ~ .rating-label .rating-icon-star {
+  color: #e9ecef;
+}
+.star-rate .rating-group:hover .rating-label .rating-icon-star {
+  color: #fdc500;
+}
+.star-rate .rating-input:hover ~ .rating-label .rating-icon-star {
+  color: #e9ecef;
+}
+
 .input-group .btn:hover, .input-group .btn:focus {
   color: #03071e;
   background-color: #fff;
@@ -11172,4 +11242,133 @@ footer .footer-text a:focus {
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 1%;
+}
+
+.about-text {
+  font-size: 0.9rem;
+  margin: auto;
+}
+
+.about-text h4, .about-text .h4 {
+  font-family: var(--title-font);
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.about-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.about-content iframe {
+  border: none;
+  width: inherit;
+  height: inherit;
+}
+
+.map-wrapper {
+  margin: auto;
+  position: relative;
+  text-align: right;
+  height: 450px;
+  width: 300px;
+}
+
+.gmap_canvas {
+  margin: auto !important;
+  overflow: hidden;
+  background: none !important;
+  height: 100%;
+  width: 100%;
+}
+
+.col-title {
+  background-color: #ffee32;
+  border-bottom: 1px solid #03071e;
+}
+
+.question-col {
+  color: #03071e;
+  background-color: #fdc500;
+}
+
+@media (min-width: 700px) and (max-width: 991px) {
+  .about-content {
+    margin: auto;
+    padding: 10px;
+  }
+
+  .about-text {
+    font-size: 0.9rem;
+    padding-bottom: 5px;
+  }
+
+  .about-text table {
+    margin-bottom: 20px;
+  }
+
+  .about-text h4, .about-text .h4 {
+    font-size: 1.6rem;
+  }
+
+  .map-wrapper {
+    height: 300px;
+    width: 350px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .about-content {
+    margin: auto;
+    padding: 10px;
+  }
+
+  .about-text {
+    font-size: 0.9rem;
+    padding-bottom: 5px;
+  }
+
+  .about-text table {
+    margin-bottom: 20px;
+  }
+
+  .about-text h4, .about-text .h4 {
+    font-size: 1.6rem;
+  }
+
+  .map-wrapper {
+    height: 300px;
+    width: 350px;
+  }
+}
+@media (min-width: 1025px) {
+  /* about Page */
+  .about-content {
+    margin: auto;
+    padding: 10px;
+  }
+
+  .about-text {
+    font-size: 1.3rem;
+    padding-bottom: 5px;
+  }
+
+  .about-text table {
+    margin-bottom: 20px;
+  }
+
+  .about-text h4, .about-text .h4 {
+    font-size: 1.6rem;
+  }
+
+  .map-wrapper {
+    height: 450px;
+    width: 600px;
+  }
+
+  .map-wrapper {
+    height: 450px;
+    width: 600px;
+  }
 }

@@ -38,8 +38,15 @@ def shop(request, category=None, subcategory=None):
         q &= Q(category__slug=category)
 
     # product
-    order = request.GET.get("order_by") or "ordering"
-    products = Product.objects.filter(q).order_by(order)
+    order = request.GET.get("order_by") or "ordering"  # '?order_by=*param'
+    if order == "rating":
+        products = sorted(
+            Product.objects.filter(q),
+            key=lambda p: p.get_average_rating(),
+            reverse=True,
+        )
+    else:
+        products = Product.objects.filter(q).order_by(order)
 
     # Pagination object from django docs
     paginator = Paginator(products, 4)  # Show 8 products per page.
