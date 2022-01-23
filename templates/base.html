@@ -86,11 +86,11 @@
                             About
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="aboutDropdown">
-                            <a class="dropdown-item text-uppercase" href="#">Club Location</a>
+                            <a class="dropdown-item text-uppercase" href="{% url 'view_about' %}">Club Location</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Club Timetable</a>
+                            <a class="dropdown-item text-uppercase" href="{% url 'view_faqs' %}">Club FAQs</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="#">Contact</a>
+                            <a class="dropdown-item text-uppercase" href="{% url 'contact' %}">Contact</a>
                         </div>
                     </li>
                     {% if user.is_authenticated %}
@@ -168,7 +168,7 @@
             <div class="row w-100 p-4">
 
                 <!-- ABOUT LINKS -->
-                <div class="col-12 col-sm-6 col-md-3">
+                <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
                     <div class="row">
                         <div class="col-12 footer-title">
                             About Us
@@ -187,7 +187,7 @@
 
                 <!-- SHOP LINKS -->
                 {% for category in categories %}
-                    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
                         <div class="row">
                             <div class="col-12 footer-title">
                                 {{ category.title }}
@@ -201,33 +201,39 @@
                     </div>
                 {% endfor %}
     
-                
-                <!-- Footer Quick Links -->
-                <!-- <div class="col-12 footer-icons ">
-                    <div class="row w-50">
-                        <div class="col-4">
-                            <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
-                                <i class="fas fa-at"></i>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                        </div>
+               <div id="footer-end" class="col-12 text-center px-4 py-1 mt-5 d-none d-sm-block">
+                    <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
+                        <i class=" text-primary fas fa-at"></i>
+                    </a>
+                    <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
+                        <i class="text-primary fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
+                        <i class="text-primary fab fa-facebook"></i>
+                    </a>
+                    <div>
+                        <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
                     </div>
-                </div> -->
-                <!-- <div id="footer-end" class="col-12 text-center">
-                    <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
                 </div>
+
+                <div id="footer-end" class="col-12 mt-3 d-sm-none px-4 py-1">
+                    <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
+                        <i class=" text-primary fas fa-at"></i>
+                    </a>
+                    <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
+                        <i class="text-primary fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
+                        <i class="text-primary fab fa-facebook"></i>
+                    </a>
+                    <div class="mt-2">
+                        <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </footer> -->
+    </footer>
     
     {% block postloadjs %}
         <script>

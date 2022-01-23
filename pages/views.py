@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib import messages
+
 from .models import FAQ
 from .forms import ContactForm
 
@@ -19,7 +22,7 @@ def contact(request):
                  {from_name}\n\n{message}\n\n\
                      Return email address: {from_email}"
             try:
-                send_mail(subject, mail_msg, from_email, ["cjcon90@pm.me"])
+                send_mail(subject, mail_msg, from_email, ["david.shanahan.burns@gmail.com"])
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
             messages.success(
@@ -41,14 +44,15 @@ def contact(request):
         else:
             form = ContactForm()
     context["contact_form"] = form
-    return render(request, "accounts/contact.html", context)
+    return render(request, "pages/contact.html", context)
 
 
 def contact_success(request):
     """
     Confirmation of successful message sent to site admins
     """
-    return render(request, "accounts/contact_success.html")
+    return render(request, "pages/contact_success.html")
+
 
 def view_faqs(request):
     """
@@ -59,4 +63,11 @@ def view_faqs(request):
     context = {
         'questions': questions,
     }
-    return render(request, 'faqs.html', context)
+    return render(request, 'pages/faqs.html', context)
+
+
+def view_about(request):
+    """
+    Returns about page
+    """
+    return render(request, 'pages/about.html')
