@@ -24,4 +24,5 @@ def display_count(count_type, count):
         return f"{count} {count_type.title()}s"
 
 @register.filter(name="key")
-def get_item(dictionary, key): return dictionary.get(key)
+def get_item(dictionary, key): 
+    return dictionary.get(key)
