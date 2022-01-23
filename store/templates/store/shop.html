@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% load store_tags %}
+{% load static %}
 
 {% block extra_title %}Shop{% endblock extra_title %}
 
@@ -30,7 +31,7 @@
                 <button type="button" id="sortDropdown" class="dropdown-toggle btn btn-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort Products
                 </button>
                 <ul class="dropdown-menu bg-dark" aria-labelledby="sortDropdown">
-                    <li><a href="#" class="dropdown-item">Highest Rated</a></li>
+                    <li><a href="url_replace request 'order_by' 'rating' " class="dropdown-item">Highest Rated</a></li>
                     <li><a href="?{% url_replace request 'order_by' 'price' %}" class="dropdown-item">Lowest Price</a></li>
                     <li><a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown-item">Newest Items</a></li>
                 </ul>
@@ -58,7 +59,8 @@
                         €{{ product.price }}
                     </div>
                     <div class="col-12 font-weight-bolder ms-3 text-dark lead">
-                        RATING
+                        {% include 'products/includes/star-rating.html' with rating=product.get_average_rating %}
+                        <p class="lead">{% display_count 'rating' product.get_rating_count %}</p>
                     </div>
                 </div>
             </div>
