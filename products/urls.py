@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import product_page
+from .views import product_page, rate_product
 
 urlpatterns = [
     path(
@@ -7,4 +7,5 @@ urlpatterns = [
         product_page,
         name="product_page",
     ),
+    path("rate/<int:product_id>/", rate_product, name="rate_product"),
 ]

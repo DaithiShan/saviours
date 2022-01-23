@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load store_tags %}
+{% load humanize %}
 {% load static %}
 
 {% block extra_title %}{{ product.title }}{% endblock %}
@@ -24,7 +26,7 @@
         <!-- Page Header -->
         <div class="row">
             <div class="col-12">
-                <h3 class="text-secondary">{{ product.title }}</h3>
+                <h2 class="text-secondary">{{ product.title }}</h2>
                 <hr class="section-divider">
             </div>
             
@@ -41,6 +43,13 @@
             <!-- Product Info -->
             <div class="col-12 col-md-6 col-lg-6 p-sm-4 p-md-3 p-lg-3 detail-text">
                 <div class="row">
+
+            
+                    <div>
+                        {% include 'products/includes/star-rating.html' with rating=product.get_average_rating %}
+                        <h3>{{product.get_average_rating_decimal|floatformat:-1}} / 5</h3>
+                        <p class="lead">{% display_count 'rating' product.get_rating_count %}</p>
+                    </div>
 
                     <!-- Product Price -->
                     <div class="col-6 text-right detail-price">
@@ -62,7 +71,7 @@
                     <div class="form-row d-flex flex-wrap justify-content-center">
                         <div class="col-12 py-sm-1">
                             {% if product.category.slug == 'membership' %}
-                                <h4 class="m-0">Age Group:</h4>
+                                <h4 class="m-0 pb-2">Age Group:</h4>
                             {% else %}
                                 <h4 class="m-0">Size:</h4>
                             {% endif %}
@@ -125,13 +134,28 @@
                         </div>
                     </div>
 
+                    <div class="star-rate">
+                        <div class="">
+                            <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="star-rate" method='POST'>
+                            {% csrf_token %}
+                                <fieldset class="rating-group">
+                                    <input disabled class="rating-input rating-input-none" name="star-rating" id="star-rating-none" value="0" type="radio" {% if not user_rating %}checked{% endif %}>
+                                        {% for i in rating_options %}
+                                            <label aria-label="{{i}} star" class="rating-label" for="star-rating-{{i}}"><i class="rating-icon rating-icon-star fa fa-star"></i></label>
+                                            <input class="rating-input" name="star-rating" id="star-rating-{{i}}" value="{{i}}" type="radio" {% if i == user_rating.rating %}checked{% endif %}>
+                                        {% endfor %}
+                                </fieldset>
+                                <button type="submit" class="btn btn-primary mt-2 mb-4"><i class="fas fa-star-half-alt"></i> Submit rating</button>
+                            </form>
+                        </div>
+
                     <!-- Product Buttons -->
                     <div class="d-flex flex-wrap mt-2 pt-2">
                         
                         <!-- Returns user to previous page -->
                         <div class="col-4 no-gutters">
                             <div class="align-self-center">
-                                <a class="btn-outline-primary" title="Back to Shop" href="{% url 'shop' %}">
+                                <a class="btn-outline-primary fs-5" title="Back to Shop" href="{% url 'shop' %}">
                                     <i class="fas fa-angle-left"></i> Back to Shop
                                 </a>
                             </div>
