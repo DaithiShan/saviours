@@ -282,6 +282,94 @@ footer {
     background-color: $gray-400;
 }
 
+// STAR RATING STYLING
+
+// Source: https://gist.github.com/NullDev/464b08135138f1c1a135053a898b1a79
+.star-rating {
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    color: $secondary;
+    font-size: 2.5rem;
+    width: auto;
+    margin: 0;
+    position: relative;
+    padding: 0;
+
+    &--small {
+        font-size: 2.5rem;
+    }
+
+    &__upper {
+        color: $yellow;
+        padding: 0;
+        position: absolute;
+        z-index: 5;
+        display: flex;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    &__lower {
+        padding: 0;
+        display: flex;
+        z-index: 0;
+    }
+}
+
+// source: https://codepen.io/andreacrawford/pen/NvqJXW
+
+.star-rate {
+
+    .rating-group {
+        display: inline-flex;
+        display: flex;
+    }
+
+    /* make hover effect work properly in IE */
+    .rating-icon {
+        pointer-events: none;
+    }
+
+    /* hide radio inputs */
+    .rating-input {
+        display: none;
+    }
+
+    /* hide 'none' input from screenreaders */
+    .rating-input-none {
+        display: none
+    }
+
+    /* set icon padding and size */
+    .rating-label {
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 2.5rem;
+    }
+
+    /* set default star color */
+    
+    .rating-icon-star {
+        color: $yellow;
+    }
+
+    /* if any input is checked, make its following siblings grey */
+    .rating-input:checked ~ .rating-label .rating-icon-star {
+        color: $gray-200;
+    }
+
+    /* make all stars yellow on rating group hover */
+    .rating-group:hover .rating-label .rating-icon-star {
+        color: $orange;
+    }
+
+    /* make hovered input's following siblings grey on hover */
+    .rating-input:hover ~ .rating-label .rating-icon-star {
+        color: $gray-200;
+    }
+}
+
 // SEARCH BAR EXTRA STYLING
 .input-group {
     .btn {
@@ -329,4 +417,124 @@ footer {
 
 }
 
+// ABOUT PAGES STYLING
+
+.about-text {
+    font-size: .9rem;
+    margin: auto;
+}
+.about-text h4 {
+    font-family: var(--title-font);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.about-content iframe {
+    border: none;
+    width: inherit;
+    height: inherit;
+}
+.map-wrapper {
+    margin: auto;
+    position: relative;
+    text-align: right;
+    height: 450px;
+    width: 300px;
+}
+.gmap_canvas {
+    margin: auto !important;
+    overflow: hidden;
+    background: none!important;
+    height: 100%;
+    width: 100%;
+}
+
+.col-title {
+    background-color: $yellow;
+    border-bottom: 1px solid $black;
+}
+
+.question-col {
+    color: $black;
+    background-color: $orange;
+}
+
+
 // MEDIA QUERIES
+@media (min-width: 700px) and (max-width: 991px) {
+
+    .about-content {
+        margin: auto;
+        padding: 10px;
+    }
+    .about-text {
+        font-size: .9rem;
+        padding-bottom: 5px;
+    }
+    .about-text table {
+        margin-bottom: 20px;
+    }
+    .about-text h4 {
+        font-size: 1.6rem;
+    }
+
+    .map-wrapper {
+        height: 300px;
+        width: 350px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+    .about-content {
+        margin: auto;
+        padding: 10px;
+    }
+    .about-text {
+        font-size: .9rem;
+        padding-bottom: 5px;
+    }
+    .about-text table {
+        margin-bottom: 20px;
+    }
+    .about-text h4 {
+        font-size: 1.6rem;
+    }
+
+    .map-wrapper{
+        height: 300px;
+        width: 350px;
+    }
+}
+
+@media (min-width: 1025px) {
+
+    /* about Page */
+    .about-content {
+        margin: auto;
+        padding: 10px;
+    }
+    .about-text {
+        font-size: 1.3rem;
+        padding-bottom: 5px;
+    }
+    .about-text table {
+        margin-bottom: 20px;
+    }
+    .about-text h4 {
+        font-size: 1.6rem;
+    }
+    .map-wrapper {
+        height: 450px;
+        width: 600px;
+    }
+
+    .map-wrapper {
+        height: 450px;
+        width: 600px;
+    }
+}
