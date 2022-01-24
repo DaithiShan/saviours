@@ -37,9 +37,13 @@
                 </tr>
             </table>
             <div class="d-flex flex-column justify-content-between mb-3">
-                <a href="" class="btn-outline-primary details-link">Edit Account Details</a>
-                <a href="" class="btn-outline-secondary details-link">Update Address</a>
-                <a href="" class="btn-outline-danger details-link">Delete Account</a>
+                <a href="{% url 'edit_account_details' %}" class="btn-outline-primary details-link">Edit Account Details</a>
+                {% if request.user.address %}
+                    <a href="{% url 'edit_address' %}" class="btn-outline-secondary details-link">Update Address</a>
+                {% else %}
+                    <a href="{% url 'add_address' %}" class="btn-outline-secondary details-link">Add Your Address</a>
+                {% endif %}
+                <a href="{% url 'delete_account' %}" class="btn-outline-danger details-link">Delete Account</a>
            </div>
     </div>
     <div class="col-12 col-md-4 lg-border order-md-1 px-0">
