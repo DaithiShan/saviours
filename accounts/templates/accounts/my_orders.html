@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/account.css' %}">
-{% endblock %}
-
 {% block extra_title %}Past Orders{% endblock %}
 
 {% block content %}
@@ -21,7 +17,7 @@
         <!-- Page Content -->
         <div class="row page-content">
             <div class="col-12 col-md-8 px-md-5 order-md-2">
-                <p class="text-muted pl-1">Order History ({{ orders.count }} {% if orders.count == 1 %}order{% else %}orders{% endif %})</p>
+                <p class="text-secondary pl-1">Order History ({{ orders.count }} {% if orders.count == 1 %}order{% else %}orders{% endif %})</p>
                 <div class="order-history table-responsive">
                     {% if orders.count < 1 %}
                         <h4>You have no orders yet!</h4>
@@ -48,7 +44,7 @@
                                         <td>
                                             €{{ order.grand_total }}
                                         </td>
-                                        <td class="table-btn">
+                                        <td class="btn btn-primary">
                                             <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
                                                 View
                                             </a>
@@ -60,7 +56,7 @@
                     {% endif %}
                 </div>
             </div>
-            <hr class="account-hr d-md-none">
+            <hr class="section-divider d-md-none">
 
             <!-- Display profile buttons -->
             <div class="col-12 col-md-4 lg-border order-md-1">

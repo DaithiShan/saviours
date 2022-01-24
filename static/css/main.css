@@ -11219,7 +11219,7 @@ footer .footer-text a:focus {
   font-size: 1.3rem;
 }
 
-.account .profile-btns {
+.profile-btns {
   display: flex;
   justify-content: center;
   margin: 1.5% auto;
@@ -11228,6 +11228,7 @@ footer .footer-text a:focus {
   border-radius: 2px;
   max-width: 100%;
 }
+
 .account th {
   padding-left: 0;
 }
