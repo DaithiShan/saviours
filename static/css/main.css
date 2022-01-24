@@ -11250,9 +11250,11 @@ footer .footer-text a:focus {
 }
 
 .about-text h4, .about-text .h4 {
-  font-family: var(--title-font);
   font-size: 1.2rem;
   margin-bottom: 0;
+}
+.about-text .pages-link {
+  color: #e9ecef;
 }
 
 .about-content {
