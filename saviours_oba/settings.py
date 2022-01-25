@@ -114,7 +114,8 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.i
                         'https://8000-plum-swordfish-k5z8tzch.ws-eu25.gitpod.io',
                         'https://8000-blue-piranha-8v2xuc7b.ws-eu25.gitpod.io',
                         'https://8000-blue-piranha-8v2xuc7b.ws-eu27.gitpod.io',
-                        'https://8000-blue-piranha-8v2xuc7b.ws-eu28.gitpod.io']
+                        'https://8000-blue-piranha-8v2xuc7b.ws-eu28.gitpod.io',
+                        'https://8000-daithishan-saviours-mjr8wv9kzza.ws-eu29.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
