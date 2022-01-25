@@ -17,7 +17,6 @@ urlpatterns = [
     path("register/", register_user, name="register"),
     path("logout/", logout_user, name="logout"),
     path("login/", login_user, name="login"),
-
     path("account/details/", account_details, name="account_details"),
     path(
         "account/details/edit/",
