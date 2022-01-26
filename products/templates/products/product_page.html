@@ -176,6 +176,7 @@
 {% endblock %}
 
 {% block postloadjs %}
+{{ block.super }}
     <script>
         // ref: https://tinyurl.com/25f4rpa4
         $('select').change(function(){
