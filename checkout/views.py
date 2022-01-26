@@ -13,8 +13,37 @@ from .models import Order, OrderLineItem
 from products.models import Product, ProductSelect, ProductOption
 from bag.contexts import bag_content
 
+from accounts.models import Account
+
 import stripe
 import json
+
+
+@require_POST
+def cache_checkout_data(request):
+    """
+    Determines whether user has save info box checked
+    Returns this to the webhook
+    Adapted from Boutique Ado
+    """
+    try:
+        # POST request with client secret and payment intent
+        # payment intent id
+        pid = request.POST.get('client_secret').split('_secret')[0]
+
+        # stipe keys is used to modify payment intent
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'current_bag': json.dumps(request.session.get('current_bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
 
 
 @login_required
@@ -52,7 +81,7 @@ def order_review(request):
 
     return render(request, 'checkout/order_review.html', context)
 
-
+@login_required
 def order_details(request):
     """
     Crispy form allowing user to enter their information.
@@ -67,7 +96,8 @@ def order_details(request):
         current_bag = request.session.get('current_bag', {})
 
         form_data = {
-            'full_name': request.POST['full_name'],
+            'first_name': request.POST['first_name'],
+            'last_name': request.POST['first_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
@@ -136,7 +166,35 @@ def order_details(request):
                     order.delete()
                     return redirect(reverse('shopping_bag'))
             # whether user wants to save produle info to session
-            request.session['save_info'] = 'save-info' in request.POST
+            request.session['save_info'] = 'save-info' in request.
+            
+             # Email Order Confirmation
+            msg_content = {
+                "order": order,
+                "items": [item for item in order.lineitems.all()],
+                "contact_email": os.environ["EMAIL_USER"],
+            }
+            msg_plain = render_to_string(
+                "checkout/order_confirmation_email.txt",
+                msg_content,
+            )
+            msg_html = render_to_string(
+                "checkout/order_confirmation_email.html",
+                msg_content,
+            )
+            subject = f"Saviours Order Confirmation: #{order.order_number}"
+            from_email = os.environ["EMAIL_USER"]
+            try:
+                send_mail(
+                    subject,
+                    msg_plain,
+                    from_email,
+                    [order.user.email],
+                    fail_silently=True,
+                    html_message=msg_html,
+                )
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
 
             # redirect to success page
             return redirect(
@@ -145,12 +203,26 @@ def order_details(request):
         else:
             messages.error(request, 'There was an error with your order form. \
             Please double check your information.')
+            context["order_form"] = form
 
-    else:
+    else: # GET request
+        # Add user name to form by default
+        details = {
+            "first_name": request.user.first_name,
+            "last_name": request.user.last_name,
+        }
+        try:
+            # add user address (if exists)
+            details.update(model_to_dict(request.user.address))
+        except Address.DoesNotExist:
+            pass
+        finally:
+            order_form = OrderForm(initial=details)
+        # Load bag
         current_bag = request.session.get('current_bag', {})
         if not current_bag:
             messages.error(request, "There is nothing in your bag")
-            return redirect(reverse('all_products'))
+            return redirect(reverse('shopping_bag'))
 
         # get order bag dictionary
         order_bag = bag_content(request)
@@ -165,25 +237,6 @@ def order_details(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-
-        # if request.user.is_authenticated:
-        #     try:
-        #         profile = UserProfile.objects.get(user=request.user)
-        #         order_form = OrderForm(initial={
-        #             'full_name': profile.default_full_name,
-        #             'email': profile.user.email,
-        #             'phone_number': profile.default_phone_number,
-        #             'street_address1': profile.default_street_address1,
-        #             'street_address2': profile.default_street_address2,
-        #             'town_or_city': profile.default_town_or_city,
-        #             'county': profile.default_county,
-        #             'postcode': profile.default_postcode,
-        #             'country': profile.default_country,
-        #         })
-        #     except UserProfile.DoesNotExist:
-        #         order_form = OrderForm()
-        # else:
-        order_form = OrderForm()
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe Public Key is missing, \

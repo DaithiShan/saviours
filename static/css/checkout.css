@@ -25,29 +25,8 @@
     color: #aab7c4;
 }
 
-.fieldset-label {
-    position: relative;
-    right: .5rem;
-}
-
-#payment-form .form-control,
-#card-element {
-    color: #0A0A0A;
-    border: 1px solid #0A0A0A;
-}
-
 #div_id_country select {
   padding: 0px 8px;
-}
-
-select,
-select option {
-  color: #0A0A0A;
-}
-
-select:invalid,
-select option[value=""] {
-  color: #aab7c4 !important;
 }
 
 #loading-overlay {
@@ -70,6 +49,6 @@ select option[value=""] {
 }
 .loading-spinner .icon i {
   border-radius: 50%;
-  color: #B8060B;
-  background-color: #fff;
+  color: #5c0099;
+  background-color: #ffee32;
 }

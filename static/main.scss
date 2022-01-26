@@ -417,6 +417,38 @@ footer {
 
 }
 
+// ChECKOUT PAGES STYLING
+
+.progress-container {
+    margin-bottom: 1rem;
+
+    .progress-steps {
+        margin-top: -3rem;
+    }
+
+    .progress-step {
+        text-align: center;
+        display: inline-block;
+        color: $yellow;
+    }
+
+    .progress-circle {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        border: 1px solid $black;
+        background-color: $yellow;
+        color: $gray-900;
+        margin: 0 auto;
+
+        &.active-circle {
+            background-color: $orange;
+        }
+    }
+}
+
+
+
 // ABOUT PAGES STYLING
 
 .about-text {

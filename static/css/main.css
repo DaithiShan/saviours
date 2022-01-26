@@ -277,7 +277,7 @@ table {
 caption {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  color: #6c757d;
+  color: #adb5bd;
   text-align: left;
 }
 
@@ -2152,7 +2152,7 @@ progress {
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
-  color: #6c757d;
+  color: #adb5bd;
 }
 
 .form-control {
@@ -7431,7 +7431,7 @@ textarea.form-control-lg {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #adb5bd !important;
 }
 
 .text-black-50 {
@@ -11242,6 +11242,30 @@ footer .footer-text a:focus {
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 1%;
+}
+
+.progress-container {
+  margin-bottom: 1rem;
+}
+.progress-container .progress-steps {
+  margin-top: -3rem;
+}
+.progress-container .progress-step {
+  text-align: center;
+  display: inline-block;
+  color: #ffee32;
+}
+.progress-container .progress-circle {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #03071e;
+  background-color: #ffee32;
+  color: #212529;
+  margin: 0 auto;
+}
+.progress-container .progress-circle.active-circle {
+  background-color: #fdc500;
 }
 
 .about-text {
