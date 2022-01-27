@@ -233,8 +233,6 @@ def order_complete(request, order_number):
     """
     # get order to send to template
     order = get_object_or_404(Order, order_number=order_number)
-
-
     order.save()
 
     # delete session bag

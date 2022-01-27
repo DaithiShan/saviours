@@ -43,12 +43,12 @@
                 {% for bag_item in order.lineitems.all %}
                     <div class="row order-content">
                         <div class="col-3 d-flex align-items-center p-0">
-                            <a href="{% url 'product_page' bag_item.product.id %}">
+                            <a href="{% url 'product_page' bag_item.product.category.slug product.subcategory.slug product.slug %}">
                                     <img src="{{ bag_item.product.image.url }}" alt="{{ product.name }}" class="w-100">
                             </a>
                         </div>
                         <div class="col-6 order-items">
-                            <p class="my-0"><strong>{{ bag_item.product.name }}</strong></p>
+                            <p class="my-0"><strong>{{ bag_item.product.title }}</strong></p>
                             <p class="my-0 small">SKU: {{ bag_item.product_select }}</p>
                             <p class="my-0 small text-muted">Qty: {{ bag_item.quantity }}</p>
                         </div>
