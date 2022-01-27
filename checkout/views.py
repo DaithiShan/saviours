@@ -231,17 +231,11 @@ def order_complete(request, order_number):
     """
     Handle successful checkouts
     """
-    # check if user wanted to save info
-    save_info = request.session.get('save_info')
-
     # get order to send to template
     order = get_object_or_404(Order, order_number=order_number)
 
-    if request.user.is_authenticated:
-        account = Account.objects.get(user=request.user)
-        # Attach the user's profile to the order
-        order.account = account
-        order.save()
+
+    order.save()
 
     # delete session bag
     if 'current_bag' in request.session:
