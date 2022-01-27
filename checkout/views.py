@@ -8,6 +8,8 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
+
 
 from .forms import OrderForm
 from .models import Order, OrderLineItem
