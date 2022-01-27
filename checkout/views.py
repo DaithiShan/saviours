@@ -99,7 +99,7 @@ def order_details(request):
 
         form_data = {
             'first_name': request.POST['first_name'],
-            'last_name': request.POST['first_name'],
+            'last_name': request.POST['last_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
@@ -268,28 +268,10 @@ def order_complete(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
+        account = Account.objects.get(user=request.user)
         # Attach the user's profile to the order
-        order.user_profile = profile
+        order.account = account
         order.save()
-
-        # Save the user's info
-        if save_info:
-            profile_data = {
-                'default_full_name': order.full_name,
-                'default_phone_number': order.phone_number,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
-                'default_town_or_city': order.town_or_city,
-                'default_postcode': order.postcode,
-                'defalt_country': order.country,
-            }
-
-            # update profile info updated above
-            user_profile_form = ProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
 
     # delete session bag
     if 'current_bag' in request.session:
