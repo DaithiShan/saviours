@@ -166,7 +166,7 @@ def order_details(request):
                     order.delete()
                     return redirect(reverse('shopping_bag'))
             # whether user wants to save produle info to session
-            request.session['save_info'] = 'save-info' in request.
+            request.session['save_info'] = 'save-info' in request.POST
             
              # Email Order Confirmation
             msg_content = {
