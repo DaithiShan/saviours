@@ -6,19 +6,16 @@ from django.shortcuts import (
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.core.mail import send_mail, BadHeaderError
+from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.forms.models import model_to_dict
 from django.template.loader import render_to_string
-
-
 from .forms import OrderForm
 from .models import Order, OrderLineItem
-
 from products.models import Product, ProductSelect, ProductOption
 from bag.contexts import bag_content
-
 from accounts.models import Account, Address
-
 import stripe
 import json
 import os
