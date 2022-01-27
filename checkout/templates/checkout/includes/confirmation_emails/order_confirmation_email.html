@@ -1,0 +1,73 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body style="font-family: Arial, Helvetica, sans-serif">
+    <h2>Hello {{ order.user.first_name}},</h2>
+    <h4>Thank you for supporting St Saviours Olympic Boxing Academy. Your order (#{{ order.order_number }}) is as follows:</h4>
+    <hr>
+
+    <!-- Order Summary -->
+    <p><strong>Order Date:</strong> {{ order.date }}</p>
+
+    <p><strong>Order:</strong></p>
+    <table>
+        <tbody>
+            {% for item in order.lineitems.all%}
+                <tr>
+                    <td>
+                        {{ item.product.title }} ({{ item.product_select }}) 
+                    </td>
+                    <td>
+                         {{ item.quantity }} x 
+                    </td>
+                    <td>
+                         €{{ item.product.price }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <h4>Order Total: €{{ order.grand_total }}</h4>
+
+    <hr>
+
+    <h4>For Gear/Apparel Orders:</h4>
+
+    <p>Your order will be shipped to your designated address within 3 – 5 working days:</p>
+    <table>
+        <tbody>
+            <tr>
+                <td>{{ order.street_address1 }}</td>
+            </tr>
+            {% if order.street_address2 %}
+            <tr>
+                <td>{{ order.street_address2 }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>{{ order.town_or_city }}</td>
+            </tr>
+            <tr>
+                <td>{{ order.county }}</td>
+            </tr>
+            <tr>
+                <td>{{ order.postcode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <p>
+      If you have any questions, feel free to get in touch at <a href="https://saviours-oba.herokuapp.com/pages/contact">Contact</a> page.
+
+    </p>
+
+    <p>See you at the club!</p>
+
+    <h3>
+      <strong><em>St Saviours Olympic Boxing Academy</em></strong>
+    </h3>
+  </body>
+</html>

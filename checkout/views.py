@@ -4,19 +4,21 @@ from django.shortcuts import (
     HttpResponse
 )
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.core.mail import send_mail, BadHeaderError
+from django.utils.safestring import mark_safe
 from django.conf import settings
-
+from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
 from .forms import OrderForm
 from .models import Order, OrderLineItem
-
 from products.models import Product, ProductSelect, ProductOption
 from bag.contexts import bag_content
-
-from accounts.models import Account
-
+from accounts.models import Account, Address
 import stripe
 import json
+import os
 
 
 @require_POST
@@ -97,7 +99,7 @@ def order_details(request):
 
         form_data = {
             'first_name': request.POST['first_name'],
-            'last_name': request.POST['first_name'],
+            'last_name': request.POST['last_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
@@ -165,36 +167,9 @@ def order_details(request):
                     )
                     order.delete()
                     return redirect(reverse('shopping_bag'))
-            # whether user wants to save produle info to session
-            request.session['save_info'] = 'save-info' in request.
             
-             # Email Order Confirmation
-            msg_content = {
-                "order": order,
-                "items": [item for item in order.lineitems.all()],
-                "contact_email": os.environ["EMAIL_USER"],
-            }
-            msg_plain = render_to_string(
-                "checkout/order_confirmation_email.txt",
-                msg_content,
-            )
-            msg_html = render_to_string(
-                "checkout/order_confirmation_email.html",
-                msg_content,
-            )
-            subject = f"Saviours Order Confirmation: #{order.order_number}"
-            from_email = os.environ["EMAIL_USER"]
-            try:
-                send_mail(
-                    subject,
-                    msg_plain,
-                    from_email,
-                    [order.user.email],
-                    fail_silently=True,
-                    html_message=msg_html,
-                )
-            except BadHeaderError:
-                return HttpResponse("Invalid header found.")
+            # whether user wants to save produle info to session
+            request.session['save_info'] = 'save-info' in request.POST
 
             # redirect to success page
             return redirect(
@@ -264,30 +239,7 @@ def order_complete(request, order_number):
 
     # get order to send to template
     order = get_object_or_404(Order, order_number=order_number)
-
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
-        order.user_profile = profile
-        order.save()
-
-        # Save the user's info
-        if save_info:
-            profile_data = {
-                'default_full_name': order.full_name,
-                'default_phone_number': order.phone_number,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
-                'default_town_or_city': order.town_or_city,
-                'default_postcode': order.postcode,
-                'defalt_country': order.country,
-            }
-
-            # update profile info updated above
-            user_profile_form = ProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+    order.save()
 
     # delete session bag
     if 'current_bag' in request.session:

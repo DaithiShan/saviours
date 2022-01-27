@@ -133,8 +133,8 @@
                         <!-- Returns user to previous page -->
                         <div class="col-4 no-gutters">
                             <div class="align-self-center">
-                                <a class="btn-outline-primary fs-5" title="Back to Shop" href="{% url 'shop' %}">
-                                    <i class="fas fa-angle-left"></i> Back to Shop
+                                <a class="btn btn-outline-primary" title="Back to Shop" href="{% url 'shop' %}">
+                                    <i class="fas fa-angle-left"></i> Return
                                 </a>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                         <!-- Adds item to shopping bag -->
                         <div class="col-4 no-gutters">
                             <div class="align-self-center">
-                                <input class="btn-secondary" type="submit" value="Add to bag">
+                                <input class="btn-secondary btn" type="submit" value="Add to bag">
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </div>

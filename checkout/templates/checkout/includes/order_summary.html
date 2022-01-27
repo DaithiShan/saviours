@@ -1,0 +1,29 @@
+{% load static %}
+{% load bag_tools %}
+
+
+<div class="container px-0 d-lg-none summary-phone">
+    <!-- Summary of Bag contents (uses lineitems page to display items) -->
+    <div class="row p-2">
+        <div class="col-9 text-left pl-0 d-flex">
+            <a class="w-100 rounded-0" data-bs-toggle="collapse" href="#summaryCollapse" role="button" aria-expanded="false" aria-controls="summaryCollapse">
+                <span>
+                    <i class="fas fa-shopping-bag"></i>
+                    Order Summary
+                    <i class="fas fa-angle-down"></i>
+                </span>
+            </a>
+        </div>
+        <div class="col-3 text-right pr-0">
+            <span>
+                €{{ grand_total|floatformat:2 }}
+            </span>
+        </div>
+    </div>
+    
+    <div class="collapse" id="summaryCollapse">
+        <div class="rounded-0 summary-box">
+            {% include 'checkout/includes/lineitems.html' %}
+        </div>
+    </div>
+</div>

@@ -95,7 +95,7 @@ form.addEventListener('submit', function(ev) {
                 // apply form data into payment intent object
                 // allows it to be retrieved once a webhook is received
                 billing_details: {
-                    name: $.trim(form.full_name.value),
+                    name: `${$.trim(form.first_name.value)} ${$.trim(form.last_name.value)}`,
                     phone: $.trim(form.phone_number.value),
                     email: $.trim(form.email.value),
                     address: {
@@ -108,7 +108,7 @@ form.addEventListener('submit', function(ev) {
                 }
             },
             shipping: {
-                name: $.trim(form.full_name.value),
+                name: `${$.trim(form.first_name.value)} ${$.trim(form.last_name.value)}`,
                 phone: $.trim(form.phone_number.value),
                 address: {
                     line1: $.trim(form.street_address1.value),
