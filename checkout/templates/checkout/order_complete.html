@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 
-{% block extra_title %}
+{% block extratitle %}
         Order {{ order.date }}
 {% endblock %}
 
@@ -18,7 +18,7 @@
 
         <!-- Page Header -->
         <div class="row">
-            <div class="col-12 page-title">
+            <div class="col-12">
                     <h3>Order Complete</h3>
                 <hr class="section-divider">
             </div>
@@ -26,24 +26,10 @@
 
         <!-- Page Content -->
         <div class="row">
-            <div class="col-12 confirm-text">
+            <div class="col-12">
 
                     <p>Thank you for your order, your order number is: <small>{{ order.order_number }}</small>.</p>
                     <p>A confirmation email has been sent to: <strong>{{ order.email }}</strong>.</p>
-            </div>
-            <hr class="sm-divider">
-        </div>
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>For Course Bookings:</h5>
-                <p>Commencement for courses booked will begin on the next calendar week (Sunday to Monday).</p>
-                <p>Please present your confirmation email with you on your first session, to complete club registration at the check-in desk.</p>
-                <p><strong>Please Note:</strong> All course bookings do not guarantee class placement. 
-                    The Teacher will assess all swimmers on their first session to ensure they are in the correct course/level. 
-                    Any adjusts will be made accordingly, with the utmost effort made to maintain day and time.
-                    Further information can be found in our <strong><a class="confirm-link" href="{% url 'view_faqs' %}">FAQ</a></strong> section.
-                </p>
-                <p>Contact Club Administrator for further information via our <strong><a class="confirm-link" href="{% url 'view_contact' %}">Contact</a></strong> page.</p>
             </div>
             <hr class="sm-divider">
         </div>
@@ -83,8 +69,12 @@
             <div class="col-12 confirm-table d-flex justify-content-center">
                 <table>
                     <tr>
-                        <td class="font-weight-bold">Full Name:</td>
-                        <td class="text-right">{{ order.full_name }}</td>
+                        <td class="font-weight-bold">First Name:</td>
+                        <td class="text-right">{{ order.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Last Name:</td>
+                        <td class="text-right">{{ order.last_name }}</td>
                     </tr>
                     <tr>
                         <td class="font-weight-bold">Address 1:</td>
