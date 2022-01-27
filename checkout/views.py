@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
+from django.forms.models import model_to_dict
 
 from .forms import OrderForm
 from .models import Order, OrderLineItem
@@ -14,7 +15,7 @@ from .models import Order, OrderLineItem
 from products.models import Product, ProductSelect, ProductOption
 from bag.contexts import bag_content
 
-from accounts.models import Account
+from accounts.models import Account, Address
 
 import stripe
 import json
