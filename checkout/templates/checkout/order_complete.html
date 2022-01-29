@@ -6,8 +6,12 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 
-{% block extratitle %}
+{% block extra_title %}
+    {% if not from_account_details %}
+        Thank You
+    {% else %}
         Order {{ order.date }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -31,7 +35,7 @@
                     <p>Thank you for your order, your order number is: <small>{{ order.order_number }}</small>.</p>
                     <p>A confirmation email has been sent to: <strong>{{ order.email }}</strong>.</p>
             </div>
-            <hr class="sm-divider">
+            <hr class="section-divider">
         </div>
 
         <!-- Order Summary -->
@@ -44,7 +48,7 @@
                     <div class="row order-content">
                         <div class="col-3 d-flex align-items-center p-0">
                             <a href="{% url 'product_page' bag_item.product.category.slug product.subcategory.slug product.slug %}">
-                                    <img src="{{ bag_item.product.image.url }}" alt="{{ product.name }}" class="w-100">
+                                    <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ product.title }}" class="w-100">
                             </a>
                         </div>
                         <div class="col-6 order-items">
@@ -69,41 +73,41 @@
             <div class="col-12 confirm-table d-flex justify-content-center">
                 <table>
                     <tr>
-                        <td class="font-weight-bold">First Name:</td>
+                        <td class="fw-bold">First Name:</td>
                         <td class="text-right">{{ order.first_name }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Last Name:</td>
+                        <td class="fw-bold">Last Name:</td>
                         <td class="text-right">{{ order.last_name }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Address 1:</td>
+                        <td class="fw-bold">Address 1:</td>
                         <td class="text-right">{{ order.street_address1 }}</td>
                     </tr>
                     {% if order.street_address2 %}
                     <tr>
-                        <td class="font-weight-bold">Address 2:</td>
+                        <td class="fw-bold">Address 2:</td>
                         <td class="text-right">{{ order.street_address2 }}</td>
                     </tr>
                     {% endif %}
                     <tr>
-                        <td class="font-weight-bold">Town or City:</td>
+                        <td class="fw-bold">Town or City:</td>
                         <td class="text-right">{{ order.town_or_city }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">County:</td>
+                        <td class="fw-bold">County:</td>
                         <td class="text-right">{{ order.county }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Eircode:</td>
+                        <td class="fw-bold">Eircode:</td>
                         <td class="text-right">{{ order.postcode }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Country:</td>
+                        <td class="fw-bold">Country:</td>
                         <td class="text-right">{{ order.country }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Phone Number:</td>
+                        <td class="fw-bold">Phone Number:</td>
                         <td class="text-right">{{ order.phone_number }}</td>
                     </tr>
                 </table>
@@ -118,15 +122,15 @@
             <div class="col-12 confirm-table d-flex justify-content-center">
                 <table>
                     <tr>
-                        <td class="font-weight-bold">Order Total:</td>
+                        <td class="fw-bold">Order Total:</td>
                         <td class="text-right">€{{ order.order_total }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Delivery:</td>
+                        <td class="fw-bold">Delivery:</td>
                         <td class="text-right">€{{ order.delivery_cost }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Grand Total:</td>
+                        <td class="fw-bold">Grand Total:</td>
                         <td class="text-right">€{{ order.grand_total }}</td>
                     </tr>
                 </table>
