@@ -21,6 +21,32 @@ import json
 import os
 
 
+@require_POST
+def cache_checkout_data(request):
+    """
+    Determines whether user has save info box checked
+    Returns this to the webhook
+    Adapted from Boutique Ado
+    """
+    try:
+        # POST request with client secret and payment intent
+        # payment intent id
+        pid = request.POST.get('client_secret').split('_secret')[0]
+
+        # stipe keys is used to modify payment intent
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'current_bag': json.dumps(request.session.get('current_bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
+
 
 @login_required
 def checkout(request):
@@ -31,7 +57,7 @@ def checkout(request):
     current_bag = request.session.get('current_bag', {})
     if not current_bag:
         messages.error(request, "There is nothing in your bag")
-        return redirect(reverse('shop'))
+        return redirect(reverse('all_products'))
 
     return redirect(reverse('order_review'))
 
@@ -57,12 +83,13 @@ def order_review(request):
 
     return render(request, 'checkout/order_review.html', context)
 
-
+@login_required
 def order_details(request):
     """
     Crispy form allowing user to enter their information.
     Removes navbar and footer from page to follow eCommerce conventions.
     Hide Elements ref: https://tinyurl.com/yp2buee3
+    Code for this function all adapted from Boutique Ado Mini Project
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -135,11 +162,14 @@ def order_details(request):
                 except Product.DoesNotExist:
                     # if product is not found
                     messages.error(request, (
-                        "One of the products wasn't found in our database."
-                        "Contact us for assistance!")
+                        "One of the items wasn't found in our database."
+                        "Call the boxing club for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('shopping_bag'))
+            
+            # whether user wants to save produle info to session
+            request.session['save_info'] = 'save-info' in request.POST
 
             # redirect to success page
             return redirect(
@@ -148,6 +178,7 @@ def order_details(request):
         else:
             messages.error(request, 'There was an error with your order form. \
             Please double check your information.')
+            context["order_form"] = form
 
     else: # GET request
         # Add user name to form by default
@@ -203,6 +234,9 @@ def order_complete(request, order_number):
     """
     Handle successful checkouts
     """
+    # check if user wanted to save info
+    save_info = request.session.get('save_info')
+
     # get order to send to template
     order = get_object_or_404(Order, order_number=order_number)
     order.save()
