@@ -12,11 +12,11 @@ from accounts.models import Account
 
 class Order(models.Model):
     """
-    Order model
-    Adapted from Boutique Ado Mini Project:
+    Create Order instance
+    Adapted from Boutique Ado project:
     https://tinyurl.com/22x9pdbm
     """
-
+    order_number = models.CharField(max_length=32, null=False, editable=False)
     user = models.ForeignKey(
         Account,
         on_delete=models.SET_NULL,
@@ -24,10 +24,7 @@ class Order(models.Model):
         blank=True,
         related_name="orders",
     )
-
-    order_number = models.CharField(max_length=32, null=False, editable=False)
-    first_name = models.CharField(max_length=50, null=False, blank=False,)
-    last_name = models.CharField(max_length=50, null=False, blank=False)
+    full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(blank_label="Country *",
@@ -91,7 +88,7 @@ class Order(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return f"{self.user}:{self.order_number}"
+        return self.order_number
 
 
 class OrderLineItem(models.Model):

@@ -1,3 +1,6 @@
+import json
+import time
+
 from django.http import HttpResponse
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -7,8 +10,6 @@ from django import template
 from .models import Order, OrderLineItem
 from products.models import Product
 
-import json
-import time
 
 """
 Webhook Handler functionality adapted from Boutique Ado
@@ -21,7 +22,7 @@ class StripeWH_Handler:
 
     def __init__(self, request):
         self.request = request
-    
+
     def _send_confirmation_email(self, order):
         """
         Send the user a confirmation email
@@ -30,7 +31,7 @@ class StripeWH_Handler:
         """
         cust_email = order.email
         subject = render_to_string(
-            'checkout/includes/order_confirmation_subject.txt',
+            'checkout/includes/order_confirmation_email_subject.txt',
             {'order': order}
         )
         plaintext = template.loader.get_template(
@@ -39,6 +40,7 @@ class StripeWH_Handler:
             'checkout/includes/order_confirmation_email.html')
         c = {
             'order': order,
+            'contact_email': settings.DEFAULT_FROM_EMAIL,
         }
         text_content = plaintext.render(c)
         html_content = htmltemp.render(c)
@@ -96,8 +98,8 @@ class StripeWH_Handler:
                 # get order info from payment intent
                 # iexact lookup field makes sure it is an exact match
                 order = Order.objects.get(
-                    first_name__iexact=shipping_details.name,
-                    last_name__iexact=shipping_details.name,
+                    first_name__iexact=shipping_details.first_name,
+                    last_name__iexact=shipping_details.last_name,
                     email__iexact=billing_details.email,
                     phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
@@ -126,7 +128,7 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if order_exists:
-            self.send_confirmation_email(order)
+            self._send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | \
                 SUCCESS: Verified order already in database',
@@ -138,9 +140,8 @@ class StripeWH_Handler:
                 # creates form to save in webhook to create order
                 # objects.create useing data from payment intent
                 order = Order.objects.create(
-                    first_name=shipping_details.name,
-                    last_name=shipping_details.name,
-                    user_profile=profile,
+                    first_name=shipping_details.first_name,
+                    last_name=shipping_details.last_name,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
                     street_address1=shipping_details.address.line1,
