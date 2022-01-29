@@ -24,7 +24,8 @@ class Order(models.Model):
         blank=True,
         related_name="orders",
     )
-    full_name = models.CharField(max_length=50, null=False, blank=False)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(blank_label="Country *",
