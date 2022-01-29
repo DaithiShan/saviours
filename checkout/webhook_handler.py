@@ -30,7 +30,7 @@ class StripeWH_Handler:
         """
         cust_email = order.email
         subject = render_to_string(
-            'checkout/includes/order_confirmation_email.txt',
+            'checkout/includes/order_confirmation_subject.txt',
             {'order': order}
         )
         plaintext = template.loader.get_template(
