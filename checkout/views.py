@@ -167,6 +167,34 @@ def order_details(request):
                     )
                     order.delete()
                     return redirect(reverse('shopping_bag'))
+            
+            # Email Order Confirmation
+            msg_content = {
+                "order": order,
+                "items": [item for item in order.lineitems.all()],
+                "contact_email": os.environ["EMAIL_USER"],
+            }
+            msg_plain = render_to_string(
+                "checkout/order_confirmation_email.txt",
+                msg_content,
+            )
+            msg_html = render_to_string(
+                "checkout/order_confirmation_email.html",
+                msg_content,
+            )
+            subject = f"RhythmBox Order Confirmation: #{order.order_number}"
+            from_email = os.environ["EMAIL_USER"]
+            try:
+                send_mail(
+                    subject,
+                    msg_plain,
+                    from_email,
+                    [order.user.email],
+                    fail_silently=True,
+                    html_message=msg_html,
+                )
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
 
             # redirect to success page
             return redirect(

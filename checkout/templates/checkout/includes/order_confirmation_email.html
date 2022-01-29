@@ -8,51 +8,60 @@
     <hr>
 
     <!-- Order Summary -->
-    <table style="text-align: left;">
-      <tr style="width: 500px; font-weight: 700">
-        <th style="width: 350px">Item</th>
-        <th style="width: 150px;">Price</th>
-      </tr>
-      {% for item in items %}
-      <tr style="width: 350px">
-        <td style="width: 350px">{{ item.product.title }}</td>
-        <td style="width: 150px;">€{{ item.product.price|floatformat:"-2"|intcomma }}</td>
-      </tr>
-      {% endfor %}
+    <p><strong>Order Date:</strong> {{ order.date }}</p>
+
+    <p><strong>Order:</strong></p>
+    <table>
+        <tbody>
+            {% for item in order.lineitems.all%}
+                <tr>
+                    <td>
+                        {{ item.product.title }} ({{ item.product_select }}) 
+                    </td>
+                    <td>
+                         {{ item.quantity }} x 
+                    </td>
+                    <td>
+                         €{{ item.product.price }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
     <hr>
+    <h4>Order Total: €{{ order.grand_total }}</h4>
 
-    <!-- Cost & Delivery -->
+    <hr>
+
+    <h4>For Gear/Apparel Orders:</h4>
+
+    <p>Your order will be shipped to your designated address within 3 – 5 working days:</p>
     <table>
-      <tr>
-        <th style="width: 150px; font-weight: 700">Total Cost:</th>
-        <td style="width: 350px">€{{ order.order_total|floatformat:"-2"|intcomma }}</td>
-      </tr>
-      <tr>
-        <th style="width: 150px; font-weight: 700">Delivery:</th>
-        <td style="width: 350px">€{{ order.delivery_cost|floatformat:"-2"|intcomma }}</td>
-      </tr>
-      <tr>
-        <th style="width: 150px; font-weight: 700">Grand Total:</th>
-        <td style="width: 350px">€{{ order.grand_total|floatformat:"-2"|intcomma }}</td>
-      </tr>
-      <tr>
-        <th style="width: 150px; font-weight: 700">Delivery:</th>
-        <td style="width: 350px">
-          {{ order.street_address_1 }}, 
-          {% if order.street_address_2 %}{{order.street_address_2 }}, {% endif %}
-          {{ order.town_or_city }},
-          {{order.county }}, 
-          {{ order.postcode }}, 
-          {{ order.country }}
-        </td>
-      </tr>
+        <tbody>
+            <tr>
+                <td>{{ order.street_address1 }}</td>
+            </tr>
+            {% if order.street_address2 %}
+            <tr>
+                <td>{{ order.street_address2 }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>{{ order.town_or_city }}</td>
+            </tr>
+            <tr>
+                <td>{{ order.county }}</td>
+            </tr>
+            <tr>
+                <td>{{ order.postcode }}</td>
+            </tr>
+        </tbody>
     </table>
 
+
     <p>
-      If you have any questions, feel free to contact us at<strong>
-        {{ contact_email }}</strong
-      >.
+      If you have any questions, feel free to get in touch at <a href="https://saviours-oba.herokuapp.com/pages/contact">Contact</a> page.
+
     </p>
 
     <p>See you at the club!</p>

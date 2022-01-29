@@ -3,16 +3,15 @@ Hello {{ order.user.first_name}}
 Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:
 
 -----------------------
-{% for item in items %}
-Item: {{ item.product.title }}
+{% for item in order.lineitems.all %}
+Item: {{ item.product.title }} {{ item.product_select }}
+Quantity: {{ item.quantity }}
 Price: €{{ item.product.price }}
 -----------------------
 {% endfor %}
-Total Cost: €{{ order.order_total|floatformat:"-2"|intcomma }}</td>
-Delivery: €{{ order.delivery_cost|floatformat:"-2"|intcomma }}</td>
-Grand Total:€{{ order.grand_total|floatformat:"-2"|intcomma }}</td>
+Grand Total:€{{ order.grand_total }}</td>
 
-Delivery:
+For Gear/Apparel Orders, your order will be shipped in 3-5 working days :
 {{ order.street_address_1 }}, 
 {% if order.street_address_2 %}{{order.street_address_2 }},{% endif %}
 {{ order.town_or_city }},
@@ -20,7 +19,7 @@ Delivery:
 {{ order.postcode }}, 
 {{ order.country }}
 
-If you have any questions, feel free to contact us at {{ contact_email }}</strong
+If you have any questions, feel free to contact us at: https://saviours-oba.herokuapp.com/pages/contact
 
 See you at the club!
 
