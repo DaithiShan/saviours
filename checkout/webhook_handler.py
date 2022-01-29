@@ -21,33 +21,6 @@ class StripeWH_Handler:
 
     def __init__(self, request):
         self.request = request
-    
-    def _send_confirmation_email(self, order):
-        """
-        Send the user a confirmation email
-        ref: https://tinyurl.com/4d7kxtyn
-             https://tinyurl.com/ht3rd3xu
-        """
-        cust_email = order.email
-        subject = render_to_string(
-            'checkout/includes/order_confirmation_subject.txt',
-            {'order': order}
-        )
-        plaintext = template.loader.get_template(
-            'checkout/includes/order_confirmation_email.txt')
-        htmltemp = template.loader.get_template(
-            'checkout/includes/order_confirmation_email.html')
-        c = {
-            'order': order,
-        }
-        text_content = plaintext.render(c)
-        html_content = htmltemp.render(c)
-
-        msg = EmailMultiAlternatives(
-            subject, text_content, settings.DEFAULT_FROM_EMAIL, [cust_email])
-        msg.attach_alternative(html_content, "text/html")
-
-        msg.send()
 
     def handle_event(self, event):
         """
@@ -126,7 +99,6 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if order_exists:
-            self.send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | \
                 SUCCESS: Verified order already in database',
@@ -172,7 +144,6 @@ class StripeWH_Handler:
                     content=f'Webhook received: {event["type"]} | Error: {e}',
                     status=500)
 
-        self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
