@@ -47,7 +47,7 @@
                 {% for bag_item in order.lineitems.all %}
                     <div class="row order-content">
                         <div class="col-3 d-flex align-items-center p-0">
-                            <a href="{% url 'product_page' bag_item.product.category.slug product.subcategory.slug product.slug %}">
+                            <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" title="{{ bag_item.product.title }}">
                                     <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ product.title }}" class="w-100">
                             </a>
                         </div>

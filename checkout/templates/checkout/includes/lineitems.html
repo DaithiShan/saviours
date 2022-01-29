@@ -6,7 +6,7 @@
     <div class="row order-content">
         <div class="col-3 d-flex align-items-center p-0">
             <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" title="{{ bag_item.product.title }}">
-                    <img src="{{ bag_item.product.image.url }}" alt="{{ bag_item.product.title }}" class="w-100">
+                    <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ bag_item.product.title }}" class="w-100">
             </a>
         </div>
         <div class="col-6">
@@ -46,7 +46,7 @@
     </div>
 {% else %}
     <div class="col-12 btn d-flex align-items-end justify-content-end">
-        <a href="{% url 'shopping_bag' %}">
+        <a href="{% url 'shopping_bag' %}" class="btn-outline-primary btn">
             <i class="fas fa-angle-left"></i> Edit Bag
         </a>
     </div>

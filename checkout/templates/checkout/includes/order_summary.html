@@ -1,196 +1,28 @@
-{% extends "base.html" %}
 {% load static %}
 {% load bag_tools %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
-{% endblock %}
-
-{% block extra_title %}
-    {% if not from_account_details %}
-        Thank You
-    {% else %}
-        Order {{ order.date }}
-    {% endif %}
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-
-        <!-- Conditional for Past Orders view -->
-        {% if not from_account_details %}
-            <!-- Checkout Logo and Progress Bar -->
-            {% include 'checkout/includes/checkout_header.html' %}
-        {% else %}
-            {% block breadcrumb_content %}
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'past_orders' %}" class="text-dark">Past Orders</a></li>
-                    <li class="breadcrumb-item active text-secondary" aria-current="page">{{ order.order_number|truncatechars:9 }}</li>
-                </ol>
-            {% endblock %}
-        {% endif %}
-        
-
-        <!-- Page Header -->
-        <div class="row">
-            <div class="col-12">
-                {% if not from_account_details %}
-                    <h3>Order Complete</h3>
-                {% else %}
-                    <h3>Past Order</h3>
-                {% endif %}
-                <hr class="section-divider">
-            </div>
+<div class="container px-0 d-lg-none summary-phone">
+    <!-- Summary of Bag contents (uses lineitems page to display items) -->
+    <div class="row p-2">
+        <div class="col-9 text-left pl-0 d-flex">
+            <a class="w-100 rounded-0" data-bs-toggle="collapse" href="#summaryCollapse" role="button" aria-expanded="false" aria-controls="summaryCollapse">
+                <span>
+                    <i class="fas fa-shopping-bag"></i>
+                    Order Summary
+                    <i class="fas fa-angle-down"></i>
+                </span>
+            </a>
         </div>
-
-        <!-- Page Content -->
-        <div class="row">
-            <div class="col-12 confirm-text">
-
-                <!-- Conditional for Past Orders view -->
-                {% if not from_account_details %}
-                    <p>Thank you for your order, your order number is: <small>{{ order.order_number }}</small>.</p>
-                    <p>A confirmation email has been sent to: <strong>{{ order.email }}</strong>.</p>
-                {% else %}
-                    <p>This is a past confirmation for order number: <small>{{ order.order_number }}</small>.</p>
-                    <p>A confirmation email was sent to: <strong>{{ order.email }}</strong> on the order date: <strong>{{ order.date }}</strong>.</p>
-                {% endif %}
-            </div>
-            <hr class="section-divider">
+        <div class="col-3 text-right pr-0">
+            <span>
+                €{{ grand_total|floatformat:2 }}
+            </span>
         </div>
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>For Membership Bookings:</h5>
-                <p>You can start your membership immediately on purchase online. But please email our Club Secretary below with your level of experience if it's your first membership purchase.</p>
-                <p>Please also present your confirmation email to Secretary on your first session, to complete club registration at the check-in desk.</p>
-                <p><strong>Please Note:</strong>
-                    Useful info can be found in our <strong><a class="confirm-link" href="{% url 'view_faqs' %}">FAQ</a></strong> section.
-                </p>
-                <p>Contact Club Secretary for further info via our <strong><a class="confirm-link" href="{% url 'contact' %}">Contact</a></strong> page.</p>
-            </div>
-            <hr class="section-divider">
-        </div>
-
-        <!-- Order Summary -->
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>Order Summary:</h5>
-            </div>
-            <div class="col-12">
-                {% for bag_item in order.lineitems.all %}
-                    <div class="row order-content">
-                        <div class="col-3 d-flex align-items-center p-0">
-                            <a href="{% url 'product_page' bag_item.product.category.slug product.subcategory.slug product.slug %}">
-                                {% if bag_item.product.image %}
-                                    <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ product.title }}" class="w-100">
-                                {% else %}
-                                    <img src="{% static 'img/no-image.png' %}" alt="{{ product.title }}" class="w-100">
-                                {% endif %}
-                            </a>
-                        </div>
-                        <div class="col-6 order-items">
-                            <p class="my-0"><strong>{{ bag_item.product.title }}</strong></p>
-                            <p class="my-0 small">SKU: {{ bag_item.product_select }}</p>
-                            <p class="my-0 small text-muted">Qty: {{ bag_item.quantity }}</p>
-                        </div>
-                        <div class="col-3 order-items text-muted text-right d-flex align-items-end justify-content-end">
-                            <p class="my-0">€{{ bag_item.product.price | calc_subtotal:bag_item.quantity }}</p>
-                        </div>
-                    </div>
-                    <hr class="m-0">
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Details Summary -->
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>Delivering To:</h5>
-            </div>
-            <div class="col-12 confirm-table d-flex justify-content-center">
-                <table>
-                    <tr>
-                        <td class="fw-bold">First Name:</td>
-                        <td class="text-right">{{ order.first_name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Last Name:</td>
-                        <td class="text-right">{{ order.last_name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Address 1:</td>
-                        <td class="text-right">{{ order.street_address1 }}</td>
-                    </tr>
-                    {% if order.street_address2 %}
-                    <tr>
-                        <td class="fw-bold">Address 2:</td>
-                        <td class="text-right">{{ order.street_address2 }}</td>
-                    </tr>
-                    {% endif %}
-                    <tr>
-                        <td class="fw-bold">Town or City:</td>
-                        <td class="text-right">{{ order.town_or_city }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">County:</td>
-                        <td class="text-right">{{ order.county }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Postcode:</td>
-                        <td class="text-right">{{ order.postcode }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Country:</td>
-                        <td class="text-right">{{ order.country }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Phone Number:</td>
-                        <td class="text-right">{{ order.phone_number }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Billing Summary -->
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>Billing Info:</h5>
-            </div>
-            <div class="col-12 confirm-table d-flex justify-content-center">
-                <table>
-                    <tr>
-                        <td class="font-weight-bold">Order Total:</td>
-                        <td class="text-right">€{{ order.order_total }}</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold">Delivery:</td>
-                        <td class="text-right">€{{ order.delivery_cost }}</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold">Grand Total:</td>
-                        <td class="text-right">€{{ order.grand_total }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Conditional for Past Orders view -->
-        {% if from_account_details %}
-            <div class="row">
-                <div class="col-12 edit-btn d-flex align-items-end justify-content-end">
-                    <a href="{% url 'past_orders' %}">
-                        <i class="fas fa-angle-left"></i> Back To History
-                    </a>
-                </div>
-            </div>
-        {% endif %}
     </div>
-        
-{% endblock %}
-
-{% block postloadjs %}
-    {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'js/stripe_elements.js' %}"></script>
-{% endblock %}
+    
+    <div class="collapse" id="summaryCollapse">
+        <div class="rounded-0 summary-box">
+            {% include 'checkout/includes/lineitems.html' %}
+        </div>
+    </div>
+</div>
