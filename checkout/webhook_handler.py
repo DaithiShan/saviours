@@ -30,13 +30,13 @@ class StripeWH_Handler:
         """
         cust_email = order.email
         subject = render_to_string(
-            'checkout/includes/confirmation_emails/confirmation_email_subject.txt',
+            'checkout/includes/order_confirmation_email.txt',
             {'order': order}
         )
         plaintext = template.loader.get_template(
-            'checkout/includes/confirmation_emails/confirmation_email_body.txt')
+            'checkout/includes/order_confirmation_email.txt')
         htmltemp = template.loader.get_template(
-            'checkout/includes/confirmation_emails/confirmation_email_body.html')
+            'checkout/includes/order_confirmation_email.html')
         c = {
             'order': order,
         }
