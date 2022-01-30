@@ -98,7 +98,7 @@ class StripeWH_Handler:
                 # get order info from payment intent
                 # iexact lookup field makes sure it is an exact match
                 order = Order.objects.get(
-                    first_name__iexact=shipping_details.split(" ")[0],
+                    first_name__iexact=shipping_details.name.split(" ")[0],
                     last_name__iexact=shipping_details.name.split(" ")[1],
                     email__iexact=billing_details.email,
                     phone_number__iexact=shipping_details.phone,
@@ -140,7 +140,7 @@ class StripeWH_Handler:
                 # creates form to save in webhook to create order
                 # objects.create useing data from payment intent
                 order = Order.objects.create(
-                    first_name__iexact=shipping_details.split(" ")[0],
+                    first_name__iexact=shipping_details.name.split(" ")[0],
                     last_name__iexact=shipping_details.name.split(" ")[1],
                     user_profile=profile,
                     email=billing_details.email,
