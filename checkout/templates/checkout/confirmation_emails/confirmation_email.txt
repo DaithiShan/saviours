@@ -1,5 +1,5 @@
 {% load humanize %}
-Hello {{ order.user.first_name}}
+Hello {{ order.first_name}}
 Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:
 
 -----------------------

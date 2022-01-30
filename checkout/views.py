@@ -116,6 +116,7 @@ def order_details(request):
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
+            order.user = request.user
 
             # dump shopping bag in json string
             order.original_bag = json.dumps(current_bag)
