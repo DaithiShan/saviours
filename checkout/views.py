@@ -172,8 +172,8 @@ def order_details(request):
                 address_obj, created = Address.objects.update_or_create(
                     user=request.user,
                     defaults={
-                        "street_address_1": order.street_address_1,
-                        "street_address_2": order.street_address_2,
+                        "street_address_1": order.street_address1,
+                        "street_address_2": order.street_address2,
                         "town_or_city": order.town_or_city,
                         "county": order.county,
                         "postcode": order.postcode,

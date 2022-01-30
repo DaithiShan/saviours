@@ -70,8 +70,6 @@ class StripeWH_Handler:
         pid = intent.id
         # shopping bag
         current_bag = intent.metadata.current_bag
-        # check whether save info is checked
-        save_info = intent.metadata.save_info
 
         # order information to use:
         billing_details = intent.charges.data[0].billing_details
