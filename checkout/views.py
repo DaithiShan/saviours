@@ -37,7 +37,6 @@ def cache_checkout_data(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'current_bag': json.dumps(request.session.get('current_bag', {})),
-            'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
 
@@ -167,9 +166,20 @@ def order_details(request):
                     )
                     order.delete()
                     return redirect(reverse('shopping_bag'))
-            
-            # whether user wants to save produle info to session
-            request.session['save_info'] = 'save-info' in request.POST
+
+                address_info = model_to_dict(order)
+                # Update existing address or create new one
+                address_obj, created = Address.objects.update_or_create(
+                    user=request.user,
+                    defaults={
+                        "street_address_1": order.street_address_1,
+                        "street_address_2": order.street_address_2,
+                        "town_or_city": order.town_or_city,
+                        "county": order.county,
+                        "postcode": order.postcode,
+                        "phone_number": order.phone_number,
+                    },
+                )
 
             # redirect to success page
             return redirect(
@@ -234,9 +244,6 @@ def order_complete(request, order_number):
     """
     Handle successful checkouts
     """
-    # check if user wanted to save info
-    save_info = request.session.get('save_info')
-
     # get order to send to template
     order = get_object_or_404(Order, order_number=order_number)
     order.save()
