@@ -1,5 +1,5 @@
 {% load humanize %}
-Hello {{ order.first_name}}
+Hello {{ order.user.first_name}}
 Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:
 
 -----------------------
@@ -19,7 +19,7 @@ For Gear/Apparel Orders, your order will be shipped in 3-5 working days :
 {{ order.postcode }}, 
 {{ order.country }}
 
-If you have any questions, feel free to contact us at: https://saviours-oba.herokuapp.com/pages/contact
+If you have any questions, feel free to get in touch using our contact form: https://saviours-oba.herokuapp.com/pages/contact
 
 See you at the club!
 
