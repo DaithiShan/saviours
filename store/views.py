@@ -22,15 +22,6 @@ def shop(request, category=None, subcategory=None):
     context = {}
     q = Q()
 
-    # text search
-    # if "q" in request.GET:
-    #     query = request.GET.get("q")
-    #     q &= (
-    #         Q(title__icontains=query) |
-    #         Q(category__title__icontains=query) |
-    #         Q(subcategory__title__icontains=query)
-    #     )
-
     # URL parameter filters
     if subcategory:
         q &= Q(subcategory__slug=subcategory)
@@ -39,14 +30,7 @@ def shop(request, category=None, subcategory=None):
 
     # product
     order = request.GET.get("order_by") or "ordering"  # '?order_by=*param'
-    if order == "rating":
-        products = sorted(
-            Product.objects.filter(q),
-            key=lambda p: p.get_average_rating(),
-            reverse=True,
-        )
-    else:
-        products = Product.objects.filter(q).order_by(order)
+    products = Product.objects.filter(q).order_by(order)
 
     # Pagination object from django docs
     paginator = Paginator(products, 4)  # Show 8 products per page.
