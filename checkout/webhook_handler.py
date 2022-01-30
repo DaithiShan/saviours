@@ -34,9 +34,9 @@ class StripeWH_Handler:
             {'order': order}
         )
         plaintext = template.loader.get_template(
-            'checkout/includes/confirmation_emails/confirmation_email_body.txt')
+            'checkout/includes/confirmation_emails/order_confirmation_email.txt')
         htmltemp = template.loader.get_template(
-            'checkout/includes/confirmation_emails/confirmation_email_body.html')
+            'checkout/includes/confirmation_emails/order_confirmation_email.html')
         c = {
             'order': order,
         }
@@ -98,8 +98,8 @@ class StripeWH_Handler:
                 # get order info from payment intent
                 # iexact lookup field makes sure it is an exact match
                 order = Order.objects.get(
-                    first_name__iexact=shipping_details.name,
-                    last_name__iexact=shipping_details.name,
+                    first_name__iexact=shipping_details..split(" ")[0],
+                    last_name__iexact=shipping_details.name.split(" ")[1],
                     email__iexact=billing_details.email,
                     phone_number__iexact=shipping_details.phone,
                     country__iexact=shipping_details.address.country,
@@ -140,8 +140,8 @@ class StripeWH_Handler:
                 # creates form to save in webhook to create order
                 # objects.create useing data from payment intent
                 order = Order.objects.create(
-                    first_name=shipping_details.name,
-                    last_name=shipping_details.name,
+                    first_name__iexact=shipping_details..split(" ")[0],
+                    last_name__iexact=shipping_details.name.split(" ")[1],
                     user_profile=profile,
                     email=billing_details.email,
                     phone_number=shipping_details.phone,
