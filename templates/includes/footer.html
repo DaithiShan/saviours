@@ -1,0 +1,73 @@
+{% load static %}
+
+<footer>
+    <div class="container-fluid d-flex justify-content-around">
+        <div class="row w-100 p-4">
+
+            <!-- ABOUT LINKS -->
+            <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
+                <div class="row">
+                    <div class="col-12 footer-title">
+                        About Us
+                    </div>
+                    <div class="col-12 footer-text">
+                        <a href="{% url 'view_about' %}">Club Location</a>
+                    </div>
+                    <div class="col-12 footer-text">
+                        <a href="{% url 'view_faqs' %}">Club FAQs</a> 
+                    </div>
+                    <div class="col-12 footer-text">
+                        <a href="{% url 'contact' %}">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHOP LINKS -->
+            {% for category in categories %}
+                <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
+                    <div class="row">
+                        <div class="col-12 footer-title">
+                            {{ category.title }}
+                        </div>
+                        {% for subcategory in category.subcategories.all %}
+                            <div class="col-12 footer-text">
+                                <a href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+           <div id="footer-end" class="col-12 text-center px-4 py-1 mt-5 d-none d-sm-block">
+                <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
+                    <i class=" text-primary fas fa-at"></i>
+                </a>
+                <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
+                    <i class="text-primary fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
+                    <i class="text-primary fab fa-facebook"></i>
+                </a>
+                <div>
+                    <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
+                </div>
+            </div>
+
+            <div id="footer-end" class="col-12 mt-3 d-sm-none px-4 py-1">
+                <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
+                    <i class=" text-primary fas fa-at"></i>
+                </a>
+                <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
+                    <i class="text-primary fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
+                    <i class="text-primary fab fa-facebook"></i>
+                </a>
+                <div class="mt-2">
+                    <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,87 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <!-- NAVBAR LOGO -->
+        <a id="nav-logo" class="navbar-brand px-1 mr-md-1" href="{% url 'store-home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="St Saviours OBA Logo ">
+        </a>
+
+            <!-- centered bag icon in mobile view -->
+            <!-- Adapted from CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
+        <div class="d-lg-none">
+            <a class="nav-link position-relative {% if bag_items %}active{% endif %}" href="{% url 'shopping_bag' %}" title="Shopping Bag">
+                <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center"></i>
+            </a>
+        </div>
+        
+        <!-- NAVBAR HAMBURGER -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Shop
+                </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="shopDropdown">
+                        {% for category in categories %}
+                            {% if category.title != 'Apparel' %}
+                                <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                                <div class="dropdown-divider"></div>
+                            {% else %}
+                                <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
+                            {% endif %}
+                        {% endfor %}
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="aboutDropdown">
+                        <a class="dropdown-item text-uppercase" href="{% url 'view_about' %}">Club Location</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-uppercase" href="{% url 'view_faqs' %}">Club FAQs</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-uppercase" href="{% url 'contact' %}">Contact</a>
+                    </div>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Account</a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="accountDropdown">
+                            <a class="dropdown-item text-uppercase" href="{% url 'account_details' %}">My Details</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="{% url 'my_orders' %}">Order History</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif  %}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if url_name == 'search' %}active{% endif %}" href="{% url 'search' %}">
+                        <i class="fas fa-search" title="Search"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <div class="d-none d-lg-inline-block">
+        <a href="{% url 'shopping_bag' %}" class="nav-link {% if bag_items %}active{% endif %}" title="Shopping Bag" aria-label="View Shopping Bag">
+            <i class="fas fa-shopping-bag"></i>
+        </a>
+    </div>
+</nav>

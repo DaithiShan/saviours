@@ -1,0 +1,26 @@
+{% load humanize %}
+Hello {{ order.user.first_name}}
+Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:
+
+-----------------------
+{% for item in order.lineitems.all %}
+Item: {{ item.product.title }} {{ item.product_select }}
+Quantity: {{ item.quantity }}
+Price: €{{ item.product.price }}
+-----------------------
+{% endfor %}
+Grand Total:€{{ order.grand_total }}</td>
+
+For Gear/Apparel Orders, your order will be shipped in 3-5 working days :
+{{ order.street_address_1 }}, 
+{% if order.street_address_2 %}{{order.street_address_2 }},{% endif %}
+{{ order.town_or_city }},
+{{ order.county }}, 
+{{ order.postcode }}, 
+{{ order.country }}
+
+If you have any questions, feel free to contact us at: https://saviours-oba.herokuapp.com/pages/contact
+
+See you at the club!
+
+St Saviours Olympic Boxing Academy

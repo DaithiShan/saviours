@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12 text-primary">
                 <h3>Order Information</h3>
-                <hr class="section-divider">
+                <hr>
             </div>
         </div>
 
@@ -51,9 +51,9 @@
                         {{ order_form.county | as_crispy_field }}
                         {{ order_form.postcode | as_crispy_field }}
                         {{ order_form.country | as_crispy_field }}
-                        
+
                         <div class="form-check form-check-inline float-right mr-0">
-                            <label for="id-save-info" class="form-check-label">Save information to my profile</label>
+                            <label for="id-save-info" class="form-check-label">Save information to my account</label>
                             <input type="checkbox" class="form-check-input ml-2 mr-0" id="id-save-info" name="save-info" checked>
                         </div>
 
@@ -75,8 +75,8 @@
                     <div class="submit-button col-12 bag-btns">
                         <div class="row">
                             <div class="col-12 text-right">
-                                <button id="submit-button" class="bag-submit-btn text-center">
-                                    <span class="font-weight-bold">
+                                <button id="submit-button" class="mb-2 btn btn-primary text-dark text-center">
+                                    <span>
                                         Complete Order
                                     </span>
                                     <span class="icon">
@@ -109,7 +109,7 @@
     <div id="loading-overlay">
         <p class="loading-spinner">
             <span class="icon">
-                <i class="far fa-life-ring fa-spin fa-7x"></i>
+                <i class="far fa-spinner fa-spin fa-7x"></i>
             </span>
         </p>
     </div>
@@ -120,5 +120,5 @@
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'js/stripe_elements.js' %}"></script>
+    <script src="{% static 'js/stripeElements.js' %}"></script>
 {% endblock %}

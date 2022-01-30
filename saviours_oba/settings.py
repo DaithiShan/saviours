@@ -114,7 +114,8 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-turquoise-parrot-8u22qfps.ws-eu25.gitpod.i
                         'https://8000-plum-swordfish-k5z8tzch.ws-eu25.gitpod.io',
                         'https://8000-blue-piranha-8v2xuc7b.ws-eu25.gitpod.io',
                         'https://8000-blue-piranha-8v2xuc7b.ws-eu27.gitpod.io',
-                        'https://8000-blue-piranha-8v2xuc7b.ws-eu28.gitpod.io']
+                        'https://8000-blue-piranha-8v2xuc7b.ws-eu28.gitpod.io',
+                        'https://8000-daithishan-saviours-mjr8wv9kzza.ws-eu29.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -186,10 +187,6 @@ if 'USE_AWS' in os.environ:
     Static files are collected in static folder in s3 bucket
     """
     # Cache control
-    AWS_S3_OBJECT_PARAMETERS = {
-        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-        'CacheControl': 'max-age=94608000',
-    }
 
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'saviours-oba'
@@ -210,8 +207,8 @@ if 'USE_AWS' in os.environ:
 
 
 # Pricing
-FREE_DELIVERY_THRESHOLD = 80
-STANDARD_DELIVERY_PERCENTAGE = 12.5
+FREE_DELIVERY_THRESHOLD = 150
+STANDARD_DELIVERY_PERCENTAGE = 20
 
 # Stripe
 STRIPE_CURRENCY = 'EUR'

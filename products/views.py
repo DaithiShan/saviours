@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.utils.safestring import mark_safe
 from .models import Product, ProductSelect, Rating
 
 
@@ -26,7 +26,7 @@ def product_page(request, category, subcategory, product):
         'product_options': product_options,
         'product_selected': product_selected,
         'ratings': Rating.objects.filter(product=product),
-        'rating_options': [i * 20 for i in range(1,6)]
+        'rating_options': [i * 20 for i in range(1,6)],
     }
 
     if request.user.is_authenticated:

@@ -24,7 +24,8 @@ class OrderForm(forms.ModelForm):
 
         # dictionary for form fields
         placeholders = {
-            'full_name': 'Full Name',
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
             'email': 'Email Address',
             'phone_number': 'Phone Number',
             'postcode': 'Eircode',
@@ -32,10 +33,11 @@ class OrderForm(forms.ModelForm):
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
             'county': 'County',
+            'country': 'Country'
         }
 
         # cursor will start in full name field
-        self.fields['full_name'].widget.attrs['autofocus'] = True
+        self.fields['first_name'].widget.attrs['autofocus'] = True
 
         # iterate through form fields
         for field in self.fields:

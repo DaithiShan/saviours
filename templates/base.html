@@ -42,91 +42,10 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-        <div class="container-fluid">
-
-            <!-- NAVBAR LOGO -->
-            <a id="nav-logo" class="navbar-brand px-1 mr-md-1" href="{% url 'store-home' %}">
-                <img src="{% static 'img/logo.png' %}" alt="St Saviours OBA Logo ">
-            </a>
-
-                <!-- centered bag icon in mobile view -->
-                <!-- Adapted from CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
-            <div class="d-lg-none">
-                <a class="nav-link position-relative {% if bag_items %}active{% endif %}" href="{% url 'shopping_bag' %}" title="Shopping Bag">
-                    <i class="fas fa-shopping-bag d-flex align-items-center justify-content-center"></i>
-                </a>
-            </div>
-            
-            <!-- NAVBAR HAMBURGER -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Shop
-                    </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="shopDropdown">
-                            {% for category in categories %}
-                                {% if category.title != 'Apparel' %}
-                                    <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
-                                    <div class="dropdown-divider"></div>
-                                {% else %}
-                                    <a class="dropdown-item text-uppercase" href="{% url 'shop' category.slug %}">{{ category.title }}</a>
-                                {% endif %}
-                            {% endfor %}
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            About
-                        </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="aboutDropdown">
-                            <a class="dropdown-item text-uppercase" href="{% url 'view_about' %}">Club Location</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="{% url 'view_faqs' %}">Club FAQs</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-uppercase" href="{% url 'contact' %}">Contact</a>
-                        </div>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-uppercase" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Account</a>
-                            <div class="dropdown-menu bg-dark" aria-labelledby="accountDropdown">
-                                <a class="dropdown-item text-uppercase" href="{% url 'account_details' %}">My Details</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-uppercase" href="{% url 'my_orders' %}">Order History</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" href="{% url 'register' %}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" href="{% url 'login' %}">Login</a>
-                        </li>
-                    {% endif  %}
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if url_name == 'search' %}active{% endif %}" href="{% url 'search' %}">
-                            <i class="fas fa-search" title="Search"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        <div class="d-none d-lg-inline-block">
-            <a href="{% url 'shopping_bag' %}" class="nav-link {% if bag_items %}active{% endif %}" title="Shopping Bag" aria-label="View Shopping Bag">
-                <i class="fas fa-shopping-bag"></i>
-            </a>
-        </div>
-    </nav>
+    <!-- Idea adapted from fellow CI student Rebecca Tracey https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
+{% if navbar != False %}
+    {% include 'includes/navbar.html' %}
+{% endif %}
 
     {% if messages %}
             <div class="message-container">
@@ -163,77 +82,10 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="container-fluid d-flex justify-content-around">
-            <div class="row w-100 p-4">
-
-                <!-- ABOUT LINKS -->
-                <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
-                    <div class="row">
-                        <div class="col-12 footer-title">
-                            About Us
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="{% url 'view_about' %}">Club Location</a>
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="{% url 'view_faqs' %}">Club FAQs</a> 
-                        </div>
-                        <div class="col-12 footer-text">
-                            <a href="{% url 'contact' %}">Contact</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHOP LINKS -->
-                {% for category in categories %}
-                    <div class="col-12 col-sm-6 col-md-3 px-4 py-1">
-                        <div class="row">
-                            <div class="col-12 footer-title">
-                                {{ category.title }}
-                            </div>
-                            {% for subcategory in category.subcategories.all %}
-                                <div class="col-12 footer-text">
-                                    <a href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-    
-               <div id="footer-end" class="col-12 text-center px-4 py-1 mt-5 d-none d-sm-block">
-                    <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
-                        <i class=" text-primary fas fa-at"></i>
-                    </a>
-                    <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
-                        <i class="text-primary fab fa-whatsapp"></i>
-                    </a>
-                    <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
-                        <i class="text-primary fab fa-facebook"></i>
-                    </a>
-                    <div>
-                        <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
-                    </div>
-                </div>
-
-                <div id="footer-end" class="col-12 mt-3 d-sm-none px-4 py-1">
-                    <a href="mailto:david.shanahan.burns@gmail.com?subject=Saviours%20Enquiry" rel="noopener" aria-label="Saviours Email">
-                        <i class=" text-primary fas fa-at"></i>
-                    </a>
-                    <a href="https://wa.me/353858667065?text=I'm%20enquiring%20about%20Saviours" target="_blank" rel="noopener" aria-label="Saviours Whatsapp Contact Number">
-                        <i class="text-primary fab fa-whatsapp"></i>
-                    </a>
-                    <a href="https://www.facebook.com/StSavioursOlympicBoxingAcademy/" target="_blank" rel="noopener" aria-label="Saviours Facebook Page">
-                        <i class="text-primary fab fa-facebook"></i>
-                    </a>
-                    <div class="mt-2">
-                        <i class="far fa-copyright"></i> Saviours Olympic Boxing Club <span id="footer-date"></span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </footer>
+    <!-- Idea adapt from fellow CI student Rebecca Tracey : https://github.com/rebeccatraceyt/delphin_lifesavingclub/ -->
+{% if footer != False %}
+    {% include 'includes/footer.html' %}
+{% endif %}
     
     {% block postloadjs %}
         <script>
@@ -242,7 +94,7 @@
             let option = {
                 animation: true,
                 autohide: true,
-                delay: 5000,
+                delay: 4000,
                 }
             let bsToast = new bootstrap.Toast(toastEl, option)
             bsToast.show();

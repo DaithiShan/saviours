@@ -7,7 +7,11 @@
 {% endblock %}
 
 {% block extra_title %}
+    {% if not from_account_details %}
+        Thank You
+    {% else %}
         Order {{ order.date }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +22,7 @@
 
         <!-- Page Header -->
         <div class="row">
-            <div class="col-12 page-title">
+            <div class="col-12">
                     <h3>Order Complete</h3>
                 <hr class="section-divider">
             </div>
@@ -26,26 +30,12 @@
 
         <!-- Page Content -->
         <div class="row">
-            <div class="col-12 confirm-text">
+            <div class="col-12">
 
                     <p>Thank you for your order, your order number is: <small>{{ order.order_number }}</small>.</p>
                     <p>A confirmation email has been sent to: <strong>{{ order.email }}</strong>.</p>
             </div>
-            <hr class="sm-divider">
-        </div>
-        <div class="row confirm-row">
-            <div class="col-12 confirm-text">
-                <h5>For Course Bookings:</h5>
-                <p>Commencement for courses booked will begin on the next calendar week (Sunday to Monday).</p>
-                <p>Please present your confirmation email with you on your first session, to complete club registration at the check-in desk.</p>
-                <p><strong>Please Note:</strong> All course bookings do not guarantee class placement. 
-                    The Teacher will assess all swimmers on their first session to ensure they are in the correct course/level. 
-                    Any adjusts will be made accordingly, with the utmost effort made to maintain day and time.
-                    Further information can be found in our <strong><a class="confirm-link" href="{% url 'view_faqs' %}">FAQ</a></strong> section.
-                </p>
-                <p>Contact Club Administrator for further information via our <strong><a class="confirm-link" href="{% url 'view_contact' %}">Contact</a></strong> page.</p>
-            </div>
-            <hr class="sm-divider">
+            <hr class="section-divider">
         </div>
 
         <!-- Order Summary -->
@@ -57,12 +47,12 @@
                 {% for bag_item in order.lineitems.all %}
                     <div class="row order-content">
                         <div class="col-3 d-flex align-items-center p-0">
-                            <a href="{% url 'product_page' bag_item.product.id %}">
-                                    <img src="{{ bag_item.product.image.url }}" alt="{{ product.name }}" class="w-100">
+                            <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" title="{{ bag_item.product.title }}">
+                                    <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ product.title }}" class="w-100">
                             </a>
                         </div>
                         <div class="col-6 order-items">
-                            <p class="my-0"><strong>{{ bag_item.product.name }}</strong></p>
+                            <p class="my-0"><strong>{{ bag_item.product.title }}</strong></p>
                             <p class="my-0 small">SKU: {{ bag_item.product_select }}</p>
                             <p class="my-0 small text-muted">Qty: {{ bag_item.quantity }}</p>
                         </div>
@@ -83,37 +73,41 @@
             <div class="col-12 confirm-table d-flex justify-content-center">
                 <table>
                     <tr>
-                        <td class="font-weight-bold">Full Name:</td>
-                        <td class="text-right">{{ order.full_name }}</td>
+                        <td class="fw-bold">First Name:</td>
+                        <td class="text-right">{{ order.first_name }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Address 1:</td>
+                        <td class="fw-bold">Last Name:</td>
+                        <td class="text-right">{{ order.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">Address 1:</td>
                         <td class="text-right">{{ order.street_address1 }}</td>
                     </tr>
                     {% if order.street_address2 %}
                     <tr>
-                        <td class="font-weight-bold">Address 2:</td>
+                        <td class="fw-bold">Address 2:</td>
                         <td class="text-right">{{ order.street_address2 }}</td>
                     </tr>
                     {% endif %}
                     <tr>
-                        <td class="font-weight-bold">Town or City:</td>
+                        <td class="fw-bold">Town or City:</td>
                         <td class="text-right">{{ order.town_or_city }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">County:</td>
+                        <td class="fw-bold">County:</td>
                         <td class="text-right">{{ order.county }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Eircode:</td>
+                        <td class="fw-bold">Eircode:</td>
                         <td class="text-right">{{ order.postcode }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Country:</td>
+                        <td class="fw-bold">Country:</td>
                         <td class="text-right">{{ order.country }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Phone Number:</td>
+                        <td class="fw-bold">Phone Number:</td>
                         <td class="text-right">{{ order.phone_number }}</td>
                     </tr>
                 </table>
@@ -128,15 +122,15 @@
             <div class="col-12 confirm-table d-flex justify-content-center">
                 <table>
                     <tr>
-                        <td class="font-weight-bold">Order Total:</td>
+                        <td class="fw-bold">Order Total:</td>
                         <td class="text-right">€{{ order.order_total }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Delivery:</td>
+                        <td class="fw-bold">Delivery:</td>
                         <td class="text-right">€{{ order.delivery_cost }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold">Grand Total:</td>
+                        <td class="fw-bold">Grand Total:</td>
                         <td class="text-right">€{{ order.grand_total }}</td>
                     </tr>
                 </table>

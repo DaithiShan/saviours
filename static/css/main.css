@@ -277,7 +277,7 @@ table {
 caption {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  color: #6c757d;
+  color: #adb5bd;
   text-align: left;
 }
 
@@ -639,15 +639,15 @@ progress {
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) * -.5);
-  margin-left: calc(var(--bs-gutter-x) * -.5);
+  margin-right: calc(var(--bs-gutter-x) * -0.5);
+  margin-left: calc(var(--bs-gutter-x) * -0.5);
 }
 .row > * {
   flex-shrink: 0;
   width: 100%;
   max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * .5);
-  padding-left: calc(var(--bs-gutter-x) * .5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
 }
 
@@ -2152,7 +2152,7 @@ progress {
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
-  color: #6c757d;
+  color: #adb5bd;
 }
 
 .form-control {
@@ -6229,15 +6229,15 @@ textarea.form-control-lg {
 }
 
 .ratio-4x3 {
-  --bs-aspect-ratio: calc(3 / 4 * 100%);
+  --bs-aspect-ratio: 75%;
 }
 
 .ratio-16x9 {
-  --bs-aspect-ratio: calc(9 / 16 * 100%);
+  --bs-aspect-ratio: 56.25%;
 }
 
 .ratio-21x9 {
-  --bs-aspect-ratio: calc(9 / 21 * 100%);
+  --bs-aspect-ratio: 42.8571428571%;
 }
 
 .fixed-top {
@@ -7431,7 +7431,7 @@ textarea.form-control-lg {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #adb5bd !important;
 }
 
 .text-black-50 {
@@ -11082,7 +11082,6 @@ footer .footer-text a:focus {
 
 .toast-count span {
   font-size: 1.2rem;
-  font-family: #fdc500;
 }
 
 .toast-highlighted {
@@ -11243,6 +11242,30 @@ footer .footer-text a:focus {
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 1%;
+}
+
+.progress-container {
+  margin-bottom: 1rem;
+}
+.progress-container .progress-steps {
+  margin-top: -3rem;
+}
+.progress-container .progress-step {
+  text-align: center;
+  display: inline-block;
+  color: #ffee32;
+}
+.progress-container .progress-circle {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #03071e;
+  background-color: #ffee32;
+  color: #212529;
+  margin: 0 auto;
+}
+.progress-container .progress-circle.active-circle {
+  background-color: #fdc500;
 }
 
 .about-text {

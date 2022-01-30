@@ -6,7 +6,7 @@
     <div class="row order-content">
         <div class="col-3 d-flex align-items-center p-0">
             <a href="{% url 'product_page' bag_item.product.category.slug bag_item.product.subcategory.slug bag_item.product.slug %}" title="{{ bag_item.product.title }}">
-                    <img src="{{ bag_item.product.image.url }}" alt="{{ bag_item.product.title }}" class="w-100">
+                    <img src="{{ bag_item.product.thumbnail.url }}" alt="{{ bag_item.product.title }}" class="w-100">
             </a>
         </div>
         <div class="col-6">
@@ -22,7 +22,7 @@
 {% endfor %}
 
 <!-- Totals -->
-<div class="col-12 bag-total py-2 px-1">
+<div class="col-12 bag-total py-2 px-1 d-flex flex-column align-items-end">
     <h6>Subtotal: €{{ total|floatformat:2 }}</h6>
     <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
     <hr>
@@ -36,17 +36,17 @@
 
 <!-- Checkout Btns -->
 {% if active_page == 'order_review' %}
-    <div class="col-12">
-        <a class="btn-outline-primary" href="{% url 'shopping_bag' %}">
+    <div class="col-12 d-flex justify-content-between">
+        <a class="btn-outline-primary btn" href="{% url 'shopping_bag' %}">
             <i class="fas fa-angle-left"></i> Return to Bag
         </a>
-        <a class="btn-secondary" href="{% url 'order_details' %}">
+        <a class="btn-secondary btn" href="{% url 'order_details' %}">
             Secure Checkout <i class="fas fa-lock"></i>
         </a>
     </div>
 {% else %}
-    <div class="col-12 edit-btn d-flex align-items-end justify-content-end">
-        <a href="{% url 'shopping_bag' %}">
+    <div class="col-12 btn d-flex align-items-end justify-content-end">
+        <a href="{% url 'shopping_bag' %}" class="btn-outline-primary btn">
             <i class="fas fa-angle-left"></i> Edit Bag
         </a>
     </div>
