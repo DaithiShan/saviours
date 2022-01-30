@@ -43,7 +43,7 @@
             <div class="col-12 confirm-text">
                 <h5>Order Summary:</h5>
             </div>
-            <div class="col-12">
+            <div class="col-12 px-4 py-1">
                 {% for bag_item in order.lineitems.all %}
                     <div class="row order-content">
                         <div class="col-3 d-flex align-items-center p-0">
@@ -56,7 +56,7 @@
                             <p class="my-0 small">SKU: {{ bag_item.product_select }}</p>
                             <p class="my-0 small text-muted">Qty: {{ bag_item.quantity }}</p>
                         </div>
-                        <div class="col-3 order-items text-muted text-right d-flex align-items-end justify-content-end">
+                        <div class="col-3 order-items text-muted text-right d-flex align-items-end">
                             <p class="my-0">€{{ bag_item.product.price | calc_subtotal:bag_item.quantity }}</p>
                         </div>
                     </div>
@@ -66,48 +66,48 @@
         </div>
 
         <!-- Details Summary -->
-        <div class="row confirm-row">
+        <div class="row confirm-row mt-2">
             <div class="col-12 confirm-text">
-                <h5>Delivering To:</h5>
+                <h5 class="text-primary">Delivering To:</h5>
             </div>
-            <div class="col-12 confirm-table d-flex">
+            <div class="col-12 confirm-table d-flex px-4 py-1">
                 <table>
                     <tr>
-                        <td class="fw-bold">First Name:</td>
+                        <td class="fw-bold text-secondary">First Name:</td>
                         <td class="text-right">{{ order.first_name }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Last Name:</td>
+                        <td class="fw-bold text-secondary">Last Name:</td>
                         <td class="text-right">{{ order.last_name }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Address 1:</td>
+                        <td class="fw-bold text-secondary">Address 1:</td>
                         <td class="text-right">{{ order.street_address1 }}</td>
                     </tr>
                     {% if order.street_address2 %}
                     <tr>
-                        <td class="fw-bold">Address 2:</td>
+                        <td class="fw-bold text-secondary">Address 2:</td>
                         <td class="text-right">{{ order.street_address2 }}</td>
                     </tr>
                     {% endif %}
                     <tr>
-                        <td class="fw-bold">Town or City:</td>
+                        <td class="fw-bold text-secondary">Town or City:</td>
                         <td class="text-right">{{ order.town_or_city }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">County:</td>
+                        <td class="fw-bold text-secondary">County:</td>
                         <td class="text-right">{{ order.county }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Eircode:</td>
+                        <td class="fw-bold text-secondary">Eircode:</td>
                         <td class="text-right">{{ order.postcode }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Country:</td>
+                        <td class="fw-bold text-secondary">Country:</td>
                         <td class="text-right">{{ order.country }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Phone Number:</td>
+                        <td class="fw-bold text-secondary">Phone Number:</td>
                         <td class="text-right">{{ order.phone_number }}</td>
                     </tr>
                 </table>
@@ -115,22 +115,22 @@
         </div>
 
         <!-- Billing Summary -->
-        <div class="row confirm-row">
+        <div class="row confirm-row mt-2">
             <div class="col-12 confirm-text">
-                <h5>Billing Info:</h5>
+                <h5 class="text-primary">Billing Info:</h5>
             </div>
-            <div class="col-12 confirm-table d-flex justify-content-center">
+            <div class="col-12 confirm-table d-flex px-4 py-1">
                 <table>
                     <tr>
-                        <td class="fw-bold">Order Total:</td>
+                        <td class="fw-bold text-secondary">Order Total:</td>
                         <td class="text-right">€{{ order.order_total }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Delivery:</td>
+                        <td class="fw-bold text-secondary">Delivery:</td>
                         <td class="text-right">€{{ order.delivery_cost }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Grand Total:</td>
+                        <td class="fw-bold text-secondary">Grand Total:</td>
                         <td class="text-right">€{{ order.grand_total }}</td>
                     </tr>
                 </table>
