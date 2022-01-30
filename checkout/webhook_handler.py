@@ -140,7 +140,7 @@ class StripeWH_Handler:
                 # creates form to save in webhook to create order
                 # objects.create useing data from payment intent
                 order = Order.objects.create(
-                    first_name__iexact=shipping_details..split(" ")[0],
+                    first_name__iexact=shipping_details.split(" ")[0],
                     last_name__iexact=shipping_details.name.split(" ")[1],
                     user_profile=profile,
                     email=billing_details.email,
