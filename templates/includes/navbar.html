@@ -44,11 +44,11 @@
                         About
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="aboutDropdown">
-                        <a class="dropdown-item text-uppercase" href="{% url 'view_about' %}">Club Location</a>
+                        <a class="dropdown-item text-uppercase" href="{% url 'view_about' %}">The Club</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-uppercase" href="{% url 'view_faqs' %}">Club FAQs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-uppercase" href="{% url 'contact' %}">Contact</a>
+                        <a class="dropdown-item text-uppercase" href="{% url 'contact' %}">Contact Us</a>
                     </div>
                 </li>
                 {% if user.is_authenticated %}
