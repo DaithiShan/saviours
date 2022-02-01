@@ -7,14 +7,14 @@
             <!-- Conditional to current page -->
             {% with request.resolver_match.url_name as url_name %}
                 {% if url_name == 'account_details' %}
-                    <a href="{% url 'my_orders' %}">View Past Orders</a>
+                    <a href="{% url 'my_orders' %}">View Order History</a>
                 {% else %}
                     <a href="{% url 'edit_address' %}">Update Delivery Information</a>
                 {% endif %}
             {% endwith %}
         </div>
         <div class="col-12 profile-btns profile-blk btn-primary">
-            <a href="{% url 'password_reset' %}">Password Reset</a>
+            <a href="{% url 'password_reset' %}">Reset Password</a>
         </div>
         <div class="col-12 profile-btns profile-blk btn-primary">
             <a href="{% url 'contact' %}">Contact Us</a>
