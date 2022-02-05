@@ -11268,6 +11268,32 @@ footer .footer-text a:focus {
   background-color: #fdc500;
 }
 
+/* --- Checkout Complete Page --- */
+.confirm-row {
+  padding-bottom: 1rem;
+}
+.confirm-row .confirm-text {
+  padding: 0.5rem 0.5rem;
+}
+.confirm-row .confirm-text h5, .confirm-row .confirm-text .h5 {
+  font-family: var(--title-font);
+  font-size: 1.6rem;
+}
+.confirm-row .confirm-table table {
+  width: 100%;
+}
+.confirm-row .confirm-table table td {
+  border-bottom: 1px solid #ffee32;
+  padding: 0.5rem;
+}
+.confirm-row .confirm-link {
+  transition: all 0.5s ease 0s;
+}
+.confirm-row .confirm-link:hover,
+.confirm-row .confirm-link:focus {
+  color: #fdc500;
+}
+
 .about-text {
   font-size: 0.9rem;
   margin: auto;
@@ -11316,8 +11342,7 @@ footer .footer-text a:focus {
 }
 
 .question-col {
-  color: #03071e;
-  background-color: #fdc500;
+  background-color: #212529;
 }
 
 @media (min-width: 700px) and (max-width: 991px) {

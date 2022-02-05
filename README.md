@@ -67,11 +67,10 @@ The Developer / Site Owners are looking to:
 
 * As a new visitor, I want to:
 
+    + Land on an engaging page, with very relevant calls to action
     + See all offers and content without first registering.
-    + Register my details when ordering, securely and quickly.
-    + Choose from a menu of membership options, particular to my own needs.
-    + Select apparel in a specific size, to suit my needs.
-    + View contact information for the club, to communicate with staff team.
+    + Register my details when ordering, securely and quickly
+    + See contact info for the club, to communicate with staff team.
     + Navigate to a page that could help me with any enquiry, to answer my questions.
 
 * As a returning visitor, I want to:
@@ -80,19 +79,18 @@ The Developer / Site Owners are looking to:
     + View my previous orders, to keep a record of my transactions.
     + Check out quickly using my saved details.
     + Edit my info, to update fields ahead of next order.
-    + Sign up for a club newsletter, to keep up to date with any new offers.
     + Connect with the club on one of their social apps, to integrate further.
 
 * All users would like to:
+    + Choose from a menu of membership options, particular to my own needs.
+    + Select apparel in a specific size, to suit my needs.
     + Filter through categories, to only see relevant products.
     + Use a search query, to find a specific product or product type.
-    + Receive visual feedback that my item has been added to the bag, to confirm my selection.
-    + Add items to my shopping bag, to begin the order process.
-    + View shopping bag to get an overview of products I wish to order.
-    + Remove products from my bag, to suit my needs.
-    + Update a product's quantity, to suit my needs.
+    + Add, update and remove items in my shopping bag, during the order process.
+    + Receive visual feedback on all of these actions to confirm them.
     + Get real-time feedback on available stock, to make purchase decisions.
     + Proceed to a secure checkout, to make a purchase.
+    + Review shopping bag before progressing in checking out process.
     + Have clear visual feedback of the order process, to understand all steps of the process.
     + Be able to edit my bag at all times, to allow change of mind.
     + Receive a summary of my order via email to confirm that my transaction has been process.

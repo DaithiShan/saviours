@@ -14,7 +14,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'store-home' %}" class="text-primary">Home</a></li>
             {% if category %}
-                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ category.title }}</a></li>
+                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ category.title }}</li>
             {% endif %}
         </ol>
     {% endblock %}
