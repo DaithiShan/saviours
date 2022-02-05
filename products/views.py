@@ -26,7 +26,7 @@ def product_page(request, category, subcategory, product):
         'product_options': product_options,
         'product_selected': product_selected,
         'ratings': Rating.objects.filter(product=product),
-        'rating_options': [i * 20 for i in range(1,6)],
+        'rating_options': [i * 20 for i in range(1,6)], 
     }
 
     if request.user.is_authenticated:

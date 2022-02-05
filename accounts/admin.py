@@ -18,7 +18,7 @@ class AddressAdminInline(admin.StackedInline):
 
 class AccountAdmin(admin.ModelAdmin):
     inlines = (AddressAdminInline,)
-    
+
     list_display = (
         "email",
         "first_name",

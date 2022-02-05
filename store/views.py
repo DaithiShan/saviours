@@ -33,7 +33,7 @@ def shop(request, category=None, subcategory=None):
     products = Product.objects.filter(q).order_by(order)
 
     # Pagination object from django docs
-    paginator = Paginator(products, 4)  # Show 8 products per page.
+    paginator = Paginator(products, 6)  # Show 8 products per page.
     page_number = request.GET.get('page')
     context["page_obj"] = paginator.get_page(page_number)
 
@@ -47,6 +47,7 @@ def shop(request, category=None, subcategory=None):
     return render(request, 'store/shop.html', context)
 
 # Custom search view adapted from Boutique Ado Mini Project
+
 
 def search(request):
     """

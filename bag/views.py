@@ -12,6 +12,7 @@ def shopping_bag(request):
     """
     return render(request, 'shopping_bag.html')
 
+
 # Custom view adapted from Boutique Ado Mini Project: tinyurl.com/2fudzeuj
 def add_to_bag(request, item_id):
     """

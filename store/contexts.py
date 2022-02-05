@@ -1,5 +1,6 @@
 from products.models import Product, Category
 
+
 def subcategories_per_category(request):
     """
     function to insert product categories,

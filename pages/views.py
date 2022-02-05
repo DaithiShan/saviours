@@ -22,7 +22,9 @@ def contact(request):
                  {from_name}\n\n{message}\n\n\
                      Return email address: {from_email}"
             try:
-                send_mail(subject, mail_msg, from_email, ["david.shanahan.burns@gmail.com"])
+                send_mail(
+                    subject, mail_msg, from_email,
+                    ["david.shanahan.burns@gmail.com"])
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
             messages.success(

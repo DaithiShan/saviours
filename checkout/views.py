@@ -82,6 +82,7 @@ def order_review(request):
 
     return render(request, 'checkout/order_review.html', context)
 
+
 @login_required
 def order_details(request):
     """
@@ -191,7 +192,7 @@ def order_details(request):
             Please double check your information.')
             context["order_form"] = form
 
-    else: # GET request
+    else:  # GET request
         # Add user name to form by default
         details = {
             "first_name": request.user.first_name,
