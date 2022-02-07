@@ -147,7 +147,7 @@ def delete_account(request):
                     request,
                     f"Your account has been deleted. Sorry to see you go! 👋",
                 )
-                return redirect("home")
+                return redirect("store-home")
             else:
                 form.add_error("password", "Incorrect Password")
                 context["delete_account_form"] = form
