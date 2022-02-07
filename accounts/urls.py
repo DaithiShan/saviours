@@ -17,43 +17,43 @@ urlpatterns = [
     path("register/", register_user, name="register"),
     path("logout/", logout_user, name="logout"),
     path("login/", login_user, name="login"),
-    path("account/details/", account_details, name="account_details"),
+    path("details/", account_details, name="account_details"),
     path(
-        "account/details/edit/",
+        "details/edit/",
         edit_account_details,
         name="edit_account_details",
     ),
     path(
-        "account/details/delete/",
+        "details/delete/",
         delete_account,
         name="delete_account",
     ),
-    path("account/address/new/", add_address, name="add_address"),
-    path("account/address/edit/", edit_address, name="edit_address"),
-    path("account/orders/", my_orders, name="my_orders"),
+    path("address/new/", add_address, name="add_address"),
+    path("address/edit/", edit_address, name="edit_address"),
+    path("orders/", my_orders, name="my_orders"),
     path(
-        "account/password-reset/",
+        "password-reset/",
         auth_views.PasswordResetView.as_view(
             template_name="accounts/password_reset.html"
         ),
         name="password_reset",
     ),
     path(
-        "account/password-reset/done/",
+        "password-reset/done/",
         auth_views.PasswordResetDoneView.as_view(
             template_name="accounts/password_reset_done.html"
         ),
         name="password_reset_done",
     ),
     path(
-        "account/password-reset-confirm/<uidb64>/<token>/",
+        "password-reset-confirm/<uidb64>/<token>/",
         auth_views.PasswordResetConfirmView.as_view(
             template_name="accounts/password_reset_confirm.html"
         ),
         name="password_reset_confirm",
     ),
     path(
-        "account/password-reset-complete/",
+        "password-reset-complete/",
         auth_views.PasswordResetCompleteView.as_view(
             template_name="accounts/password_reset_complete.html"
         ),

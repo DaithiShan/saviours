@@ -5,7 +5,7 @@
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-    <div class="container form-wrapper col-md-6 col-lg-4">
+    <div class="container form-wrapper col-sm-6 col-lg-4">
         <h2 class="mt-3 mb-4">Login</h2>
         <form method="POST" action="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="form" novalidate>
             {% csrf_token %}
@@ -25,12 +25,12 @@
             {% endfor %}
             <input type="hidden" name="next" value="{{ request.GET.next }}" />
             <fieldset class="mt-3 text-center">
-                <button type="submit" class="btn-lg btn-primary mt-3 mb-4">Login</button>
+                <button type="submit" class="btn btn-primary mt-3 mb-4">Login</button>
             </fieldset>
         </form>
         <div class="auth-redirect text-center mb-5">
             <p class="lead">Not yet registered?</p>
-            <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="btn-outline-primary btn-lg">Sign Up Here</a>
+            <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="btn-outline-primary btn">Sign Up Here</a>
         </div>
 </div>
 {% endblock content %}
