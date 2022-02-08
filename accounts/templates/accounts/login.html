@@ -29,8 +29,8 @@
             </fieldset>
         </form>
         <div class="auth-redirect text-center mb-5">
-            <p class="lead">Not yet registered?</p>
-            <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="btn-outline-primary btn">Sign Up Here</a>
+            <p class="lead">Forgot your password?</p>
+            <a href="{% url 'password_reset' %}" class="btn-outline-primary btn">Reset password</a>
         </div>
 </div>
 {% endblock content %}
