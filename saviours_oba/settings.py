@@ -116,9 +116,16 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-daithishan-saviours-17glbrl7j70.ws-eu30.gi
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-DATABASES = {
-    'default': dj_database_url.parse('postgres://rqyeiuftztucfg:77039ae6ed946b75f00977a50c600759e453164ba5e08cfbe0699f7643505b0e@ec2-18-234-17-166.compute-1.amazonaws.com:5432/dfn52dgsemcp86')
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 
 
