@@ -39,7 +39,7 @@ Purchases can be made with the Stripe test credit card:
 ***
 
 <div align='center'>
-![Landing Page Screenshot](markdown-files/readne-files/landing.png "AmIResponsive Mockup Screenshot")
+![Landing Page Screenshot](markdown-files/readme-files/landing.png "AmIResponsive Mockup Screenshot")
 </div>
 
 ***
