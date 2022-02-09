@@ -588,6 +588,17 @@ Each page of the St Saviours OBA website features a consistently responsive and 
 | Call to action Buttons | Displayed on the left side of the screen on larger devices and at the end of the page on mobile and tablet devices. Provide users with actions to take on their account, such as change password or emails, as well as logout and redirection to **Profile** page.|
 | Call to action buttons | User's order history is displayed on the right side of the screen on larger devices and at the top (single column) on smaller screens. It provides a snapshop of order information, including date of purchase, number of items, order total. |
 
+## Issues and Bugs 
+
+The developer encountered a number of issues during the development of the website, with the noteworthy ones listed below, along with solutions or ideas to implement in the future.
+
+**Pagination** <br />
+In implementing the pagination feature, the developer encountered an issue wherby, when applying pagination, the products would repeat across 2 pages. After verifying through a json dump that there was no error in the saved products themselves, the developer decided to extend page display to 10 products. This will allow greater time for future debugging, while displaying a page count for the user, and hinting to future pages after the store has left its infancy.
+
+
+[Back to top ⇧](#table-of-contents)
+***
+
 ## Technologies Used
 ### Languages
 - [HTML5](https://en.wikipedia.org/wiki/HTML5 "Link to HTML Wiki")

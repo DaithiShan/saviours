@@ -557,6 +557,19 @@ Manual testing was conducted on the following elements on the **User Profile** P
 
 - [W3C Markup Validator](https://validator.w3.org/ "Link to W3C Markup Validator") was used to validate the `HTML` code used, using the `Validate by URI` method.
 
+- :white_check_mark: Home - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/)
+- :white_check_mark: Shop - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/shop/)
+- :white_check_mark: Product Page - [Pass](https://saviours-oba.herokuapp.com/shop/membership/yearly-bundle/yearly-bundle-gold)
+- :white_check_mark: Register - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/register/)
+- :white_check_mark: Login - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/login/)
+- :white_check_mark: Bag - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/shopping_bag/)
+- :white_check_mark: Checkout - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/checkout/)
+- :white_check_mark: Account Details - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/accounts/details/)
+- :white_check_mark: Order History - [Pass](https://saviours-oba.herokuapp.com/account/orders/)
+- :white_check_mark: Password Reset - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/account/password-reset/)
+- :white_check_mark: Contact Us - [Pass](https://validator.w3.org/nu/?doc=https://saviours-oba.herokuapp.com/contact/)
+
+Only Errors:
     - `Duplicate ID` errors were highlighted on the `FAQs` pages. These are due to the iteration of database data and could not be modified (attempts were made to dynamically change the id according to the object, but the developer was unsuccessful in implementing this).
 
     - `Duplicate ID` error for  `id_select` in product page is due to the iteration of `product_select` objects.
@@ -564,12 +577,10 @@ Manual testing was conducted on the following elements on the **User Profile** P
     - All other highlighted errors were resolved.
 
 -  [W3C CSS Validator](https://jigsaw.w3.org/css-validator/ "Link to W3C CSS Validator") was used to validate the `CSS` code used with the following result:
+- :white_check_mark: main.min.css - Pass
 
-    - Errors highlighted in `strip_elements.js` pertain to [Stripe](https://stripe.com/en-ie "Link to Stripe Homepage") import:
+![CSS PASS](markdown-files/testing-files/css-pass.png)
 
-        ![JS validation results](markdown-files/testing-files/automated/stripe-js.png)
-
-    - There were no errors highlighted in `profile.js` or `base.js` files
 
 - [PEP8 Online](http://pep8online.com/ "Link to PEP8 Online") was used to validate `Python` code.
 
@@ -596,31 +607,41 @@ Manual testing was conducted on the following elements on the **User Profile** P
 
     - All other highlighted errors and warnings were resolved.
 
-### Browser Validation
-**Chrome:**
-
-![Chrome test image](markdown-files/testing-files/automated/chrome.png)
-
-**Safari:**
-
-![Safari test image](markdown-files/testing-files/automated/safari.png)
-
-**Edge:**
-
-![Edge test image](markdown-files/testing-files/automated/edge.png)
-
-
-**Opera:**
-
-![Opera test image](markdown-files/testing-files/automated/opera.png)
-
-**Firefox:**
-
-![Firefox test image](markdown-files/testing-files/automated/firefox.png)
+### Lighthouse Auditing
 
 ### Lighthouse Auditing
 
 #### Desktop
+| Page | Performance | Accessibility | Best Practice | SEO |
+|------|:-------------:|:---------------:|:---------------:|:-----:|
+| Home Page | 77% | 100% | 92% | 100% |
+| Shop Pages | 87% | 100% | 85% | 100% |
+| Login | 94% | 100% | 100% | 100% |
+| Register | 97% | 100% | 100% | 100% |
+| Search | 95% | 100% | 100% | 100% |
+| The Club Page| 93% | 93% | 92% | 100% |
+| Academy Programme | 88% | 90% | 100% | 96% |
+| FAQs | 95% | 89% | 100% | 100% |
+| Contact | 96% | 100% | 100% | 100% |
+| Accounts | 86% | 100% | 92% | 100% |
+| Order History | 93% | 100% | 92% | 100% |
+| Shopping Bag | 95% | 98% | 100% | 100% |
+
+
+#### Mobile
+| Page | Performance | Accessibility | Best Practice | SEO |
+|------|:-------------:|:---------------:|:---------------:|:-----:|
+| Home Page | 63% | 100% | 92% | 95% |
+| Shop Pages | 64% | 85% | 100% | 97% |
+| Login | 75% | 100% | 92% | 100% |
+| Register | 75% | 100% | 92% | 100% |
+| Search | 74% | 100% | 92% | 100% |
+| The Club Page | 74% | 93% | 92% | 93% |
+| FAQs | 70% | 89% | 92% | 96% |
+| Contact Us | 77% | 100% | 92% | 94% |
+| Accounts | 64% | 100% | 85% | 95% |
+| Order History | 74% | 100% | 85% | 96% |
+| Shopping Bag | 69% | 98% | 92% | 90% |
 
 [Back to top ⇧](#table-of-contents)
 
