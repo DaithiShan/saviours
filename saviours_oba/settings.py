@@ -110,7 +110,8 @@ WSGI_APPLICATION = 'saviours_oba.wsgi.application'
 
 
 # CSRF TRUSTED ORIGINS SET TO LOCAL URL
-CSRF_TRUSTED_ORIGINS = ['https://8000-daithishan-saviours-17glbrl7j70.ws-eu30.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-daithishan-saviours-17glbrl7j70.ws-eu30.gitpod.io',
+                        'https://8000-daithishan-saviours-17glbrl7j70.ws-eu31.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
