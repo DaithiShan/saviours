@@ -10,7 +10,7 @@
 [View the live project here](https://saviours-oba.herokuapp.com/ "Link to St Saviours OBA ecommerce app")
 
 Purchases can be made with the Stripe test credit card:
-* **credit card:** 
+* **credit card:** 4242 4242 4242 4242
 * **expiration date:** Any future date
 * **CVC:** Any 3-digit number
 * **ZIP:** Any 5-digit number
